@@ -1,0 +1,113 @@
+.table-container {
+  overflow-x: auto;
+}
+
+.table {
+  table-layout: fixed;
+  margin-bottom: 2rem;
+}
+
+.table tr {
+  border-top: 1px solid lightgrey;
+}
+
+.table tr:last-child {
+  border-bottom: 1px solid lightgrey;
+}
+
+.table tr th:nth-child(1),
+.table tr td:nth-child(1) {
+  width: 200px;
+}
+
+.table tr th:nth-child(2),
+.table tr td:nth-child(2) {
+  width: 600px;
+}
+
+.table tr th:nth-child(3),
+.table tr td:nth-child(3) {
+  width: 150px;
+}
+
+.table tr th:nth-child(4),
+.table tr td:nth-child(4) {
+  width: 150px;
+}
+
+.table tr th:nth-child(5),
+.table tr td:nth-child(5) {
+  width: 150px;
+}
+
+.table tr th:nth-child(6),
+.table tr td:nth-child(6) {
+  width: 100px;
+}
+
+.table-img {
+  width: 80px;
+}
+
+.table tr th,
+.table tr td {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.table-title {
+  color: var(--main-color);
+}
+
+.table-description {
+  max-width: 550px;
+  margin-inline: auto;
+}
+
+.table-trash {
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: var(--comfort-black);
+}
+
+.cart-group {
+  grid-template-columns: 1fr 1fr;
+  align-items: flex-start;
+  margin: 1rem auto;
+}
+
+.cart-total,
+.cart-shipping {
+  border: 1px solid lightgrey;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  height: 100%;
+  margin-top: 1%;
+}
+
+.cart-total-table {
+  margin-bottom: 1rem;
+}
+
+.cart-total-table tr td {
+  border: 1px solid lightgrey;
+  padding: 1rem 0.5rem;
+  width: 50%;
+}
+
+.cart-total-price {
+  font-weight: 700;
+}
+
+.cart-total .btn {
+  margin-left: 13rem;
+  margin-top: 1.5rem;
+}
+
+.quantity {
+  border: 1px solid lightgrey;
+  max-width: 80px;
+  padding-block: 0.5rem;
+  padding-inline: 1rem 0.5rem;
+  border-radius: 0.25rem;
+}

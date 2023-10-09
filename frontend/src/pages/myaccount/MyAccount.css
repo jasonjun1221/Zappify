@@ -1,0 +1,85 @@
+.accounts-title {
+  margin-left: 5rem;
+}
+
+.accounts-container {
+  grid-template-columns: 1fr 3fr;
+  padding: 1rem;
+}
+
+.account-tabs {
+  border: 1px solid lightgrey;
+  border-radius: 0.25rem;
+  font-weight: bold;
+}
+
+.account-tab a {
+  padding: 1.52rem 3rem;
+  display: flex;
+  align-items: center;
+  column-gap: 1.5rem;
+  cursor: pointer;
+  color: var(--comfort-black);
+}
+
+.account-tab .active {
+  background-color: var(--main-color);
+  color: var(--comfort-white);
+}
+
+.account-tab:not(:last-child) {
+  border-bottom: 1px solid lightgrey;
+}
+
+/********** For account tabs ***********/
+.tab-content {
+  border: 1px solid lightgrey;
+  border-radius: 0.25rem;
+}
+
+.tab-header {
+  background-color: lightgrey;
+  padding: 1rem;
+}
+
+.tab-body {
+  padding: 1.5rem;
+}
+
+.tab-body input {
+  display: block;
+  width: 20rem;
+  margin-bottom: 1rem;
+}
+
+.order-table tr th,
+.order-table tr td {
+  border: 1px solid lightgrey;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.view-order {
+  color: var(--main-color);
+}
+
+.address {
+  line-height: 1.5rem;
+}
+
+.city {
+  margin-bottom: 0.25rem;
+}
+
+.edit {
+  font-size: var(--small-font-size);
+}
+
+.address label {
+  display: inline-block;
+  width: 8rem;
+}
+
+.address input {
+  display: inline;
+}

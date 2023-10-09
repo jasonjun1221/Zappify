@@ -1,0 +1,35 @@
+.banner-container {
+  grid-template-columns: 5fr 7fr;
+  align-items: center;
+}
+
+.banner-subtitle,
+.banner-description {
+  font-size: 1.2rem;
+}
+
+.banner-subtitle {
+  font-family: "Spartan", sans-serif;
+  margin-bottom: 1rem;
+}
+
+.banner-title-one {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.banner-title-two {
+  color: var(--main-color);
+  font-size: 3.5rem;
+  font-weight: 700;
+}
+
+.banner-description {
+  margin-block: 0.5rem 2rem;
+}
+
+.banner-img {
+  justify-self: flex-end;
+  border-radius: 0.5rem;
+}

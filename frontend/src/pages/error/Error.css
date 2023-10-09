@@ -1,0 +1,19 @@
+.error-page-container {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background-color: var(--comfort-white);
+}
+
+.error-page {
+  text-align: center;
+  line-height: 10rem;
+}
+
+.error-code {
+  font-size: 5rem;
+}
+
+.error-message {
+  font-size: 1.5rem;
+}

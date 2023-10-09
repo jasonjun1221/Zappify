@@ -1,0 +1,40 @@
+.reviews-container {
+  display: flex;
+  flex-direction: column;
+  column-gap: 1.75rem;
+  margin-bottom: 3rem;
+  border-radius: 0.5rem;
+}
+
+.review-single {
+  padding: 1rem;
+  border-bottom: 1px solid lightgrey;
+  display: flex;
+  column-gap: 2rem;
+}
+
+.review-img {
+  width: 70px;
+  border-radius: 50%;
+}
+
+.review-description {
+  margin-bottom: 1rem;
+}
+
+.review-rating {
+  color: hsl(42, 100%, 50%);
+  margin-bottom: 1rem;
+}
+
+.review-form-title {
+  margin-top: 2.5rem;
+}
+
+.rate-product {
+  margin-top: 1rem;
+}
+
+.review-btn {
+  width: 13rem;
+}

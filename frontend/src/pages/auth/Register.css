@@ -1,0 +1,26 @@
+.register-container {
+  max-width: 400px;
+  margin: 2rem auto;
+  padding: 3rem;
+  border: 1px solid lightgrey;
+  border-radius: 0.5rem;
+}
+
+.register-container h1 {
+  text-align: center;
+}
+
+.register-container .form-input {
+  width: 100%;
+  margin: 0.5rem 0;
+}
+
+.register-btn {
+  width: 100%;
+  margin: 0.8rem 0;
+}
+
+.login-link {
+  display: block;
+  text-align: center;
+}
