@@ -7,6 +7,7 @@ const navigations = [
   { name: "Home", link: "/" },
   { name: "Categories", link: "/catergories" },
   { name: "About Us", link: "/" },
+  { name: "Admin", link: "/admin" },
 ];
 
 function Header() {

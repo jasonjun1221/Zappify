@@ -1,0 +1,65 @@
+.category-form {
+  padding: 1rem 3rem;
+  border-bottom: 1px solid lightgrey;
+}
+
+.category-form .form-group {
+  margin: 1rem;
+}
+
+.category-form .section-title {
+  margin: 0.5rem;
+  text-align: center;
+}
+
+.category-form .form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.category-form .form-group input {
+  width: 40%;
+  border: 1px solid lightgrey;
+}
+
+.category-form .form-group button {
+  margin-left: 2rem;
+}
+
+.category-list {
+  max-height: 450px;
+  overflow-y: scroll;
+}
+
+.category-list .section-title {
+  margin-top: 1.6rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.category-table {
+  table-layout: fixed;
+  border-left: none;
+  border-right: none;
+}
+
+.category-table tr {
+  border-top: 1px solid lightgrey;
+}
+
+.category-table tr:last-child {
+  border-bottom: 1px solid lightgrey;
+}
+
+.category-table tr th:nth-child(1),
+.category-table tr td:nth-child(1) {
+  width: 50px;
+}
+
+.category-table tr th,
+.category-table tr td {
+  border-left: none;
+  border-right: none;
+  padding: 0.5rem;
+  text-align: center;
+}

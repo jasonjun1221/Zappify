@@ -51,8 +51,6 @@ const products = [
 function Catergories() {
   return (
     <section className="container section">
-      <h1 className="section-title categories-title">Categories</h1>
-
       <div className="categories-container">
         {categories.map((category) => (
           <NavLink to={category.link} className="category-item " key={category.id}>

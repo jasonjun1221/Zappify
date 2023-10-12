@@ -37,7 +37,7 @@ function Checkout() {
   return (
     <section className="container section">
       <h1 className="section-title">Checkout</h1>
-      <form action="" className="checkout-container">
+      <form className="checkout-container">
         <div className="checkout-group grid">
           <h3>Billing Details</h3>
           <input type="text" placeholder="Name" className="form-input" />

@@ -1,0 +1,75 @@
+.brand-form {
+  padding: 1rem 3rem;
+  border-bottom: 1px solid lightgrey;
+}
+
+.brand-form form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.brand-form .form-group {
+  margin: 1rem;
+}
+
+.brand-form .section-title {
+  margin: 0.5rem;
+  text-align: center;
+}
+
+.brand-form .form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.brand-form .form-group input {
+  width: 65%;
+  border: 1px solid lightgrey;
+}
+
+.brand-form .form-group select {
+  width: 80%;
+  border: 1px solid lightgrey;
+}
+
+.brand-form .form-group button {
+  margin-left: 2rem;
+}
+
+.brand-list {
+  max-height: 440px;
+  overflow-y: scroll;
+}
+
+.brand-list .section-title {
+  margin-top: 1.6rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.brand-table {
+  table-layout: fixed;
+  border-left: none;
+  border-right: none;
+}
+
+.brand-table tr {
+  border-top: 1px solid lightgrey;
+}
+
+.brand-table tr:last-child {
+  border-bottom: 1px solid lightgrey;
+}
+
+.brand-table tr th:nth-child(1),
+.brand-table tr td:nth-child(1) {
+  width: 50px;
+}
+
+.brand-table tr th,
+.brand-table tr td {
+  border-left: none;
+  border-right: none;
+  padding: 0.5rem;
+  text-align: center;
+}

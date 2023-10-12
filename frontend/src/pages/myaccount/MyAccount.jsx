@@ -15,7 +15,6 @@ function MyAccount() {
 
   return (
     <section className="section">
-      <h1 className="section-title accounts-title">My Account</h1>
       <div className="accounts-container container grid">
         <div className="account-tabs">
           {myAccountNav.map((item, index) => (

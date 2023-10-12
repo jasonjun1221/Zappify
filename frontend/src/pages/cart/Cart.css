@@ -15,34 +15,9 @@
   border-bottom: 1px solid lightgrey;
 }
 
-.table tr th:nth-child(1),
-.table tr td:nth-child(1) {
-  width: 200px;
-}
-
 .table tr th:nth-child(2),
 .table tr td:nth-child(2) {
   width: 600px;
-}
-
-.table tr th:nth-child(3),
-.table tr td:nth-child(3) {
-  width: 150px;
-}
-
-.table tr th:nth-child(4),
-.table tr td:nth-child(4) {
-  width: 150px;
-}
-
-.table tr th:nth-child(5),
-.table tr td:nth-child(5) {
-  width: 150px;
-}
-
-.table tr th:nth-child(6),
-.table tr td:nth-child(6) {
-  width: 100px;
 }
 
 .table-img {

@@ -52,6 +52,14 @@ img {
 table {
   width: 100%;
   border-collapse: collapse;
+  border: 1px solid lightgrey;
+}
+
+td {
+  border: 1px solid lightgrey;
+}
+th {
+  background-color: #f2f2f2;
 }
 
 /*=============== Global CSS Classes ===============*/

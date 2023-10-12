@@ -1,0 +1,57 @@
+.admin-container {
+  max-width: 1350px;
+  margin: 2rem auto;
+  padding: 2rem;
+  border: 1px solid lightgrey;
+  border-radius: 0.25rem;
+  grid-template-columns: 1fr 3fr;
+  grid-template-rows: 0.5fr 1fr;
+}
+
+.admin-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.admin-photo {
+  width: 150px;
+  height: 150px;
+  margin-bottom: 1rem;
+}
+
+.admin-photo h3 {
+  text-align: center;
+}
+
+.admin-tabs {
+  border: 1px solid lightgrey;
+  border-radius: 0.25rem;
+  font-weight: bold;
+}
+
+.admin-tab a {
+  padding: 1.52rem 3rem;
+  display: flex;
+  align-items: center;
+  column-gap: 1.5rem;
+  cursor: pointer;
+  color: var(--comfort-black);
+}
+
+.admin-tab .active {
+  background-color: var(--main-color);
+  color: var(--comfort-white);
+}
+
+.admin-tab:not(:last-child) {
+  border-bottom: 1px solid lightgrey;
+}
+
+
+.admin-content {
+  border: 1px solid lightgrey;
+  border-radius: 0.25rem;
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
