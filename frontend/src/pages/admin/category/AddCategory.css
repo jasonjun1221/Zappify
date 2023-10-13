@@ -28,7 +28,7 @@
 
 .category-list {
   max-height: 450px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .category-list .section-title {

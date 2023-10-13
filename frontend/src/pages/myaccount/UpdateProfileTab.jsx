@@ -1,5 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
 import "./MyAccount.css";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { updateProfile } from "../../redux/features/auth/authSlice";
 import { toast } from "react-toastify";
@@ -19,21 +19,18 @@ function UpdateProfileTab() {
 
   return (
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <div className="tab-content">
-          <h3 className="tab-header">Update Profile</h3>
-          <div className="tab-body">
-            <form onSubmit={handleSubmit}>
-              <input type="text" placeholder="Username" className="form-input" value={name} onChange={(e) => setName(e.target.value)} />
-              <button type="submit" className="btn">
-                Save
-              </button>
-            </form>
-          </div>
+      {isLoading && <Loader />}
+      <div className="tab-content">
+        <h3 className="tab-header">Update Profile</h3>
+        <div className="tab-body">
+          <form onSubmit={handleSubmit}>
+            <input type="text" placeholder="Username" className="form-input" value={name} onChange={(e) => setName(e.target.value)} />
+            <button type="submit" className="btn">
+              Save
+            </button>
+          </form>
         </div>
-      )}
+      </div>
     </>
   );
 }

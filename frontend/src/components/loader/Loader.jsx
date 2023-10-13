@@ -1,12 +1,10 @@
-import ReactDOM from "react-dom";
-import "./Loader.css";
+import './Loader.css';
 
 function Loader() {
-  return ReactDOM.createPortal(
+  return (
     <div className="loader-container">
       <div className="loader"></div>
-    </div>,
-    document.getElementById("loader")
+    </div>
   );
 }
 

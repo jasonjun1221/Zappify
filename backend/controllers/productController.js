@@ -12,6 +12,11 @@ const createProduct = asyncHandler(async (req, res) => {
     throw new Error("Please enter all required fields.");
   }
 
+  if (await Product.findOne({ name })) {
+    res.status(400);
+    throw new Error("Product already exists.");
+  }
+
   const product = await Product.create({ name, category, brand, price, description, countInStock, image });
   res.status(201).json({ status: "success", product });
 });
@@ -74,7 +79,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
     throw new Error("Product not found.");
   }
 
-  await product.findByIdAndDelete(req.params.id);
+  await Product.deleteOne({ _id: req.params.id });
   res.status(200).json({ status: "success", message: "Product removed." });
 });
 

@@ -7,7 +7,7 @@ const myAccountNav = [
   { name: "Orders", icon: "fa-solid fa-bag-shopping", link: "/myaccount/orders" },
   { name: "Update Profile", icon: "fa-solid fa-user", link: "/myaccount/update-profile" },
   { name: "My Address", icon: "fa-solid fa-location-dot", link: "/myaccount/address" },
-  { name: "Change Password", icon: "fa-solid fa-lock", link: "/myaccount/change-password" },
+  { name: "Update Password", icon: "fa-solid fa-lock", link: "/myaccount/update-password" },
 ];
 
 function MyAccount() {

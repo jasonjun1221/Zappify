@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
 const initialState = {
@@ -91,126 +91,123 @@ const authSlice = createSlice({
       .addCase(register.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(register.fulfilled, (state, action) => {
+      .addCase(register.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isLoggedIn = true;
-        state.user = action.payload;
+        state.user = payload;
         toast.success("Registration successfull.");
       })
-      .addCase(register.rejected, (state, action) => {
+      .addCase(register.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+        state.message = payload;
         state.user = null;
-        toast.error(action.payload);
+        toast.error(payload);
       })
       // Login user
       .addCase(login.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(login.fulfilled, (state, action) => {
+      .addCase(login.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isLoggedIn = true;
-        state.user = action.payload;
+        state.user = payload;
         toast.success("Login successfull.");
       })
-      .addCase(login.rejected, (state, action) => {
+      .addCase(login.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+        state.message = payload;
         state.user = null;
-        toast.error(action.payload);
+        toast.error(payload);
       })
       // Logout user
       .addCase(logout.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(logout.fulfilled, (state, action) => {
+      .addCase(logout.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isLoggedIn = false;
         state.user = null;
-        toast.success(action.payload);
+        toast.success(payload);
       })
-      .addCase(logout.rejected, (state, action) => {
+      .addCase(logout.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
-        toast.error(action.payload);
+        state.message = payload;
+        toast.error(payload);
       })
       // Login status
       .addCase(loginStatus.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(loginStatus.fulfilled, (state, action) => {
+      .addCase(loginStatus.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.isLoggedIn = action.payload;
-        if (action.payload.message === "invalid token") {
+        state.isLoggedIn = payload;
+        if (payload.message === "invalid token") {
           state.isLoggedIn = false;
         }
       })
-      .addCase(loginStatus.rejected, (state, action) => {
+      .addCase(loginStatus.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
+        state.message = payload;
       })
       // Get Profile
       .addCase(getProfile.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getProfile.fulfilled, (state, action) => {
+      .addCase(getProfile.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isLoggedIn = true;
-        state.user = action.payload;
+        state.user = payload;
       })
-      .addCase(getProfile.rejected, (state, action) => {
+      .addCase(getProfile.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
-        toast.error(action.payload);
+        state.message = payload;
+        toast.error(payload);
       })
       // Update Profile
       .addCase(updateProfile.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(updateProfile.fulfilled, (state, action) => {
+      .addCase(updateProfile.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isLoggedIn = true;
-        state.user = action.payload;
+        state.user = payload;
         toast.success("User updated successfully.");
       })
-      .addCase(updateProfile.rejected, (state, action) => {
+      .addCase(updateProfile.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
-        toast.error(action.payload);
+        state.message = payload;
+        toast.error(payload);
       })
       // Update Password
       .addCase(updatePassword.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(updatePassword.fulfilled, (state, action) => {
+      .addCase(updatePassword.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isLoggedIn = true;
-        state.user = action.payload;
+        state.user = payload;
         toast.success("Password updated successfully.");
       })
-      .addCase(updatePassword.rejected, (state, action) => {
+      .addCase(updatePassword.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = action.payload;
-        console.log(action.payload);
-        toast.error(action.payload);
+        state.message = payload;
+        toast.error(payload);
       });
   },
 });
-
-export const {} = authSlice.actions;
 
 export default authSlice.reducer;

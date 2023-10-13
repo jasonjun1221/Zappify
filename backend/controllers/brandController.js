@@ -14,6 +14,11 @@ const createBrand = asyncHandler(async (req, res) => {
     throw new Error("Please enter all fields.");
   }
 
+  if (await Brand.findOne({ name })) {
+    res.status(400);
+    throw new Error("Brand already exists.");
+  }
+
   if (!(await Category.findOne({ name: category }))) {
     res.status(400);
     throw new Error("Category does not exist.");

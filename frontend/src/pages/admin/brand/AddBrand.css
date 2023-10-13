@@ -38,7 +38,7 @@
 
 .brand-list {
   max-height: 440px;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .brand-list .section-title {

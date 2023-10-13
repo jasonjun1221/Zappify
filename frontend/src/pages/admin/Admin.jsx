@@ -4,11 +4,12 @@ import { NavLink, Outlet } from "react-router-dom";
 
 const adminNav = [
   { name: "Dashboard", link: "/admin/" },
-  { name: "All Products", link: "/admin/" },
+  { name: "Product List", link: "/admin/products" },
   { name: "Add Product", link: "/admin/add-product" },
   { name: "Add Category", link: "/admin/add-category" },
   { name: "Add Brand", link: "/admin/add-brand" },
   { name: "Data Analytics", link: "/admin/" },
+  { name: "Coupon", link: "/admin/" },
 ];
 
 function Admin() {

@@ -56,6 +56,7 @@ const productSchema = mongoose.Schema(
     },
     image: {
       type: String,
+      default: "/images/sample.jpg",
     },
     reviews: {
       type: [reviewSchema],

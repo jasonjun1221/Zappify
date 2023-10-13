@@ -14,7 +14,7 @@ import DashboardTab from "./pages/myaccount/DashboardTab";
 import OrdersTab from "./pages/myaccount/OrdersTab";
 import UpdateProfileTab from "./pages/myaccount/UpdateProfileTab";
 import AddressTab from "./pages/myaccount/AddressTab";
-import ChangePasswordTab from "./pages/myaccount/ChangePasswordTab";
+import UpdatePasswordTab from "./pages/myaccount/UpdatePasswordTab";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProfile, loginStatus } from "./redux/features/auth/authSlice";
@@ -23,6 +23,7 @@ import AdminDashboard from "./pages/admin/dashboard/AdminDashboard";
 import AddProduct from "./pages/admin/product/AddProduct";
 import AddCategory from "./pages/admin/category/AddCategory";
 import AddBrand from "./pages/admin/brand/AddBrand";
+import ProductList from "./pages/admin/product/ProductList";
 
 function App() {
   axios.defaults.withCredentials = true;
@@ -57,9 +58,9 @@ function App() {
           children: [
             { index: true, element: <DashboardTab /> },
             { path: "orders", element: <OrdersTab /> },
-            { path: "update-profile", element: <UpdateProfileTab /> },
             { path: "address", element: <AddressTab /> },
-            { path: "change-password", element: <ChangePasswordTab /> },
+            { path: "update-profile", element: <UpdateProfileTab /> },
+            { path: "update-password", element: <UpdatePasswordTab /> },
           ],
         },
         {
@@ -67,6 +68,7 @@ function App() {
           element: <Admin />,
           children: [
             { index: true, element: <AdminDashboard /> },
+            { path: "products", element: <ProductList /> },
             { path: "add-product", element: <AddProduct /> },
             { path: "add-category", element: <AddCategory /> },
             { path: "add-brand", element: <AddBrand /> },
