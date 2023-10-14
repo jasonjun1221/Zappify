@@ -1,0 +1,42 @@
+/* .add-product-form {
+  padding: 3rem 3rem;
+}
+
+.add-product-form form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.add-product-form .form-group {
+  margin: 1rem;
+}
+
+.add-product-form .section-title {
+  text-align: center;
+}
+
+.add-product-form .form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.add-product-form .form-group input {
+  width: 80%;
+  border: 1px solid lightgrey;
+}
+
+.add-product-form .form-group select {
+  width: 80%;
+  border: 1px solid lightgrey;
+}
+
+.product-desc {
+  width: 200%;
+  border: 1px solid lightgrey;
+}
+
+.add-product-form button {
+  margin-top: 14rem;
+  margin-left: -10rem;
+  width: 75%;
+} */

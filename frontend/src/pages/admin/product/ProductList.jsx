@@ -6,6 +6,7 @@ import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import Loader from "../../../components/loader/Loader";
 import ReactPaginate from "react-paginate";
+import { Link } from "react-router-dom";
 
 function ProductList() {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ function ProductList() {
 
   return (
     <>
-    {isLoading && <Loader />}
+      {isLoading && <Loader />}
       <div className="product-list">
         <h1 className="section-title">Product List</h1>
         {products.length === 0 ? (
@@ -60,7 +61,8 @@ function ProductList() {
                 <th>Brand</th>
                 <th>Price</th>
                 <th>Quantity</th>
-                <th>Action</th>
+                <th>Edit</th>
+                <th>Remove</th>
               </tr>
             </thead>
             <tbody>
@@ -72,6 +74,13 @@ function ProductList() {
                   <td>{prod.brand}</td>
                   <td>{prod.price}</td>
                   <td>{prod.countInStock}</td>
+                  <td>
+                    <Link to={`admin/edit-product/${prod._id}`}>
+                      <span>
+                        <i className="fa-solid fa-pen-to-square"></i>
+                      </span>
+                    </Link>
+                  </td>
                   <td>
                     <span>
                       <i className="fa-solid fa-trash table-trash" onClick={() => confirmDelete(prod._id)}></i>

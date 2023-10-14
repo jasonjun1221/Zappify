@@ -65,7 +65,7 @@ function App() {
         },
         {
           path: "admin",
-          element: <Admin />,
+          element: user?.isAdmin ? <Admin /> : <Error />,
           children: [
             { index: true, element: <AdminDashboard /> },
             { path: "products", element: <ProductList /> },

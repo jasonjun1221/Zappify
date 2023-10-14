@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const multer = require("multer");
 const {
   createProduct,
   getProducts,
@@ -11,7 +12,17 @@ const {
 } = require("../controllers/productController.js");
 const { protect, admin } = require("../middlewares/authMiddleware.js");
 
-router.post("/", protect, admin, createProduct);
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+const upload = multer({ storage });
+
+router.post("/", protect, admin, upload.single("image"), createProduct);
 router.get("/", getProducts);
 router.get("/:id", getProductById);
 router.put("/:id", protect, admin, updateProduct);

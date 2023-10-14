@@ -24,6 +24,7 @@ function AddProduct() {
   const { isLoading: brandLoading, brands } = useSelector((state) => state.brand);
   const [product, setProduct] = useState(initialState);
   const [filteredBrands, setFilteredBrands] = useState([]);
+  const [image, setImage] = useState(null);
   const { name, category, brand, price, countInStock, description } = product;
 
   useEffect(() => {
@@ -47,10 +48,17 @@ function AddProduct() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (category === "" || brand === "" || price === "" || countInStock === "" || description === "")
+    if (name === "" || category === "" || brand === "" || price === "" || countInStock === "" || description === "" || !image)
       return toast.error("All fields are required.");
     if (name.length < 3) return toast.error("Product name must be at least 3 characters long.");
-    await dispatch(createProduct({ name, category, brand, price: Number(price), countInStock: Number(countInStock), description }));
+
+    const formData = new FormData();
+    for (let key in product) {
+      formData.append(key, product[key]);
+    }
+    formData.append("image", image);
+
+    await dispatch(createProduct(formData));
     naivgate("/admin/products");
   };
 
@@ -130,7 +138,7 @@ function AddProduct() {
 
             <div className="form-group">
               <label htmlFor="image">Image:</label>
-              <input type="file" id="image" accept="image/*" className="form-input" />
+              <input type="file" id="image" accept="image/*" className="form-input" onChange={(e) => setImage(e.target.files[0])} />
             </div>
           </div>
 

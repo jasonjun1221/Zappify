@@ -7,11 +7,10 @@ const navigations = [
   { name: "Home", link: "/" },
   { name: "Categories", link: "/catergories" },
   { name: "About Us", link: "/" },
-  { name: "Admin", link: "/admin" },
 ];
 
 function Header() {
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { isLoggedIn, user } = useSelector((state) => state.auth);
 
   return (
     <>
@@ -30,6 +29,14 @@ function Header() {
                   </NavLink>
                 </li>
               ))}
+
+              {isLoggedIn && user?.isAdmin && (
+                <li className="nav-item">
+                  <NavLink to="/admin" className="nav-link">
+                    Admin
+                  </NavLink>
+                </li>
+              )}
 
               {!isLoggedIn ? (
                 <li className="nav-item">

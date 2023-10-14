@@ -39,3 +39,11 @@
   padding: 0.5rem;
   text-align: center;
 }
+
+.product-table a {
+  color: var(--comfort-black);
+}
+
+.product-table a:hover {
+  color: var(--main-color);
+} 
