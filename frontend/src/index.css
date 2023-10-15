@@ -124,7 +124,6 @@ th {
 }
 
 /*===============  Pagination ===============*/
-
 .pagination {
   display: flex;
   column-gap: 0.5rem;

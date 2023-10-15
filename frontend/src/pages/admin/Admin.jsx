@@ -3,13 +3,13 @@ import "./Admin.css";
 import { NavLink, Outlet } from "react-router-dom";
 
 const adminNav = [
-  { name: "Dashboard", link: "/admin/" },
+  { name: "Dashboard", link: "/admin/dashboard" },
   { name: "Product List", link: "/admin/products" },
   { name: "Add Product", link: "/admin/add-product" },
   { name: "Add Category", link: "/admin/add-category" },
   { name: "Add Brand", link: "/admin/add-brand" },
-  { name: "Data Analytics", link: "/admin/" },
-  { name: "Coupon", link: "/admin/" },
+  { name: "Order List", link: "/admin/dashboard" },
+  { name: "Coupon", link: "/admin/dashboard" },
 ];
 
 function Admin() {

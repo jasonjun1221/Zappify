@@ -48,6 +48,11 @@
   margin-bottom: 1rem;
 }
 
+.tab-body button {
+  margin-left: 9rem;
+  width: 33.5%;
+}
+
 .order-table tr th,
 .order-table tr td {
   border: 1px solid lightgrey;
@@ -59,7 +64,7 @@
   color: var(--main-color);
 }
 
-.address {
+.content {
   line-height: 1.5rem;
 }
 
@@ -71,11 +76,11 @@
   font-size: var(--small-font-size);
 }
 
-.address label {
+.content label {
   display: inline-block;
-  width: 8rem;
+  width: 9rem;
 }
 
-.address input {
+.content input {
   display: inline;
 }

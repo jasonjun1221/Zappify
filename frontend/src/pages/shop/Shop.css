@@ -22,11 +22,11 @@
   width: 170px;
 }
 
-.category__title {
+.category-title {
   font-size: 1rem;
 }
 
-/*===============  Products ===============*/
+/*=============== Sort ===============*/
 .total-products {
   margin: 3rem;
   font-size: 1.2rem;
@@ -36,6 +36,25 @@
   color: var(--main-color);
   font-weight: 600;
 }
+
+.sort-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sorting {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-right: 3rem;
+}
+
+.sorting span {
+  font-size: 1.2rem;
+}
+
+/*===============  Products ===============*/
+
 
 .products-container {
   margin: 2.2rem;

@@ -32,27 +32,40 @@ function UpdatePasswordTab() {
         <h3 className="tab-header">Change Password</h3>
         <div className="tab-body">
           <form onSubmit={handleSubmit}>
-            <input
-              type="password"
-              placeholder="Current Password"
-              className="form-input"
-              value={currentPassword}
-              onChange={(e) => setCurrentPassword(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="New Password"
-              className="form-input"
-              value={newPassword}
-              onChange={(e) => setNewPassword(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              className="form-input"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
+            <div className="content">
+              <label htmlFor="currentPassword">Current Password: </label>
+              <input
+                type="password"
+                placeholder="Current Password"
+                id="currentPassword"
+                className="form-input"
+                value={currentPassword}
+                onChange={(e) => setCurrentPassword(e.target.value)}
+              />
+            </div>
+
+            <div className="content">
+              <label htmlFor="newPassword">New Password: </label>
+              <input
+                type="password"
+                placeholder="New Password"
+                id="newPassword"
+                className="form-input"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
+              />
+            </div>
+            <div className="content">
+              <label htmlFor="confirmPassword">Confirm Password: </label>
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                id="confirmPassword"
+                className="form-input"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </div>
             <button type="submit" className="btn">
               Save
             </button>

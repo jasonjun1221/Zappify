@@ -3,7 +3,8 @@ import axios from "axios";
 import Layout from "./layout/Layout";
 import Error from "./pages/error/Error";
 import Home from "./pages/home/Home";
-import Catergories from "./pages/categories/Catergories";
+import Shop from "./pages/shop/Shop";
+import About from "./pages/about/About";
 import Login from "./pages/auth/Login";
 import Cart from "./pages/cart/Cart";
 import Checkout from "./pages/checkout/Checkout";
@@ -46,7 +47,8 @@ function App() {
       errorElement: <Error />,
       children: [
         { index: true, element: <Home /> },
-        { path: "catergories", element: <Catergories /> },
+        { path: "shop", element: <Shop /> },
+        { path: "about", element: <About /> },
         { path: "login", element: <Login /> },
         { path: "cart", element: <Cart /> },
         { path: "checkout", element: <Checkout /> },
@@ -56,7 +58,7 @@ function App() {
           path: "myaccount",
           element: <MyAccount />,
           children: [
-            { index: true, element: <DashboardTab /> },
+            { path: "dashboard", element: <DashboardTab /> },
             { path: "orders", element: <OrdersTab /> },
             { path: "address", element: <AddressTab /> },
             { path: "update-profile", element: <UpdateProfileTab /> },
@@ -65,9 +67,10 @@ function App() {
         },
         {
           path: "admin",
-          element: user?.isAdmin ? <Admin /> : <Error />,
+          // element: user?.isAdmin && <Admin />,
+          element: <Admin />,
           children: [
-            { index: true, element: <AdminDashboard /> },
+            { path: "dashboard", element: <AdminDashboard /> },
             { path: "products", element: <ProductList /> },
             { path: "add-product", element: <AddProduct /> },
             { path: "add-category", element: <AddCategory /> },

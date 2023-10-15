@@ -24,7 +24,10 @@ function UpdateProfileTab() {
         <h3 className="tab-header">Update Profile</h3>
         <div className="tab-body">
           <form onSubmit={handleSubmit}>
-            <input type="text" placeholder="Username" className="form-input" value={name} onChange={(e) => setName(e.target.value)} />
+            <div className="content">
+              <label htmlFor="newPassword">Username: </label>
+              <input type="text" placeholder="Username" className="form-input" value={name} onChange={(e) => setName(e.target.value)} />
+            </div>
             <button type="submit" className="btn">
               Save
             </button>

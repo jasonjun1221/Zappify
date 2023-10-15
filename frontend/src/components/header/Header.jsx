@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 
 const navigations = [
   { name: "Home", link: "/" },
-  { name: "Categories", link: "/catergories" },
-  { name: "About Us", link: "/" },
+  { name: "Shop", link: "/shop" },
+  { name: "About Us", link: "/about" },
 ];
 
 function Header() {

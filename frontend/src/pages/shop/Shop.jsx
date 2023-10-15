@@ -1,6 +1,6 @@
 import { NavLink, Link } from "react-router-dom";
 import ReactPaginate from "react-paginate";
-import "./Catergories.css";
+import "./Shop.css";
 import productShoe from "../../assets/product-shoe.jpg";
 import catergories from "../../assets/categories.jpg";
 
@@ -48,22 +48,34 @@ const products = [
   },
 ];
 
-function Catergories() {
+function Shop() {
   return (
     <section className="container section">
       <div className="categories-container">
-        {categories.map((category) => (
-          <NavLink to={category.link} className="category-item " key={category.id}>
-            <img src={category.image} alt={category.name} className="category-img" />
-            <h3 className="category__title">{category.name}</h3>
+        {categories.map((cat) => (
+          <NavLink to={cat.link} className="category-item " key={cat.id}>
+            <img src={cat.image} alt={cat.name} className="category-img" />
+            <h3 className="category-title">{cat.name}</h3>
           </NavLink>
         ))}
       </div>
 
       <section className="products section container">
-        <p className="total-products">
-          We found <span>688</span> items for you!
-        </p>
+        <div className="sort-container">
+          <p className="total-products">
+            We found <span>688</span> items for you!
+          </p>
+
+          <div className="sorting">
+            <span>Sort By: </span>
+            <select className="form-input">
+              <option value="">Default</option>
+              <option value="lowest-price">Lowest Price</option>
+              <option value="highest-price">Highest Price</option>
+              <option value="rating">Rating</option>
+            </select>
+          </div>
+        </div>
 
         <div className="products-container grid">
           {products.map((product) => (
@@ -116,4 +128,4 @@ function Catergories() {
     </section>
   );
 }
-export default Catergories;
+export default Shop;
