@@ -31,6 +31,26 @@ export const getProducts = createAsyncThunk("product/getProducts", async (_, thu
   }
 });
 
+// Get Product
+export const getProduct = createAsyncThunk("product/getProduct", async (id, thunkAPI) => {
+  try {
+    return await productService.getProduct(id);
+  } catch (error) {
+    const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+// Update Product
+export const updateProduct = createAsyncThunk("product/updateProduct", async ({ id, formData }, thunkAPI) => {
+  try {
+    return await productService.updateProduct(id, formData);
+  } catch (error) {
+    const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 // Delete Product
 export const deleteProduct = createAsyncThunk("product/deleteProduct", async (id, thunkAPI) => {
   try {
@@ -75,6 +95,36 @@ const productSlice = createSlice({
         state.isLoading = false;
         state.isError = true;
         state.message = payload;
+      })
+      // Get Product
+      .addCase(getProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getProduct.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.product = payload;
+      })
+      .addCase(getProduct.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = payload;
+        toast.error(payload);
+      })
+      // Update Product
+      .addCase(updateProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateProduct.fulfilled, (state) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        toast.success("Product updated successfully.");
+      })
+      .addCase(updateProduct.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = payload;
+        toast.error(payload);
       })
       // Delete Product
       .addCase(deleteProduct.pending, (state) => {

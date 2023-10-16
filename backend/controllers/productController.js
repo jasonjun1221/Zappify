@@ -49,7 +49,7 @@ const getProductById = asyncHandler(async (req, res) => {
 // @route   PUT /api/products/:id
 // @access  Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
-  const { name, category, brand, price, description, countInStock, image } = req.body;
+  const { name, category, brand, price, description, countInStock } = req.body;
 
   if (!name || !category || !brand || !price || !description || !countInStock) {
     res.status(400);
@@ -64,7 +64,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 
   const updatedProduct = await Product.findByIdAndUpdate(
     req.params.id,
-    { name, category, brand, price, description, countInStock, image },
+    { name, category, brand, price, description, countInStock },
     { new: true, runValidators: true }
   );
 

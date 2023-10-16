@@ -1,7 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import axios from "axios";
 import Layout from "./layout/Layout";
-import Error from "./pages/error/Error";
+import PageNotFound from "./pages/error/PageNotFound";
 import Home from "./pages/home/Home";
 import Shop from "./pages/shop/Shop";
 import About from "./pages/about/About";
@@ -25,6 +25,7 @@ import AddProduct from "./pages/admin/product/AddProduct";
 import AddCategory from "./pages/admin/category/AddCategory";
 import AddBrand from "./pages/admin/brand/AddBrand";
 import ProductList from "./pages/admin/product/ProductList";
+import EditProduct from "./pages/admin/product/EditProduct";
 
 function App() {
   axios.defaults.withCredentials = true;
@@ -44,7 +45,7 @@ function App() {
   const router = createBrowserRouter([
     {
       element: <Layout />,
-      errorElement: <Error />,
+      errorElement: <PageNotFound />,
       children: [
         { index: true, element: <Home /> },
         { path: "shop", element: <Shop /> },
@@ -58,7 +59,7 @@ function App() {
           path: "myaccount",
           element: <MyAccount />,
           children: [
-            { path: "dashboard", element: <DashboardTab /> },
+            { index: true, element: <DashboardTab /> },
             { path: "orders", element: <OrdersTab /> },
             { path: "address", element: <AddressTab /> },
             { path: "update-profile", element: <UpdateProfileTab /> },
@@ -67,11 +68,11 @@ function App() {
         },
         {
           path: "admin",
-          // element: user?.isAdmin && <Admin />,
-          element: <Admin />,
+          element: user?.isAdmin && <Admin />,
           children: [
-            { path: "dashboard", element: <AdminDashboard /> },
+            { index: true, element: <AdminDashboard /> },
             { path: "products", element: <ProductList /> },
+            { path: "edit-product/:id", element: <EditProduct /> },
             { path: "add-product", element: <AddProduct /> },
             { path: "add-category", element: <AddCategory /> },
             { path: "add-brand", element: <AddBrand /> },

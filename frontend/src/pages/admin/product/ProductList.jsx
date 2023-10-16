@@ -1,14 +1,15 @@
 import "./ProductList.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { deleteProduct, getProducts } from "../../../redux/features/product/productSlice";
+import { deleteProduct, getProduct, getProducts } from "../../../redux/features/product/productSlice";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import Loader from "../../../components/loader/Loader";
 import ReactPaginate from "react-paginate";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function ProductList() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isLoading, products } = useSelector((state) => state.product);
 
@@ -30,6 +31,10 @@ function ProductList() {
         { label: "Cancel", onClick: () => {} },
       ],
     });
+  };
+
+  const handleEdit = (id) => {
+    navigate(`/admin/edit-product/${id}`);
   };
 
   // Pagination
@@ -75,11 +80,9 @@ function ProductList() {
                   <td>{prod.price}</td>
                   <td>{prod.countInStock}</td>
                   <td>
-                    <Link to={`admin/edit-product/${prod._id}`}>
-                      <span>
-                        <i className="fa-solid fa-pen-to-square"></i>
-                      </span>
-                    </Link>
+                    <span>
+                      <i className="fa-solid fa-pen-to-square" onClick={() => handleEdit(prod._id)}></i>
+                    </span>
                   </td>
                   <td>
                     <span>

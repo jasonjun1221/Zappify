@@ -3,16 +3,17 @@ import "./Admin.css";
 import { NavLink, Outlet } from "react-router-dom";
 
 const adminNav = [
-  { name: "Dashboard", link: "/admin/dashboard" },
+  { name: "Dashboard", link: "/admin/" },
   { name: "Product List", link: "/admin/products" },
   { name: "Add Product", link: "/admin/add-product" },
   { name: "Add Category", link: "/admin/add-category" },
   { name: "Add Brand", link: "/admin/add-brand" },
-  { name: "Order List", link: "/admin/dashboard" },
-  { name: "Coupon", link: "/admin/dashboard" },
+  { name: "Order List", link: "/admin/" },
+  { name: "Coupon", link: "/admin/" },
 ];
 
 function Admin() {
+  
   return (
     <div className="admin-container grid">
       <div className="admin-details">

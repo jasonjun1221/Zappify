@@ -40,10 +40,11 @@
   text-align: center;
 }
 
-.product-table a {
+.product-table i {
   color: var(--comfort-black);
 }
 
-.product-table a:hover {
+.product-table i:hover {
   color: var(--main-color);
+  cursor: pointer;
 } 

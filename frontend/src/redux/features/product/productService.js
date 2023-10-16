@@ -14,12 +14,24 @@ const getProducts = async () => {
   return response.data.products;
 };
 
+// Get Product
+const getProduct = async (id) => {
+  const response = await axios.get(`${API_URL}/products/${id}`);
+  return response.data.product;
+};
+
+// Update Product
+const updateProduct = async (id, formData) => {
+  const response = await axios.put(`${API_URL}/products/${id}`, formData);
+  return response.data;
+};
+
 // Delete Product
 const deleteProduct = async (id) => {
   const response = await axios.delete(`${API_URL}/products/${id}`);
   return response.data;
 };
 
-const productService = { createProduct, getProducts, deleteProduct };
+const productService = { createProduct, getProducts, getProduct, updateProduct, deleteProduct };
 
 export default productService;

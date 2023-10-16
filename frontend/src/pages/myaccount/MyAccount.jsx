@@ -4,7 +4,7 @@ import { NavLink, Outlet } from "react-router-dom";
 import { logout } from "../../redux/features/auth/authSlice";
 
 const myAccountNav = [
-  { name: "Dashboard", icon: "fa-solid fa-house", link: "/myaccount/dashboard" },
+  { name: "Dashboard", icon: "fa-solid fa-house", link: "/myaccount/" },
   { name: "Orders", icon: "fa-solid fa-bag-shopping", link: "/myaccount/orders" },
   { name: "Update Profile", icon: "fa-solid fa-user", link: "/myaccount/update-profile" },
   { name: "My Address", icon: "fa-solid fa-location-dot", link: "/myaccount/address" },

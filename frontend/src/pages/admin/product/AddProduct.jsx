@@ -19,11 +19,10 @@ const initialState = {
 
 function AddProduct() {
   const dispatch = useDispatch();
-  const naivgate = useNavigate();
+  const navigate = useNavigate();
   const { isLoading: categoryLoading, categories } = useSelector((state) => state.category);
   const { isLoading: brandLoading, brands } = useSelector((state) => state.brand);
   const [product, setProduct] = useState(initialState);
-  const [filteredBrands, setFilteredBrands] = useState([]);
   const [image, setImage] = useState(null);
   const { name, category, brand, price, countInStock, description } = product;
 
@@ -31,15 +30,6 @@ function AddProduct() {
     dispatch(getCategories());
     dispatch(getBrands());
   }, [dispatch]);
-
-  // filter brands based on selected category
-  const filterBrands = (selectedCategory) => {
-    setFilteredBrands(brands.filter((brand) => brand.category === selectedCategory));
-  };
-
-  useEffect(() => {
-    filterBrands(category);
-  }, [category]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -59,7 +49,7 @@ function AddProduct() {
     formData.append("image", image);
 
     await dispatch(createProduct(formData));
-    naivgate("/admin/products");
+    navigate("/admin/products");
   };
 
   return (
@@ -70,10 +60,10 @@ function AddProduct() {
         <form onSubmit={handleSubmit}>
           <div>
             <div className="form-group">
-              <label htmlFor="categoryName">Product Name:</label>
+              <label htmlFor="name">Product Name:</label>
               <input
                 type="text"
-                id="productName"
+                id="name"
                 placeholder="Product name"
                 className="form-input"
                 name="name"
@@ -83,8 +73,8 @@ function AddProduct() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="categoryName">Category Name:</label>
-              <select className="form-input" id="categoryName" name="category" value={product?.category} onChange={handleInputChange}>
+              <label htmlFor="category">Category Name:</label>
+              <select className="form-input" id="category" name="category" value={product?.category} onChange={handleInputChange}>
                 <option value="">-- Select Category --</option>
                 {categories.length > 0 &&
                   categories.map((cat) => (
@@ -96,11 +86,11 @@ function AddProduct() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="brandName">Brand Name:</label>
-              <select className="form-input" id="categoryName" name="brand" value={product?.brand} onChange={handleInputChange}>
+              <label htmlFor="brand">Brand Name:</label>
+              <select className="form-input" id="brand" name="brand" value={product?.brand} onChange={handleInputChange}>
                 <option value="">-- Select Brand --</option>
-                {filteredBrands.length > 0 &&
-                  filteredBrands.map((brand) => (
+                {brands.length > 0 &&
+                  brands.map((brand) => (
                     <option key={brand._id} value={brand.name}>
                       {brand.name}
                     </option>
@@ -124,10 +114,10 @@ function AddProduct() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="quantity">Quantity:</label>
+              <label htmlFor="countInStock">Quantity:</label>
               <input
                 type="number"
-                id="quantity"
+                id="countInStock"
                 placeholder="Quantity"
                 className="form-input"
                 name="countInStock"

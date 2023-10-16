@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "./Error.css";
 
-function Error() {
+function PageNotFound() {
   const navigate = useNavigate();
 
   return (
@@ -16,4 +16,4 @@ function Error() {
     </div>
   );
 }
-export default Error;
+export default PageNotFound;
