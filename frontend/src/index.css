@@ -1,7 +1,9 @@
 /*=============== Google Fonts ===============*/
+
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Spartan:wght@400;500;600;700&display=swap");
 
 /*=============== Global CSS Variables ===============*/
+
 :root {
   --main-color: #1ebbd7;
   --comfort-white: #fffefc;
@@ -10,6 +12,7 @@
 }
 
 /*=============== Global CSS Base ===============*/
+
 * {
   margin: 0;
   padding: 0;
@@ -58,6 +61,7 @@ table {
 td {
   border: 1px solid lightgrey;
 }
+
 th {
   background-color: #f2f2f2;
 }
@@ -89,6 +93,27 @@ th {
   height: 45px;
   border-radius: 0.25rem;
   font-size: 0.9rem;
+}
+
+.search {
+  width: 230px;
+  position: relative;
+}
+
+.search .form-input {
+  width: 100%;
+}
+
+.search-btn {
+  position: absolute;
+  top: 30%;
+  right: 1rem;
+  cursor: pointer;
+}
+
+.search-btn i {
+  font-size: 1.2rem;
+  color: #3a3a3a;
 }
 
 .form-group {
@@ -123,11 +148,21 @@ th {
   color: var(--main-color);
 }
 
+.back-btn {
+  border-radius: 50rem;
+  line-height: normal;
+  padding-inline: 0.75rem;
+  width: 50px;
+}
+
+.trash-icon:hover {
+  color: red;
+}
+
 /*===============  Pagination ===============*/
 .pagination {
   display: flex;
   column-gap: 0.5rem;
-  margin-top: 3rem;
   justify-content: center;
 }
 

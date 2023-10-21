@@ -1,8 +1,8 @@
-import "./AdminDashboard.css";
+import "./Dashboard.css";
 
-function AdminDashboard() {
+function Dashboard() {
   return (
-    <div className="admin-dashboard">
+    <div className="dashboard">
       <div className="statistic-container">
         <div className="sales-box">
           <h1>230,503</h1>
@@ -20,4 +20,4 @@ function AdminDashboard() {
   );
 }
 
-export default AdminDashboard;
+export default Dashboard;

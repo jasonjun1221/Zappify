@@ -13,7 +13,7 @@ const initialState = {
   category: "",
   brand: "",
   price: "",
-  countInStock: "",
+  quantity: "",
   description: "",
 };
 
@@ -24,47 +24,60 @@ function AddProduct() {
   const { isLoading: brandLoading, brands } = useSelector((state) => state.brand);
   const [product, setProduct] = useState(initialState);
   const [image, setImage] = useState(null);
-  const { name, category, brand, price, countInStock, description } = product;
+  const { name, category, brand, price, quantity, description } = product;
 
+  // Get categories and brands
   useEffect(() => {
     dispatch(getCategories());
     dispatch(getBrands());
   }, [dispatch]);
 
+  // Filter brands based on category
+  const filteredBrands = brands.filter((brand) => brand.category === category);
+
+  // Handle input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setProduct({ ...product, [name]: value });
   };
 
+  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (name === "" || category === "" || brand === "" || price === "" || countInStock === "" || description === "" || !image)
+    if (name === "" || category === "" || brand === "" || price === "" || quantity === "" || description === "" || !image)
       return toast.error("All fields are required.");
     if (name.length < 3) return toast.error("Product name must be at least 3 characters long.");
+    if (description.length < 5) return toast.error("Product description must be at least 5 characters long.");
+    if (price < 1) return toast.error("Product price must be greater than 0.");
+    if (quantity < 1) return toast.error("Product quantity must be greater than 0.");
 
     const formData = new FormData();
-    for (let key in product) {
-      formData.append(key, product[key]);
-    }
+    for (let key in product) formData.append(key, product[key]);
     formData.append("image", image);
 
     await dispatch(createProduct(formData));
-    navigate("/admin/products");
+    navigate("/admin/product");
   };
 
   return (
     <>
       {(categoryLoading || brandLoading) && <Loader />}
       <div className="add-product-form">
-        <h1 className="section-title">Add Product</h1>
+        <div className="add-product-header">
+          <button className="btn back-btn" onClick={() => navigate(-1)}>
+            <i className="fa-solid fa-chevron-left"></i>
+          </button>
+          <h1 className="section-title">Add Product</h1>
+        </div>
+
         <form onSubmit={handleSubmit}>
           <div>
             <div className="form-group">
-              <label htmlFor="name">Product Name:</label>
+              <label htmlFor="name">Name:</label>
               <input
                 type="text"
                 id="name"
-                placeholder="Product name"
+                placeholder="Name"
                 className="form-input"
                 name="name"
                 value={product?.name}
@@ -73,7 +86,7 @@ function AddProduct() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="category">Category Name:</label>
+              <label htmlFor="category">Category:</label>
               <select className="form-input" id="category" name="category" value={product?.category} onChange={handleInputChange}>
                 <option value="">-- Select Category --</option>
                 {categories.length > 0 &&
@@ -86,11 +99,11 @@ function AddProduct() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="brand">Brand Name:</label>
+              <label htmlFor="brand">Brand:</label>
               <select className="form-input" id="brand" name="brand" value={product?.brand} onChange={handleInputChange}>
                 <option value="">-- Select Brand --</option>
-                {brands.length > 0 &&
-                  brands.map((brand) => (
+                {filteredBrands.length > 0 &&
+                  filteredBrands.map((brand) => (
                     <option key={brand._id} value={brand.name}>
                       {brand.name}
                     </option>
@@ -101,7 +114,7 @@ function AddProduct() {
 
           <div>
             <div className="form-group">
-              <label htmlFor="price">Price:</label>
+              <label htmlFor="price">Price (SGD):</label>
               <input
                 type="number"
                 id="price"
@@ -114,14 +127,14 @@ function AddProduct() {
             </div>
 
             <div className="form-group">
-              <label htmlFor="countInStock">Quantity:</label>
+              <label htmlFor="quantity">Quantity:</label>
               <input
                 type="number"
-                id="countInStock"
+                id="quantity"
                 placeholder="Quantity"
                 className="form-input"
-                name="countInStock"
-                value={product?.countInStock}
+                name="quantity"
+                value={product?.quantity}
                 onChange={handleInputChange}
               />
             </div>
@@ -135,7 +148,7 @@ function AddProduct() {
           <div className="form-group">
             <label htmlFor="description">Description:</label>
             <textarea
-              className="form-input textarea product-desc"
+              className="form-input textarea product-description"
               id="description"
               placeholder="Write description"
               name="description"

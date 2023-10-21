@@ -50,9 +50,9 @@ const productSchema = mongoose.Schema(
       type: String,
       required: [true, "Please enter product description."],
     },
-    countInStock: {
+    quantity: {
       type: Number,
-      required: [true, "Please enter product count in stock."],
+      required: [true, "Please enter product quantity."],
     },
     image: {
       type: String,

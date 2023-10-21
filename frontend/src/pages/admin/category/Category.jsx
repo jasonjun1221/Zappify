@@ -1,14 +1,15 @@
-import "./AddCategory.css";
+import "./Category.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { createCategory, getCategories } from "../../../redux/features/category/categorySlice";
 import CategoryList from "./CategoryList";
 
-function AddCategory() {
+function Category() {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
 
+  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (name === "") return toast.error("Category name is required.");
@@ -21,14 +22,14 @@ function AddCategory() {
   return (
     <>
       <div className="category-form">
-        <h1 className="section-title">Add Category</h1>
+        <h1 className="section-title">Add New Category</h1>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="categoryName">Category Name:</label>
+            <label htmlFor="categoryName">Category:</label>
             <input
               type="text"
               id="categoryName"
-              placeholder="Category name"
+              placeholder="Category"
               className="form-input"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -45,4 +46,4 @@ function AddCategory() {
   );
 }
 
-export default AddCategory;
+export default Category;

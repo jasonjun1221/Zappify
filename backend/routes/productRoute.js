@@ -13,10 +13,10 @@ const {
 const { protect, admin } = require("../middlewares/authMiddleware.js");
 
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
+  destination: (_, file, cb) => {
     cb(null, "uploads/");
   },
-  filename: (req, file, cb) => {
+  filename: (_, file, cb) => {
     cb(null, Date.now() + "-" + file.originalname);
   },
 });

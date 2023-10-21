@@ -1,0 +1,84 @@
+/*=============== Product ===============*/
+
+.product-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 3rem 1.5rem 3rem;
+}
+
+.product-list .section-title {
+  margin: 2rem 0;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.edit-icon:hover {
+  color: var(--main-color);
+  cursor: pointer;
+}
+
+.not-found {
+  text-align: center;
+  font-size: 1.5rem;
+  margin: 5rem 0;
+}
+
+.product-table {
+  table-layout: fixed;
+  border-left: none;
+  border-right: none;
+  margin-bottom: 1rem;
+}
+
+.product-table tr th,
+.product-table tr td {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.product-table tr:hover {
+  background-color: #f2f2f2;
+}
+
+.product-table tr th:nth-child(1),
+.product-table tr td:nth-child(1) {
+  border-left: none;
+  width: 50px;
+}
+
+.product-table tr th:nth-child(2),
+.product-table tr td:nth-child(2) {
+  width: 280px;
+}
+
+.product-table tr th:nth-child(3),
+.product-table tr td:nth-child(3) {
+  width: 140px;
+}
+
+.product-table tr th:nth-child(4),
+.product-table tr td:nth-child(4) {
+  width: 120px;
+}
+
+.product-table tr th:nth-child(5),
+.product-table tr td:nth-child(5) {
+  width: 90px;
+}
+
+.product-table tr th:nth-child(6),
+.product-table tr td:nth-child(6) {
+  width: 80px;
+}
+
+.product-table tr th:nth-child(7),
+.product-table tr td:nth-child(7) {
+  width: 70px;
+}
+
+.product-table tr th:nth-child(8),
+.product-table tr td:nth-child(8) {
+  width: 70px;
+  border-right: none;
+}

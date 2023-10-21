@@ -45,20 +45,13 @@ function Header() {
                   </NavLink>
                 </li>
               ) : (
-                <li className="nav-item">
-                  <NavLink to="/myaccount" className="nav-link">
-                    My Account
-                  </NavLink>
-                </li>
+                <li className="nav-item"></li>
               )}
             </ul>
 
-            <div className="header-search">
-              <input type="text" placeholder="Search for items..." className="form-input" />
-              <button className="search-btn">
-                <i className="fa-solid fa-magnifying-glass"></i>
-              </button>
-            </div>
+            <NavLink to="/myaccount" className="nav-link myaccount">
+              My Account
+            </NavLink>
           </div>
 
           <div className="header-cart">

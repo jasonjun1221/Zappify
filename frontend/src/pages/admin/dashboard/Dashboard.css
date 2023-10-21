@@ -1,4 +1,6 @@
-.admin-dashboard {
+/*=============== Dashboard ===============*/
+
+.dashboard {
   display: flex;
   flex-direction: column;
   align-items: center;

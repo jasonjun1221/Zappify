@@ -1,8 +1,8 @@
-import "./Product.css";
+import "./ProductDetails.css";
 import ProductJPG from "../../assets/product.jpg";
-import Review from "../../components/review/Review"
+import Review from "../../components/review/Review";
 
-function Product() {
+function ProductDetails() {
   return (
     <>
       <section className="section">
@@ -41,4 +41,4 @@ function Product() {
     </>
   );
 }
-export default Product;
+export default ProductDetails;

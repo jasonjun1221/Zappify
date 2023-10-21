@@ -1,5 +1,7 @@
+/*=============== Brand Form ===============*/
+
 .brand-form {
-  padding: 1rem 3rem;
+  padding: 3rem 3rem 4rem 3rem;
   border-bottom: 1px solid lightgrey;
 }
 
@@ -13,7 +15,6 @@
 }
 
 .brand-form .section-title {
-  margin: 0.5rem;
   text-align: center;
 }
 
@@ -22,27 +23,27 @@
   font-weight: 600;
   margin-bottom: 1rem;
 }
+
 .brand-form .form-group input {
   width: 65%;
-  border: 1px solid lightgrey;
 }
 
 .brand-form .form-group select {
   width: 80%;
-  border: 1px solid lightgrey;
 }
 
 .brand-form .form-group button {
   margin-left: 2rem;
 }
 
+/*=============== Brand List ===============*/
+
 .brand-list {
   max-height: 440px;
-  overflow-y: auto;
 }
 
 .brand-list .section-title {
-  margin-top: 1.6rem;
+  margin-top: 3rem;
   font-size: 1.5rem;
   text-align: center;
 }
@@ -51,25 +52,37 @@
   table-layout: fixed;
   border-left: none;
   border-right: none;
+  margin-bottom: 1rem;
 }
 
-.brand-table tr {
-  border-top: 1px solid lightgrey;
-}
-
-.brand-table tr:last-child {
-  border-bottom: 1px solid lightgrey;
-}
-
-.brand-table tr th:nth-child(1),
-.brand-table tr td:nth-child(1) {
-  width: 50px;
+.brand-table tr:hover {
+  background-color: #f2f2f2;
 }
 
 .brand-table tr th,
 .brand-table tr td {
-  border-left: none;
-  border-right: none;
   padding: 0.5rem;
   text-align: center;
+}
+
+.brand-table tr th:nth-child(1),
+.brand-table tr td:nth-child(1) {
+  border-left: none;
+  width: 50px;
+}
+
+.brand-table tr th:nth-child(2),
+.brand-table tr td:nth-child(2) {
+  width: 200px;
+}
+
+.brand-table tr th:nth-child(3),
+.brand-table tr td:nth-child(3) {
+  width: 200px;
+}
+
+.brand-table tr th:nth-child(4),
+.brand-table tr td:nth-child(4) {
+  border-right: none;
+  width: 50px;
 }

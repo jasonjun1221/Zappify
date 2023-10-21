@@ -1,0 +1,63 @@
+/* AboutPage.css */
+.about-page {
+  background-color: #f4f4f4;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.about-page header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.about-page h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.about-page p {
+  font-size: 1.2rem;
+  color: #666;
+}
+
+.about-page section {
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+.about-page h2 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.about-page .mission {
+  background-color: #f7f7f7;
+}
+
+.about-page .team {
+  background-color: #eaf2f4;
+}
+
+.about-page .contact {
+  background-color: #f0f0f0;
+}
+
+.about-page .contact-info {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  color: #666;
+}
+
+/* Style links (you can customize these) */
+.about-page a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.about-page a:hover {
+  text-decoration: underline;
+}

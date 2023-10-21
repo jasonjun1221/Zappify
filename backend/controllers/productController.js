@@ -5,10 +5,10 @@ const Product = require("../models/productModel.js");
 // @route   POST /api/products
 // @access  Private/Admin
 const createProduct = asyncHandler(async (req, res) => {
-  const { name, category, brand, price, description, countInStock } = req.body;
+  const { name, category, brand, price, description, quantity } = req.body;
   const image = req.file;
 
-  if (!name || !category || !brand || !price || !description || !countInStock || !image) {
+  if (!name || !category || !brand || !price || !description || !quantity || !image) {
     res.status(400);
     throw new Error("Please enter all required fields.");
   }
@@ -18,9 +18,9 @@ const createProduct = asyncHandler(async (req, res) => {
     throw new Error("Product already exists.");
   }
 
-  const imageUrl = image.destination + image.filename;
-  const product = await Product.create({ name, category, brand, price, description, countInStock, image: imageUrl });
-  res.status(201).json({ status: "success", product });
+  const imageUrl = `${req.protocol}://${req.get("host")}/uploads/${image.filename}`;
+  const product = await Product.create({ name, category, brand, price, description, quantity, image: imageUrl });
+  res.status(201).json({ status: "success", product, image: imageUrl });
 });
 
 // @desc    Get all products
@@ -49,9 +49,10 @@ const getProductById = asyncHandler(async (req, res) => {
 // @route   PUT /api/products/:id
 // @access  Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
-  const { name, category, brand, price, description, countInStock } = req.body;
+  const { name, category, brand, price, countInStock, description } = req.body;
+  console.log(req.body);
 
-  if (!name || !category || !brand || !price || !description || !countInStock) {
+  if (!name || !category || !brand || !price || !countInStock || !description) {
     res.status(400);
     throw new Error("Please enter all required fields.");
   }

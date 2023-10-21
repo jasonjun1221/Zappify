@@ -58,7 +58,7 @@ const brandSlice = createSlice({
       .addCase(createBrand.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.isError = true;
-        state.message = payload;
+        state.message = payload.message;
         toast.error(payload);
       })
       // Get Brands

@@ -14,7 +14,7 @@ const createBrand = asyncHandler(async (req, res) => {
     throw new Error("Please enter all fields.");
   }
 
-  if (await Brand.findOne({ name })) {
+  if (await Brand.findOne({ name, category })) {
     res.status(400);
     throw new Error("Brand already exists.");
   }
@@ -24,7 +24,7 @@ const createBrand = asyncHandler(async (req, res) => {
     throw new Error("Category does not exist.");
   }
 
-  const brand = await Brand.create({ name, slug: slugify(name), category });
+  const brand = await Brand.create({ name, slug: slugify(`${name}-${category}`), category });
   res.status(201).json({ status: "success", brand });
 });
 

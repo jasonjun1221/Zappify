@@ -3,10 +3,12 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { updateProfile } from "../../redux/features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 import Loader from "../../components/loader/Loader";
 
 function AddressTab() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { user, isLoading } = useSelector((state) => state.auth);
   const initialState = {
     street: user?.address?.street || "",
@@ -15,16 +17,19 @@ function AddressTab() {
   };
   const [address, setAddress] = useState(initialState);
 
+  // handle input change
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setAddress({ ...address, [name]: value });
   };
 
+  // handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (address === initialState) return toast.error("Please enter a new address.");
     if (address.street === "" || address.postalCode === "" || address.country === "") return toast.error("Please enter all fields.");
     await dispatch(updateProfile({ address }));
+    navigate("/myaccount");
   };
 
   return (

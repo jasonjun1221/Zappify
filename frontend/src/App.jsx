@@ -1,30 +1,36 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getProfile, loginStatus } from "./redux/features/auth/authSlice";
 import axios from "axios";
+
+// Pages & Layouts
 import Layout from "./layout/Layout";
 import PageNotFound from "./pages/error/PageNotFound";
 import Home from "./pages/home/Home";
+import Register from "./pages/auth/Register";
+import Login from "./pages/auth/Login";
 import Shop from "./pages/shop/Shop";
 import About from "./pages/about/About";
-import Login from "./pages/auth/Login";
 import Cart from "./pages/cart/Cart";
 import Checkout from "./pages/checkout/Checkout";
-import Register from "./pages/auth/Register";
-import Product from "./pages/product/Product";
+import ProductDetails from "./pages/productDetails/ProductDetails";
+
+// My Account Pages
 import MyAccount from "./pages/myaccount/MyAccount";
 import DashboardTab from "./pages/myaccount/DashboardTab";
 import OrdersTab from "./pages/myaccount/OrdersTab";
 import UpdateProfileTab from "./pages/myaccount/UpdateProfileTab";
 import AddressTab from "./pages/myaccount/AddressTab";
 import UpdatePasswordTab from "./pages/myaccount/UpdatePasswordTab";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getProfile, loginStatus } from "./redux/features/auth/authSlice";
+
+// Admin Panel
 import Admin from "./pages/admin/Admin";
-import AdminDashboard from "./pages/admin/dashboard/AdminDashboard";
+import Dashboard from "./pages/admin/dashboard/Dashboard";
+import Category from "./pages/admin/category/Category";
+import Brand from "./pages/admin/brand/Brand";
+import Product from "./pages/admin/product/Product";
 import AddProduct from "./pages/admin/product/AddProduct";
-import AddCategory from "./pages/admin/category/AddCategory";
-import AddBrand from "./pages/admin/brand/AddBrand";
-import ProductList from "./pages/admin/product/ProductList";
 import EditProduct from "./pages/admin/product/EditProduct";
 
 function App() {
@@ -32,16 +38,19 @@ function App() {
   const dispatch = useDispatch();
   const { isLoggedIn, user } = useSelector((state) => state.auth);
 
+  // Check if user is logged in
   useEffect(() => {
     dispatch(loginStatus());
   }, [dispatch]);
 
+  // Get user profile
   useEffect(() => {
     if (isLoggedIn && user === null) {
       dispatch(getProfile());
     }
   }, [dispatch, isLoggedIn, user]);
 
+  // Create routes
   const router = createBrowserRouter([
     {
       element: <Layout />,
@@ -54,7 +63,7 @@ function App() {
         { path: "cart", element: <Cart /> },
         { path: "checkout", element: <Checkout /> },
         { path: "register", element: <Register /> },
-        { path: "product", element: <Product /> },
+        { path: "product", element: <ProductDetails /> },
         {
           path: "myaccount",
           element: <MyAccount />,
@@ -70,12 +79,12 @@ function App() {
           path: "admin",
           element: user?.isAdmin && <Admin />,
           children: [
-            { index: true, element: <AdminDashboard /> },
-            { path: "products", element: <ProductList /> },
-            { path: "edit-product/:id", element: <EditProduct /> },
+            { index: true, element: <Dashboard /> },
+            { path: "category", element: <Category /> },
+            { path: "brand", element: <Brand /> },
+            { path: "product", element: <Product /> },
             { path: "add-product", element: <AddProduct /> },
-            { path: "add-category", element: <AddCategory /> },
-            { path: "add-brand", element: <AddBrand /> },
+            { path: "edit-product/:id", element: <EditProduct /> },
           ],
         },
       ],

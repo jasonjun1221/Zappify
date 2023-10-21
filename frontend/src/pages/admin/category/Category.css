@@ -1,6 +1,12 @@
+/*=============== Category Form ===============*/
+
 .category-form {
-  padding: 1rem 3rem;
+  padding: 3rem 3rem 4rem 3rem;
   border-bottom: 1px solid lightgrey;
+}
+
+.category-form form {
+  display: grid;
 }
 
 .category-form .form-group {
@@ -8,7 +14,6 @@
 }
 
 .category-form .section-title {
-  margin: 0.5rem;
   text-align: center;
 }
 
@@ -17,14 +22,16 @@
   font-weight: 600;
   margin-bottom: 1rem;
 }
+
 .category-form .form-group input {
   width: 40%;
-  border: 1px solid lightgrey;
 }
 
 .category-form .form-group button {
   margin-left: 2rem;
 }
+
+/*=============== Category List ===============*/
 
 .category-list {
   max-height: 450px;
@@ -32,7 +39,7 @@
 }
 
 .category-list .section-title {
-  margin-top: 1.6rem;
+  margin-top: 3rem;
   font-size: 1.5rem;
   text-align: center;
 }
@@ -41,25 +48,29 @@
   table-layout: fixed;
   border-left: none;
   border-right: none;
-}
-
-.category-table tr {
-  border-top: 1px solid lightgrey;
-}
-
-.category-table tr:last-child {
-  border-bottom: 1px solid lightgrey;
-}
-
-.category-table tr th:nth-child(1),
-.category-table tr td:nth-child(1) {
-  width: 50px;
+  margin-bottom: 1rem;
 }
 
 .category-table tr th,
 .category-table tr td {
-  border-left: none;
-  border-right: none;
   padding: 0.5rem;
   text-align: center;
 }
+
+.category-table tr:hover {
+  background-color: #f2f2f2;
+}
+
+.category-table tr th:nth-child(1),
+.category-table tr td:nth-child(1) {
+  border-left: none;
+  width: 50px;
+}
+
+.category-table tr th:nth-child(3),
+.category-table tr td:nth-child(3) {
+  width: 70px;
+  border-right: none;
+}
+
+

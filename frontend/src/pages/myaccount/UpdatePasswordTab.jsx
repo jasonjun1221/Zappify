@@ -3,19 +3,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { updatePassword } from "../../redux/features/auth/authSlice";
+import { useNavigate } from "react-router-dom";
 import Loader from "../../components/loader/Loader";
 
 function UpdatePasswordTab() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isLoading } = useSelector((state) => state.auth);
-
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (currentPassword === newPassword) return toast.error("Please enter a new password.");
+    if (newPassword === currentPassword) return toast.error("New password must be different from current password.");
     if (currentPassword === "" || newPassword === "" || confirmPassword === "") return toast.error("Please enter all fields.");
     if (newPassword !== confirmPassword) return toast.error("Passwords do not match.");
     if (newPassword.length < 6) return toast.error("Password must be at least 6 characters long.");
@@ -23,6 +25,7 @@ function UpdatePasswordTab() {
     setCurrentPassword("");
     setNewPassword("");
     setConfirmPassword("");
+    navigate("/myaccount");
   };
 
   return (

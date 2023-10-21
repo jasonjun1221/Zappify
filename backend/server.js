@@ -17,14 +17,15 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
+// Serve static files
+app.use("/uploads", express.static("uploads"));
+
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/brands", brandRoutes);
 app.use("/api/orders", orderRoutes);
-
-app.get("/", (req, res) => res.send("API running"));
 
 // Error Handler Middleware
 app.use(errorMiddleware);
