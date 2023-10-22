@@ -1,9 +1,8 @@
 .reviews-container {
-  display: flex;
-  flex-direction: column;
-  column-gap: 1.75rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 2rem;
   margin-bottom: 3rem;
-  border-radius: 0.5rem;
 }
 
 .review-single {
@@ -27,16 +26,27 @@
   margin-bottom: 1rem;
 }
 
+.review-form {
+  border-radius: 0.25rem;
+}
+
+.review-form textarea {
+  height: 17rem;
+  font-size: 1.2rem;
+}
+
 .review-form-title {
-  margin-top: 2.5rem;
+  margin: 1rem 0;
 }
 
 .rate-product {
-  margin-top: 1rem;
+  font-size: 1.8rem;
 }
 
 .review-btn {
   width: 13rem;
+  margin-top: 1rem;
+  margin: auto;
 }
 
 

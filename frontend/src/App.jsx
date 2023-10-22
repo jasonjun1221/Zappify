@@ -63,7 +63,7 @@ function App() {
         { path: "cart", element: <Cart /> },
         { path: "checkout", element: <Checkout /> },
         { path: "register", element: <Register /> },
-        { path: "product", element: <ProductDetails /> },
+        { path: "product-details/:id", element: <ProductDetails /> },
         {
           path: "myaccount",
           element: <MyAccount />,
