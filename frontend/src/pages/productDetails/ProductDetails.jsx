@@ -2,16 +2,21 @@ import "./ProductDetails.css";
 import Review from "../../components/review/Review";
 import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { getProduct } from "../../redux/features/product/productSlice";
 import Loader from "../../components/loader/Loader";
+import { addToCart, decreaseQuantity, increaseQuantity } from "../../redux/features/cart/cartSlice";
 
 function ProductDetails() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { product, isLoading } = useSelector((state) => state.product);
-  const [quantity, setQuantity] = useState(1);
+  const { cartItems } = useSelector((state) => state.cart);
+  console.log(cartItems);
+
+  // Check if item is in cart
+  const itemInCart = cartItems.find((item) => item._id === id);
 
   // Get product details
   useEffect(() => {
@@ -41,8 +46,29 @@ function ProductDetails() {
               </li>
             </ul>
             <div className="details-action">
-              <input type="number" className="quantity" value={quantity} onChange={(e) => setQuantity(e.target.value)} min="1" max="99" />
-              <button className="btn">Add to Cart</button>
+              {itemInCart?.cartQuantity > 0 ? (
+                <div className="details-quantity">
+                  <button className="details-action-btn" onClick={() => dispatch(decreaseQuantity(product))}>
+                    -
+                  </button>
+                  <input type="text" className="item-quantity" value={itemInCart?.cartQuantity} disabled />
+                  <button className="details-action-btn" onClick={() => dispatch(increaseQuantity(product))}>
+                    +
+                  </button>
+                </div>
+              ) : null}
+
+              <div className="cart-btn">
+                {product?.quantity > 0 ? (
+                  <button className="btn" onClick={() => dispatch(addToCart(product))}>
+                    Add to Cart
+                  </button>
+                ) : (
+                  <button className="out-of-stock" disabled>
+                    Out of Stock
+                  </button>
+                )}
+              </div>
             </div>
           </div>
         </div>

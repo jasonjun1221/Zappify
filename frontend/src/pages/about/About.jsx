@@ -1,6 +1,6 @@
-import "./About.css"; // Import the CSS
+import "./About.css";
 
-const About = () => {
+function About() {
   return (
     <div className="about-page">
       <header>
@@ -19,8 +19,8 @@ const About = () => {
       <section className="history">
         <h2>Our History</h2>
         <p>
-          Zappify was founded in [Year] with a vision to revolutionize the electronics retail industry. Since then, we have been
-          consistently delivering innovative products and exceptional customer service.
+          Zappify was founded in 2023 with a vision to revolutionize the electronics retail industry. Since then, we have been consistently
+          delivering innovative products and exceptional customer service.
         </p>
       </section>
 
@@ -37,12 +37,11 @@ const About = () => {
         <p>We'd love to hear from you! If you have any questions, feedback, or inquiries, please don't hesitate to get in touch with us.</p>
         <div className="contact-info">
           <p>Email: info@zappify.com</p>
-          <p>Phone: [+1 (123) 456-7890]</p>
-          <p>Address: [Your Address]</p>
+          <p>Phone: +65 4561-7890</p>
+          <p>Address: #01-91, 5026 Ang Mo Kio Industrial Park 2, 569529, Singapore</p>
         </div>
       </section>
     </div>
   );
-};
-
+}
 export default About;

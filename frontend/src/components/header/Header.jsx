@@ -11,6 +11,7 @@ const navigations = [
 
 function Header() {
   const { isLoggedIn, user } = useSelector((state) => state.auth);
+  const { cartItems } = useSelector((state) => state.cart);
 
   return (
     <>
@@ -57,7 +58,7 @@ function Header() {
           <div className="header-cart">
             <Link to="/cart" className="cart-btn">
               <i className="fa-solid fa-cart-shopping"></i>
-              <span className="cart-count">3</span>
+              <span className="cart-count">{cartItems?.length}</span>
             </Link>
           </div>
         </nav>
