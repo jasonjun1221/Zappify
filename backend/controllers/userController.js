@@ -157,4 +157,32 @@ const updatePassword = asyncHandler(async (req, res) => {
   createAndSendToken(updatedUser, 200, res);
 });
 
-module.exports = { register, login, logout, loginStatus, getProfile, updateProfile, updatePassword };
+// @desc    Save cart items
+// @route   POST /api/users/save-cart
+// @access  Private
+const saveCartItems = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found.");
+  }
+
+  user.cartItems = req.body;
+  await user.save();
+  res.status(200).json({ status: "success", message: "Cart items saved." });
+});
+
+// @desc    Get cart items
+// @route   GET /api/users/get-cart
+// @access  Private
+const getCartItems = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id);
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found.");
+  }
+
+  res.status(200).json({ status: "success", cartItems: user.cartItems });
+});
+
+module.exports = { register, login, logout, loginStatus, getProfile, updateProfile, updatePassword, saveCartItems, getCartItems };

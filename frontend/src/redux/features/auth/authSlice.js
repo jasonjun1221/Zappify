@@ -96,7 +96,7 @@ const authSlice = createSlice({
         state.isSuccess = true;
         state.isLoggedIn = true;
         state.user = payload;
-        toast.success("Registration successfull.");
+        toast.success("Registration successfully.");
       })
       .addCase(register.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -114,7 +114,7 @@ const authSlice = createSlice({
         state.isSuccess = true;
         state.isLoggedIn = true;
         state.user = payload;
-        toast.success("Login successfull.");
+        toast.success("Login successfully.");
       })
       .addCase(login.rejected, (state, { payload }) => {
         state.isLoading = false;

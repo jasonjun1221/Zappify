@@ -13,7 +13,6 @@ function ProductDetails() {
   const navigate = useNavigate();
   const { product, isLoading } = useSelector((state) => state.product);
   const { cartItems } = useSelector((state) => state.cart);
-  console.log(cartItems);
 
   // Check if item is in cart
   const itemInCart = cartItems.find((item) => item._id === id);

@@ -24,7 +24,7 @@ const createCategory = asyncHandler(async (req, res) => {
 
 // @desc    Get all categories
 // @route   GET /api/categories
-// @access  Private/Admin
+// @access  Public
 const getCategories = asyncHandler(async (req, res) => {
   const categories = await Category.find({}).sort({ createdAt: -1 });
   res.json({ status: "success", categories });

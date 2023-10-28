@@ -30,7 +30,7 @@ const createBrand = asyncHandler(async (req, res) => {
 
 // @desc    Get all brands
 // @route   GET /api/brands
-// @access  Private/Admin
+// @access  Public
 const getBrands = asyncHandler(async (req, res) => {
   const brands = await Brand.find({}).sort({ createdAt: -1 });
   res.status(200).json({ status: "success", brands });

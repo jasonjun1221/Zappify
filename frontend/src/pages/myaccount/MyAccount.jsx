@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import "./MyAccount.css";
 import { NavLink, Outlet } from "react-router-dom";
 import { logout } from "../../redux/features/auth/authSlice";
+import { resetCart, saveCartItems } from "../../redux/features/cart/cartSlice";
 
 const myAccountNav = [
   { name: "Dashboard", icon: "fa-solid fa-house", link: "/myaccount/" },
@@ -13,6 +14,14 @@ const myAccountNav = [
 
 function MyAccount() {
   const dispatch = useDispatch();
+
+  // Logout user
+  const logoutUser = () => {
+    dispatch(saveCartItems(JSON.parse(localStorage.getItem("cartItems"))));
+    dispatch(resetCart());
+    localStorage.setItem("cartItems", JSON.stringify([]));
+    dispatch(logout());
+  };
 
   return (
     <section className="section">
@@ -27,7 +36,7 @@ function MyAccount() {
             </div>
           ))}
           <div className="account-tab">
-            <NavLink to="/" onClick={async () => await dispatch(logout())}>
+            <NavLink to="/" onClick={() => logoutUser()}>
               <i className="fa-solid fa-right-from-bracket"></i>
               <span>Logout</span>
             </NavLink>

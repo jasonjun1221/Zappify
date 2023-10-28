@@ -77,7 +77,8 @@ function EditProduct() {
     if (price < 1) return toast.error("Product price must be greater than 0.");
     if (quantity < 1) return toast.error("Product quantity must be greater than 0.");
 
-    await dispatch(updateProduct({ id, editProduct }));
+    const formData = { name, category, brand, price, quantity, description };
+    await dispatch(updateProduct({ id, formData }));
     navigate("/admin/product");
   };
 

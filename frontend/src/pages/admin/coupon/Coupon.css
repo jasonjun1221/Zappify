@@ -1,0 +1,94 @@
+/*=============== Coupon Form ===============*/
+
+.coupon-form {
+  padding: 3rem 3rem 4rem 3rem;
+  border-bottom: 1px solid lightgrey;
+}
+
+.coupon-form form {
+  display: grid;
+  grid-template-columns: 1.5fr 1.5fr 1.5fr 1fr;
+}
+
+.coupon-form .form-group {
+  margin: 1rem 0;
+}
+
+.coupon-form .section-title {
+  text-align: center;
+}
+
+.coupon-form .form-group label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.coupon-form .form-group input {
+  width: 75%;
+}
+
+.coupon-form .form-group select {
+  width: 80%;
+}
+
+.coupon-form .form-group .btn {
+  margin-top: 2rem;
+  width: 100%;
+}
+
+/*=============== Coupon List ===============*/
+
+.coupon-list {
+  max-height: 440px;
+}
+
+.coupon-list .section-title {
+  margin-top: 3rem;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.coupon-table {
+  table-layout: fixed;
+  border-left: none;
+  border-right: none;
+  margin-bottom: 1rem;
+}
+
+.coupon-table tr:hover {
+  background-color: #f2f2f2;
+}
+
+.coupon-table tr th,
+.coupon-table tr td {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.coupon-table tr th:nth-child(1),
+.coupon-table tr td:nth-child(1) {
+  border-left: none;
+  width: 50px;
+}
+
+.coupon-table tr th:nth-child(2),
+.coupon-table tr td:nth-child(2) {
+  width: 200px;
+}
+
+.coupon-table tr th:nth-child(3),
+.coupon-table tr td:nth-child(3) {
+  width: 100px;
+}
+
+.coupon-table tr th:nth-child(4),
+.coupon-table tr td:nth-child(4) {
+  border-right: none;
+  width: 200px;
+}
+.coupon-table tr th:nth-child(5),
+.coupon-table tr td:nth-child(5) {
+  border-right: none;
+  width: 70px;
+}

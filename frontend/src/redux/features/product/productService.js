@@ -14,7 +14,7 @@ const getProducts = async () => {
   return response.data.products;
 };
 
-// Get Product
+// Get Product by ID
 const getProduct = async (id) => {
   const response = await axios.get(`${API_URL}/products/${id}`);
   return response.data.product;

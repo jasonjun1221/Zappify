@@ -57,7 +57,7 @@ function Shop() {
     <>
       {isLoading && <Loader />}
       <section className="container section shop">
-        <div className={`items-container ${filteredProducts.length === 0 ? "none-items" : ""}`}>
+        <div className={`items-container ${filteredProducts.length === 0 ? `none-items` : ``}`}>
           <p className="total-items">
             We found <span>{filteredProducts?.length}</span> items for you!
           </p>

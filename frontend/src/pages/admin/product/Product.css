@@ -49,7 +49,7 @@
 
 .product-table tr th:nth-child(2),
 .product-table tr td:nth-child(2) {
-  width: 280px;
+  width: 200px;
 }
 
 .product-table tr th:nth-child(3),
@@ -59,17 +59,17 @@
 
 .product-table tr th:nth-child(4),
 .product-table tr td:nth-child(4) {
-  width: 120px;
+  width: 130px;
 }
 
 .product-table tr th:nth-child(5),
 .product-table tr td:nth-child(5) {
-  width: 90px;
+  width: 110px;
 }
 
 .product-table tr th:nth-child(6),
 .product-table tr td:nth-child(6) {
-  width: 80px;
+  width: 60px;
 }
 
 .product-table tr th:nth-child(7),

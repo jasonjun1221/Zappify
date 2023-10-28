@@ -32,6 +32,7 @@ import Brand from "./pages/admin/brand/Brand";
 import Product from "./pages/admin/product/Product";
 import AddProduct from "./pages/admin/product/AddProduct";
 import EditProduct from "./pages/admin/product/EditProduct";
+import Coupon from "./pages/admin/coupon/Coupon";
 
 function App() {
   axios.defaults.withCredentials = true;
@@ -85,6 +86,7 @@ function App() {
             { path: "product", element: <Product /> },
             { path: "add-product", element: <AddProduct /> },
             { path: "edit-product/:id", element: <EditProduct /> },
+            { path: "coupon", element: <Coupon /> },
           ],
         },
       ],

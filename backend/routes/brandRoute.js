@@ -4,7 +4,7 @@ const { protect, admin } = require("../middlewares/authMiddleware");
 const { createBrand, getBrands, deleteBrand } = require("../controllers/brandController");
 
 router.post("/", protect, admin, createBrand);
-router.get("/", protect, admin, getBrands);
+router.get("/", getBrands);
 router.delete("/:slug", protect, admin, deleteBrand);
 
 module.exports = router;

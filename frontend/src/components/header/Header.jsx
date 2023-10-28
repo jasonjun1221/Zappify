@@ -1,7 +1,9 @@
 import { NavLink, Link } from "react-router-dom";
 import "./Header.css";
 import logoSVG from "../../assets/logo.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { calculateTotalQuantity } from "../../redux/features/cart/cartSlice";
 
 const navigations = [
   { name: "Home", link: "/" },
@@ -10,8 +12,14 @@ const navigations = [
 ];
 
 function Header() {
+  const dispatch = useDispatch();
   const { isLoggedIn, user } = useSelector((state) => state.auth);
-  const { cartItems } = useSelector((state) => state.cart);
+  const { cartItems, totalQuantity } = useSelector((state) => state.cart);
+
+  // Calculate total quantity of cart items
+  useEffect(() => {
+    dispatch(calculateTotalQuantity());
+  }, [dispatch, cartItems]);
 
   return (
     <>
@@ -31,13 +39,13 @@ function Header() {
                 </li>
               ))}
 
-              {isLoggedIn && user?.isAdmin && (
+              {isLoggedIn && user?.isAdmin ? (
                 <li className="nav-item">
                   <NavLink to="/admin" className="nav-link">
                     Admin
                   </NavLink>
                 </li>
-              )}
+              ) : null}
 
               {!isLoggedIn ? (
                 <li className="nav-item">
@@ -45,20 +53,26 @@ function Header() {
                     Login
                   </NavLink>
                 </li>
-              ) : (
-                <li className="nav-item"></li>
-              )}
+              ) : null}
             </ul>
 
-            <NavLink to="/myaccount" className="nav-link myaccount">
-              My Account
-            </NavLink>
+            {isLoggedIn ? (
+              <NavLink to="/myaccount" className="nav-link myaccount">
+                My Account
+              </NavLink>
+            ) : null}
           </div>
 
           <div className="header-cart">
             <Link to="/cart" className="cart-btn">
-              <i className="fa-solid fa-cart-shopping"></i>
-              <span className="cart-count">{cartItems?.length}</span>
+              {totalQuantity && totalQuantity > 0 ? (
+                <>
+                  <i className="fa-solid fa-cart-shopping"></i>
+                  <span className="cart-count">{totalQuantity}</span>
+                </>
+              ) : (
+                <i className="fa-solid fa-cart-shopping"></i>
+              )}
             </Link>
           </div>
         </nav>

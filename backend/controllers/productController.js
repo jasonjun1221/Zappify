@@ -49,10 +49,9 @@ const getProductById = asyncHandler(async (req, res) => {
 // @route   PUT /api/products/:id
 // @access  Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
-  const { name, category, brand, price, countInStock, description } = req.body;
-  console.log(req.body);
+  const { name, category, brand, price, quantity, description } = req.body;
 
-  if (!name || !category || !brand || !price || !countInStock || !description) {
+  if (!name || !category || !brand || !price || !quantity || !description) {
     res.status(400);
     throw new Error("Please enter all required fields.");
   }
@@ -65,7 +64,7 @@ const updateProduct = asyncHandler(async (req, res) => {
 
   const updatedProduct = await Product.findByIdAndUpdate(
     req.params.id,
-    { name, category, brand, price, description, countInStock },
+    { name, category, brand, price, description, quantity },
     { new: true, runValidators: true }
   );
 

@@ -42,14 +42,12 @@ const getCouponById = asyncHandler(async (req, res) => {
 // @route   DELETE /api/coupons/:id
 // @access  Private/Admin
 const deleteCoupon = asyncHandler(async (req, res, next) => {
-  const coupon = await Coupon.findOneAndDelete(req.params.id);
-
-  if (!coupon) {
+  if (!(await Coupon.findOne({ _id: req.params.id }))) {
     res.status(404);
     throw new Error("Coupon not found.");
   }
-
-  res.status(200).json({ message: "Coupon removed successfully." });
+  await Coupon.deleteOne({ _id: req.params.id });
+  res.status(200).json({ status: "success", message: "Coupon removed successfully." });
 });
 
 module.exports = { createCoupon, getCoupons, getCouponById, deleteCoupon };

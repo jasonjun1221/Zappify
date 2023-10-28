@@ -5,8 +5,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { validateEmail } from "../../utils/utils";
-import { login} from "../../redux/features/auth/authSlice";
+import { login } from "../../redux/features/auth/authSlice";
 import Loader from "../../components/loader/Loader";
+import { getCartItems } from "../../redux/features/cart/cartSlice";
 
 function Login() {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // Handle login
   const handleLogin = async (e) => {
     e.preventDefault();
     if (!email || !password) return toast.error("Please fill in all fields.");
@@ -22,9 +24,13 @@ function Login() {
     await dispatch(login({ email, password }));
   };
 
+  // Get cart items when user is logged in and redirect to home page
   useEffect(() => {
-    if (isSuccess && isLoggedIn) navigate("/");
-  }, [isSuccess, isLoggedIn, navigate]);
+    if (isSuccess && isLoggedIn) {
+      dispatch(getCartItems());
+      navigate("/");
+    }
+  }, [isSuccess, isLoggedIn, navigate, dispatch]);
 
   return (
     <>
@@ -61,7 +67,7 @@ function Login() {
             </button>
           </form>
           <p className="register-link">
-            Don&apos;t have an account? <Link to="/register">Register</Link>
+            Don't have an account? <Link to="/register">Register</Link>
           </p>
         </div>
       )}

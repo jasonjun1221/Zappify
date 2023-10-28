@@ -45,6 +45,9 @@ const userSchema = mongoose.Schema(
         default: "",
       },
     },
+    cartItems: {
+      type: [Object],
+    },
   },
   {
     timestamps: true,

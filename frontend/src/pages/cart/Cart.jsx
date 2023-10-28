@@ -16,12 +16,12 @@ function Cart() {
 
   return (
     <section className="section container">
-      {cartItems.length === 0 ? (
+      {cartItems?.length === 0 ? (
         <div className="cart-empty-container">
           <h1 className="cart-empty-title">Your Cart is Empty</h1>
           <p className="cart-empty-message">Oops! It looks like your shopping cart is empty.</p>
           <div className="cart-empty-actions">
-            <Link to="/shop" class="btn btn-primary">
+            <Link to="/shop" className="btn btn-primary">
               Continue Shopping
             </Link>
           </div>
@@ -30,51 +30,54 @@ function Cart() {
         <>
           <div className="table-container">
             <table className="table">
-              <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-                <th>Remove</th>
-              </tr>
-
-              {cartItems.map((product, index) => (
-                <tr key={index}>
-                  <td>
-                    <img src={product?.image} alt={product?.name} className="table-img" />
-                  </td>
-
-                  <td>
-                    <h3 className="table-title">{product?.name}</h3>
-                    <p className="table-description">{shortenText(product?.description, 145)}</p>
-                  </td>
-
-                  <td>
-                    <span className="table-price">${product?.price.toFixed(2)}</span>
-                  </td>
-
-                  <td>
-                    <div className="cart-actions">
-                      <button className="cart-action-btn" onClick={() => dispatch(decreaseQuantity(product))}>
-                        -
-                      </button>
-                      <input type="text" className="cart-quantity" value={product?.cartQuantity} disabled />
-                      <button className="cart-action-btn" onClick={() => dispatch(increaseQuantity(product))}>
-                        +
-                      </button>
-                    </div>
-                  </td>
-
-                  <td>
-                    <span className="table-subtotal">${(product?.price * product?.cartQuantity).toFixed(2)}</span>
-                  </td>
-
-                  <td>
-                    <i className="fa-solid fa-trash table-trash trash-icon" onClick={() => dispatch(removeFromCart(product))}></i>
-                  </td>
+              <thead>
+                <tr>
+                  <th>Image</th>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Subtotal</th>
+                  <th>Remove</th>
                 </tr>
-              ))}
+              </thead>
+              <tbody>
+                {cartItems.map((product, index) => (
+                  <tr key={index}>
+                    <td>
+                      <img src={product?.image} alt={product?.name} className="table-img" />
+                    </td>
+
+                    <td>
+                      <h3 className="table-title">{product?.name}</h3>
+                      <p className="table-description">{shortenText(product?.description, 145)}</p>
+                    </td>
+
+                    <td>
+                      <span className="table-price">${product?.price.toFixed(2)}</span>
+                    </td>
+
+                    <td>
+                      <div className="cart-actions">
+                        <button className="cart-action-btn" onClick={() => dispatch(decreaseQuantity(product))}>
+                          -
+                        </button>
+                        <input type="text" className="cart-quantity" value={product?.cartQuantity} disabled />
+                        <button className="cart-action-btn" onClick={() => dispatch(increaseQuantity(product))}>
+                          +
+                        </button>
+                      </div>
+                    </td>
+
+                    <td>
+                      <span className="table-subtotal">${(product?.price * product?.cartQuantity).toFixed(2)}</span>
+                    </td>
+
+                    <td>
+                      <i className="fa-solid fa-trash table-trash trash-icon" onClick={() => dispatch(removeFromCart(product))}></i>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
             </table>
           </div>
 
@@ -124,7 +127,7 @@ function Cart() {
                 </tr>
               </table>
 
-              <Link to="/checkout" class="btn">
+              <Link to="/checkout" className="btn">
                 Proceed to Checkout
               </Link>
             </div>

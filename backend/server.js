@@ -8,6 +8,7 @@ const productRoutes = require("./routes/productRoute");
 const categoryRoutes = require("./routes/categoryRoute");
 const brandRoutes = require("./routes/brandRoute");
 const orderRoutes = require("./routes/orderRoute");
+const couponRoutes = require("./routes/couponRoute");
 const errorMiddleware = require("./middlewares/errorMiddleware");
 
 // Initialize express app
@@ -26,6 +27,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/brands", brandRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/coupons", couponRoutes);
 
 // Error Handler Middleware
 app.use(errorMiddleware);
