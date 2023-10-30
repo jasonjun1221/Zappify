@@ -14,9 +14,9 @@ const getCoupons = async () => {
   return response.data.coupons;
 };
 
-// Get Coupon by ID
-const getCouponById = async (id) => {
-  const response = await axios.get(`${API_URL}/coupons/${id}`);
+// Get Coupon
+const getCoupon = async (couponName) => {
+  const response = await axios.get(`${API_URL}/coupons/${couponName}`);
   return response.data.coupon;
 };
 
@@ -26,6 +26,6 @@ const deleteCoupon = async (id) => {
   return response.data;
 };
 
-const couponService = { createCoupon, getCoupons, getCouponById, deleteCoupon };
+const couponService = { createCoupon, getCoupons, getCoupon, deleteCoupon };
 
 export default couponService;

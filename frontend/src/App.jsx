@@ -39,6 +39,7 @@ function App() {
   const dispatch = useDispatch();
   const { isLoggedIn, user } = useSelector((state) => state.auth);
 
+
   // Check if user is logged in
   useEffect(() => {
     dispatch(loginStatus());

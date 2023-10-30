@@ -84,3 +84,8 @@
 .content input {
   display: inline;
 }
+
+.country-dropdown {
+  width: 20rem;
+  margin-bottom: 1rem;
+}

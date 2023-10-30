@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import "./Login.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -8,10 +8,14 @@ import { validateEmail } from "../../utils/utils";
 import { login } from "../../redux/features/auth/authSlice";
 import Loader from "../../components/loader/Loader";
 import { getCartItems } from "../../redux/features/cart/cartSlice";
+import Newsletter from "../../components/newsletter/Newsletter";
+import Footer from "../../components/footer/Footer";
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [urlParams] = useSearchParams();
+  const redirect = urlParams.get("redirect");
   const { isLoading, isLoggedIn, isSuccess } = useSelector((state) => state.auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,10 +31,11 @@ function Login() {
   // Get cart items when user is logged in and redirect to home page
   useEffect(() => {
     if (isSuccess && isLoggedIn) {
+      if (redirect === "checkout") return navigate("/checkout");
       dispatch(getCartItems());
       navigate("/");
     }
-  }, [isSuccess, isLoggedIn, navigate, dispatch]);
+  }, [isSuccess, isLoggedIn, navigate, dispatch, redirect]);
 
   return (
     <>
@@ -71,6 +76,8 @@ function Login() {
           </p>
         </div>
       )}
+      <Newsletter />
+      <Footer/>
     </>
   );
 }

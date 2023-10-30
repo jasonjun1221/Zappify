@@ -24,11 +24,11 @@ const getCoupons = asyncHandler(async (req, res) => {
   res.status(200).json({ success: "success", coupons });
 });
 
-// @desc    Get a coupon by ID
-// @route   GET /api/coupons/:id
-// @access  Private/Admin
-const getCouponById = asyncHandler(async (req, res) => {
-  const coupon = await Coupon.findOne({ _id: req.params.id, expiry: { $gt: Date.now() } });
+// @desc    Get a coupon
+// @route   GET /api/coupons/:couponName
+// @access  Private
+const getCoupon = asyncHandler(async (req, res) => {
+  const coupon = await Coupon.findOne({ name: req.params.couponName, expiry: { $gt: Date.now() } });
 
   if (!coupon) {
     res.status(404);
@@ -50,4 +50,4 @@ const deleteCoupon = asyncHandler(async (req, res, next) => {
   res.status(200).json({ status: "success", message: "Coupon removed successfully." });
 });
 
-module.exports = { createCoupon, getCoupons, getCouponById, deleteCoupon };
+module.exports = { createCoupon, getCoupons, getCoupon, deleteCoupon };

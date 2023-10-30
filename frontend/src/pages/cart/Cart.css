@@ -90,21 +90,12 @@
 }
 
 .cart-total,
-.cart-shipping,
-.cart-coupon {
+.cart-shipping {
   border: 1px solid lightgrey;
   border-radius: 0.5rem;
   padding: 2rem;
   height: 100%;
   margin-top: 1%;
-}
-
-.apply-coupon {
-  margin: 4.5rem;
-}
-
-.apply-coupon input {
-  margin: 1rem;
 }
 
 .cart-total-table tr td {

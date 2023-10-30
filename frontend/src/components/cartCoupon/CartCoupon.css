@@ -1,0 +1,41 @@
+.cart-coupon {
+  border: 1px solid lightgrey;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  height: 100%;
+  margin-top: 1%;
+}
+
+.apply-coupon {
+  margin: 4rem 4.5rem;
+}
+
+.apply-coupon input {
+  margin: 2rem;
+}
+
+.coupon-details {
+  margin: 1.5rem 0;
+  border: 1px solid lightgrey;
+}
+
+.coupon-details h3{
+  padding: 0.85rem 10rem;
+}
+
+.coupon-btn {
+  margin: 0 15rem;
+}
+
+.coupon-details .span-1 {
+  margin: 0 0.8rem;
+  color: green;
+}
+.coupon-details .span-2 {
+  margin: 0 1.8rem;
+  color: green;
+}
+.coupon-details .span-3 {
+  margin: 0 2.9rem;
+  color: green;
+}

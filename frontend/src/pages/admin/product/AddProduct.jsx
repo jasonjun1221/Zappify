@@ -67,7 +67,7 @@ function AddProduct() {
           <button className="btn back-btn" onClick={() => navigate(-1)}>
             <i className="fa-solid fa-chevron-left"></i>
           </button>
-          <h1 className="section-title">Add Product</h1>
+          <h1 className="section-title">Add New Product</h1>
         </div>
 
         <form onSubmit={handleSubmit}>

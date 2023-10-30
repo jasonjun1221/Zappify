@@ -31,10 +31,10 @@ export const getCoupons = createAsyncThunk("coupon/getCoupons", async (_, thunkA
   }
 });
 
-// Get Coupon by ID
-export const getCoupon = createAsyncThunk("coupon/getCoupon", async (id, thunkAPI) => {
+// Get Coupon
+export const getCoupon = createAsyncThunk("coupon/getCoupon", async (couponName, thunkAPI) => {
   try {
-    return await couponService.getCouponById(id);
+    return await couponService.getCoupon(couponName);
   } catch (error) {
     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
     return thunkAPI.rejectWithValue(message);
@@ -54,7 +54,16 @@ export const deleteCoupon = createAsyncThunk("coupon/deleteCoupon", async (id, t
 const couponSlice = createSlice({
   name: "coupon",
   initialState,
-  reducers: {},
+  reducers: {
+    resetCoupon: (state) => {
+      state.coupon = null;
+      state.coupons = [];
+      state.isError = false;
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.message = "";
+    },
+  },
   extraReducers: (builder) =>
     builder
       // Create Coupon
@@ -86,7 +95,7 @@ const couponSlice = createSlice({
         state.isError = true;
         state.message = payload;
       })
-      // Get Coupon by ID
+      // Get Coupon
       .addCase(getCoupon.pending, (state) => {
         state.isLoading = true;
       })
@@ -94,6 +103,7 @@ const couponSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.coupon = payload;
+        toast.success("Coupon applied successfully.");
       })
       .addCase(getCoupon.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -118,6 +128,6 @@ const couponSlice = createSlice({
       }),
 });
 
-export const {} = couponSlice.actions;
+export const { resetCoupon } = couponSlice.actions;
 
 export default couponSlice.reducer;

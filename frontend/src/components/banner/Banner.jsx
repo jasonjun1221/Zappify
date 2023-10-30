@@ -11,7 +11,7 @@ function Banner() {
           <h1 className="banner-title-one">Tech Paradise</h1>
           <h1 className="banner-title-two">Great Collection</h1>
           <p className="banner-description">Get 10% OFF on All Electronics</p>
-          <Link to="/" className="btn">
+          <Link to="/shop" className="btn">
             Shop Now
           </Link>
         </div>

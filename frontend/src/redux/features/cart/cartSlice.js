@@ -99,8 +99,13 @@ const cartSlice = createSlice({
     calculateTotalQuantity: (state) => {
       state.totalQuantity = state.cartItems.reduce((acc, item) => acc + item.cartQuantity, 0);
     },
-    calculateTotalPrice: (state) => {
-      state.totalPrice = state.cartItems.reduce((acc, item) => acc + item.price * item.cartQuantity, 0);
+    calculateTotalPrice: (state, action) => {
+      if (!action.payload) {
+        state.totalPrice = state.cartItems.reduce((acc, item) => acc + item.price * item.cartQuantity, 0);
+      } else {
+        const originalPrice = state.cartItems.reduce((acc, item) => acc + item.price * item.cartQuantity, 0);
+        state.totalPrice = originalPrice - (originalPrice * action.payload?.discount) / 100;
+      }
     },
     resetCart: (state) => {
       state.cartItems = [];

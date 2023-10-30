@@ -41,7 +41,7 @@ function Footer() {
           {companys.map((item, index) => (
             <ul key={index}>
               <li>
-                <Link to="/" className="footer-link">
+                <Link to="/about" className="footer-link">
                   {item}
                 </Link>
               </li>

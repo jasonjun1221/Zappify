@@ -1,18 +1,32 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Cart.css";
 import { useDispatch, useSelector } from "react-redux";
 import { calculateTotalPrice, decreaseQuantity, increaseQuantity, removeFromCart } from "../../redux/features/cart/cartSlice";
 import { useEffect } from "react";
 import { shortenText } from "../../utils/utils";
+import CartCoupon from "../../components/cartCoupon/CartCoupon";
+
 
 function Cart() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { cartItems, totalPrice } = useSelector((state) => state.cart);
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { coupon } = useSelector((state) => state.coupon);
 
   // Calculate total price when cart items change
   useEffect(() => {
-    dispatch(calculateTotalPrice());
-  }, [cartItems, dispatch]);
+    dispatch(calculateTotalPrice(coupon));
+  }, [cartItems, dispatch, coupon]);
+
+  const handleCheckout = (e) => {
+    e.preventDefault();
+    if (isLoggedIn) {
+      navigate("/checkout");
+    } else {
+      navigate("/login?redirect=checkout");
+    }
+  };
 
   return (
     <section className="section container">
@@ -82,54 +96,45 @@ function Cart() {
           </div>
 
           <div className="cart-group grid">
-            <div className="cart-coupon">
-              <h3 className="section-title">Apply Coupon</h3>
-              <form>
-                <div className="form-group apply-coupon">
-                  <label htmlFor="couponName">Coupon name:</label>
-                  <input type="text" id="couponName" placeholder="Coupon" className="form-input" />
-                  <button type="submit" className="btn">
-                    Apply
-                  </button>
-                </div>
-              </form>
-            </div>
+            <CartCoupon />
 
             <div className="cart-total">
               <h3 className="section-title">Cart Total</h3>
 
               <table className="cart-total-table">
-                <tr>
-                  <td>
-                    <span className="cart-total-title">Cart Subtotal</span>
-                  </td>
-                  <td>
-                    <span className="cart-total-price">${totalPrice.toFixed(2)}</span>
-                  </td>
-                </tr>
+                <tbody>
+                  <tr>
+                    <td>
+                      <span className="cart-total-title">Cart Subtotal</span>
+                    </td>
+                    <td>
+                      <span className="cart-total-price">${totalPrice.toFixed(2)}</span>
+                    </td>
+                  </tr>
 
-                <tr>
-                  <td>
-                    <span className="cart-total-title">Shipping</span>
-                  </td>
-                  <td>
-                    <span className="cart-total-price">$10.00</span>
-                  </td>
-                </tr>
+                  <tr>
+                    <td>
+                      <span className="cart-total-title">Shipping</span>
+                    </td>
+                    <td>
+                      <span className="cart-total-price">$10.00</span>
+                    </td>
+                  </tr>
 
-                <tr>
-                  <td>
-                    <span className="cart-total-title">Total</span>
-                  </td>
-                  <td>
-                    <span className="cart-total-price">${(totalPrice + 10).toFixed(2)}</span>
-                  </td>
-                </tr>
+                  <tr>
+                    <td>
+                      <span className="cart-total-title">Total</span>
+                    </td>
+                    <td>
+                      <span className="cart-total-price">${(totalPrice + 10).toFixed(2)}</span>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
 
-              <Link to="/checkout" className="btn">
+              <button className="btn" onClick={handleCheckout}>
                 Proceed to Checkout
-              </Link>
+              </button>
             </div>
           </div>
         </>

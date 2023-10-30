@@ -3,6 +3,8 @@ import "./MyAccount.css";
 import { NavLink, Outlet } from "react-router-dom";
 import { logout } from "../../redux/features/auth/authSlice";
 import { resetCart, saveCartItems } from "../../redux/features/cart/cartSlice";
+import Newsletter from "../../components/newsletter/Newsletter";
+import Footer from "../../components/footer/Footer";
 
 const myAccountNav = [
   { name: "Dashboard", icon: "fa-solid fa-house", link: "/myaccount/" },
@@ -24,30 +26,34 @@ function MyAccount() {
   };
 
   return (
-    <section className="section">
-      <div className="accounts-container container grid">
-        <div className="account-tabs">
-          {myAccountNav.map((item, index) => (
-            <div className="account-tab" key={index}>
-              <NavLink to={item.link}>
-                <i className={item.icon}></i>
-                <span>{item.name}</span>
+    <>
+      <section className="section">
+        <div className="accounts-container container grid">
+          <div className="account-tabs">
+            {myAccountNav.map((item, index) => (
+              <div className="account-tab" key={index}>
+                <NavLink to={item.link}>
+                  <i className={item.icon}></i>
+                  <span>{item.name}</span>
+                </NavLink>
+              </div>
+            ))}
+            <div className="account-tab">
+              <NavLink to="/" onClick={() => logoutUser()}>
+                <i className="fa-solid fa-right-from-bracket"></i>
+                <span>Logout</span>
               </NavLink>
             </div>
-          ))}
-          <div className="account-tab">
-            <NavLink to="/" onClick={() => logoutUser()}>
-              <i className="fa-solid fa-right-from-bracket"></i>
-              <span>Logout</span>
-            </NavLink>
+          </div>
+
+          <div className="tabs-content">
+            <Outlet />
           </div>
         </div>
-
-        <div className="tabs-content">
-          <Outlet />
-        </div>
-      </div>
-    </section>
+      </section>
+      <Newsletter />
+      <Footer />
+    </>
   );
 }
 export default MyAccount;
