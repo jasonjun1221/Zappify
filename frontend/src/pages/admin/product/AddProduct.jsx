@@ -45,7 +45,7 @@ function AddProduct() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (name === "" || category === "" || brand === "" || price === "" || quantity === "" || description === "" || !image)
-      return toast.error("All fields are required.");
+      return toast.error("Please enter all fields.");
     if (name.length < 3) return toast.error("Product name must be at least 3 characters long.");
     if (description.length < 5) return toast.error("Product description must be at least 5 characters long.");
     if (price < 1) return toast.error("Product price must be greater than 0.");

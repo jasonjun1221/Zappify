@@ -23,7 +23,7 @@ function Brand() {
     e.preventDefault();
     if (name === "") return toast.error("Please enter a brand name.");
     if (category === "") return toast.error("Please select a category.");
-    if (name.length < 3) return toast.error("Brand name must be at least 3 characters long");
+    if (name.length < 3) return toast.error("Brand name must be at least 3 characters long.");
     await dispatch(createBrand({ name, category }));
     await dispatch(getBrands());
     setName("");
@@ -47,7 +47,6 @@ function Brand() {
               ))}
             </select>
           </div>
-
           <div className="form-group">
             <label htmlFor="brandName">Brand:</label>
             <input
@@ -64,7 +63,6 @@ function Brand() {
           </div>
         </form>
       </div>
-
       <BrandList />
     </>
   );

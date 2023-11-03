@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./CartCoupon.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getCoupon, resetCoupon } from "../../redux/features/coupon/couponSlice";
 import { toast } from "react-toastify";
+import { resetDiscountedPrice } from "../../redux/features/cart/cartSlice";
 
 function CartCoupon() {
   const dispatch = useDispatch();
   const { coupon } = useSelector((state) => state.coupon);
   const [couponName, setCouponName] = useState("");
+
+  // update local storage when coupon changes
+  useEffect(() => {
+    localStorage.setItem("coupon", JSON.stringify(coupon));
+  }, [coupon]);
 
   // handle submit
   const handleSubmit = async (e) => {
@@ -16,9 +22,12 @@ function CartCoupon() {
     await dispatch(getCoupon(couponName));
   };
 
+  // remove coupon
   const removeCoupon = async () => {
     await dispatch(resetCoupon());
+    await dispatch(resetDiscountedPrice());
     setCouponName("");
+    localStorage.removeItem("coupon");
   };
 
   return (

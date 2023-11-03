@@ -1,16 +1,15 @@
-import { Link, useNavigate } from "react-router-dom";
 import "./Cart.css";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { calculateTotalPrice, decreaseQuantity, increaseQuantity, removeFromCart } from "../../redux/features/cart/cartSlice";
+import { addToCart, calculateTotalPrice, decreaseQuantity, removeFromCart } from "../../redux/features/cart/cartSlice";
 import { useEffect } from "react";
 import { shortenText } from "../../utils/utils";
 import CartCoupon from "../../components/cartCoupon/CartCoupon";
 
-
 function Cart() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { cartItems, totalPrice } = useSelector((state) => state.cart);
+  const { cartItems, totalPrice, discountedPrice } = useSelector((state) => state.cart);
   const { isLoggedIn } = useSelector((state) => state.auth);
   const { coupon } = useSelector((state) => state.coupon);
 
@@ -19,12 +18,13 @@ function Cart() {
     dispatch(calculateTotalPrice(coupon));
   }, [cartItems, dispatch, coupon]);
 
+  // Handle checkout
   const handleCheckout = (e) => {
     e.preventDefault();
     if (isLoggedIn) {
       navigate("/checkout");
     } else {
-      navigate("/login?redirect=checkout");
+      navigate("/login?redirect=cart");
     }
   };
 
@@ -76,7 +76,7 @@ function Cart() {
                           -
                         </button>
                         <input type="text" className="cart-quantity" value={product?.cartQuantity} disabled />
-                        <button className="cart-action-btn" onClick={() => dispatch(increaseQuantity(product))}>
+                        <button className="cart-action-btn" onClick={() => dispatch(addToCart(product))}>
                           +
                         </button>
                       </div>
@@ -108,7 +108,13 @@ function Cart() {
                       <span className="cart-total-title">Cart Subtotal</span>
                     </td>
                     <td>
-                      <span className="cart-total-price">${totalPrice.toFixed(2)}</span>
+                      {discountedPrice > 0 ? (
+                        <span className="cart-total-price">
+                          <del>${totalPrice.toFixed(2)}</del> ${discountedPrice.toFixed(2)}
+                        </span>
+                      ) : (
+                        <span className="cart-total-price">${totalPrice.toFixed(2)}</span>
+                      )}
                     </td>
                   </tr>
 
@@ -117,7 +123,7 @@ function Cart() {
                       <span className="cart-total-title">Shipping</span>
                     </td>
                     <td>
-                      <span className="cart-total-price">$10.00</span>
+                      <span className="cart-total-price">Free Shipping</span>
                     </td>
                   </tr>
 
@@ -126,7 +132,13 @@ function Cart() {
                       <span className="cart-total-title">Total</span>
                     </td>
                     <td>
-                      <span className="cart-total-price">${(totalPrice + 10).toFixed(2)}</span>
+                      {discountedPrice > 0 ? (
+                        <span className="cart-total-price">
+                          <del>${totalPrice.toFixed(2)}</del> ${discountedPrice.toFixed(2)}
+                        </span>
+                      ) : (
+                        <span className="cart-total-price">${totalPrice.toFixed(2)}</span>
+                      )}
                     </td>
                   </tr>
                 </tbody>

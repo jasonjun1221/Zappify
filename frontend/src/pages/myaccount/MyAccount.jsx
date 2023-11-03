@@ -19,9 +19,10 @@ function MyAccount() {
 
   // Logout user
   const logoutUser = () => {
-    dispatch(saveCartItems(JSON.parse(localStorage.getItem("cartItems"))));
+    if (JSON.parse(localStorage.getItem("cartItems"))) {
+      dispatch(saveCartItems(JSON.parse(localStorage.getItem("cartItems"))));
+    }
     dispatch(resetCart());
-    localStorage.setItem("cartItems", JSON.stringify([]));
     dispatch(logout());
   };
 

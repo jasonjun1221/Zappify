@@ -1,0 +1,23 @@
+{
+  "name": "zappify",
+  "version": "1.0.0",
+  "description": "��#\u0000 \u0000Z\u0000a\u0000p\u0000p\u0000i\u0000f\u0000y\u0000\r\u0000 \u0000",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd ./backend && nodemon server\" \"cd ./frontend && npm run dev\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasonjun1221/Zappify.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jasonjun1221/Zappify/issues"
+  },
+  "homepage": "https://github.com/jasonjun1221/Zappify#readme",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

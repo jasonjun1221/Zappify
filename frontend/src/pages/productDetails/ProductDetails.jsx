@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getProduct } from "../../redux/features/product/productSlice";
 import Loader from "../../components/loader/Loader";
-import { addToCart, decreaseQuantity, increaseQuantity } from "../../redux/features/cart/cartSlice";
+import { addToCart, decreaseQuantity } from "../../redux/features/cart/cartSlice";
 
 function ProductDetails() {
   const { id } = useParams();
@@ -26,9 +26,6 @@ function ProductDetails() {
     <>
       {isLoading && <Loader />}
       <section className="section">
-        <button className="btn back-btn shop-back-btn" onClick={() => navigate(-1)}>
-          <i className="fa-solid fa-chevron-left"></i>
-        </button>
         <div className="details-container container grid">
           <img src={product?.image} alt={product?.name} className="details-img" />
           <div className="details-group">
@@ -51,7 +48,7 @@ function ProductDetails() {
                     -
                   </button>
                   <input type="text" className="item-quantity" value={itemInCart?.cartQuantity} disabled />
-                  <button className="details-action-btn" onClick={() => dispatch(increaseQuantity(product))}>
+                  <button className="details-action-btn" onClick={() => dispatch(addToCart(product))}>
                     +
                   </button>
                 </div>

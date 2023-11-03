@@ -23,10 +23,10 @@ function ProductList({ products, currentItems }) {
   };
 
   // Confirm delete
-  const confirmDelete = (id) => {
+  const confirmDelete = (id, productName) => {
     confirmAlert({
       title: "Delete Product",
-      message: "Are you sure you want to delete this product?",
+      message: `Are you sure you want to delete this product(${productName})?`,
       buttons: [
         { label: "Yes", onClick: () => handleDelete(id) },
         { label: "Cancel", onClick: () => {} },
@@ -68,7 +68,7 @@ function ProductList({ products, currentItems }) {
                 </td>
                 <td>
                   <span>
-                    <i className="fa-solid fa-trash table-trash trash-icon" onClick={() => confirmDelete(prod._id)}></i>
+                    <i className="fa-solid fa-trash table-trash trash-icon" onClick={() => confirmDelete(prod._id, prod.name)}></i>
                   </span>
                 </td>
               </tr>

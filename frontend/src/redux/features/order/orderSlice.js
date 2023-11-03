@@ -1,148 +1,155 @@
-import productService from "./productService";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import orderService from "./orderService";
 import { toast } from "react-toastify";
 
 const initialState = {
-  product: null,
-  products: [],
-  isError: false,
+  order: null,
+  orders: [],
   isLoading: false,
   isSuccess: false,
+  isError: false,
   message: "",
 };
 
-// Create Product
-export const createProduct = createAsyncThunk("product/createProduct", async (formData, thunkAPI) => {
+// Create Order
+export const createOrder = createAsyncThunk("order/createOrder", async (formData, thunkAPI) => {
   try {
-    return await productService.createProduct(formData);
+    return await orderService.createOrder(formData);
   } catch (error) {
     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
     return thunkAPI.rejectWithValue(message);
   }
 });
 
-// Get Products
-export const getProducts = createAsyncThunk("product/getProducts", async (_, thunkAPI) => {
+// Get Orders
+export const getOrders = createAsyncThunk("order/getOrders", async (_, thunkAPI) => {
   try {
-    return await productService.getProducts();
+    return await orderService.getOrders();
   } catch (error) {
     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
     return thunkAPI.rejectWithValue(message);
   }
 });
 
-// Get Product
-export const getProduct = createAsyncThunk("product/getProduct", async (id, thunkAPI) => {
+// Get My Orders
+export const getMyOrders = createAsyncThunk("order/getMyOrders", async (_, thunkAPI) => {
   try {
-    return await productService.getProduct(id);
+    return await orderService.getMyOrders();
   } catch (error) {
     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
     return thunkAPI.rejectWithValue(message);
   }
 });
 
-// Update Product
-export const updateProduct = createAsyncThunk("product/updateProduct", async ({ id, formData }, thunkAPI) => {
+// Get Order By Id
+export const getOrderById = createAsyncThunk("order/getOrderById", async (id, thunkAPI) => {
   try {
-    return await productService.updateProduct(id, formData);
+    return await orderService.getOrderById(id);
   } catch (error) {
     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
     return thunkAPI.rejectWithValue(message);
   }
 });
 
-// Delete Product
-export const deleteProduct = createAsyncThunk("product/deleteProduct", async (id, thunkAPI) => {
+// Update Order Status
+export const updateOrderStatus = createAsyncThunk("order/updateOrderStatus", async ({ id, orderStatus }, thunkAPI) => {
   try {
-    return await productService.deleteProduct(id);
+    return await orderService.updateOrderStatus(id, orderStatus);
   } catch (error) {
     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
     return thunkAPI.rejectWithValue(message);
   }
 });
 
-const productSlice = createSlice({
-  name: "product",
+const orderSlice = createSlice({
+  name: "order",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      // Create Product
-      .addCase(createProduct.pending, (state) => {
+      // Create Order
+      .addCase(createOrder.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(createProduct.fulfilled, (state, { payload }) => {
+      .addCase(createOrder.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
         state.message = payload;
         toast.success(payload);
       })
-      .addCase(createProduct.rejected, (state, { payload }) => {
+      .addCase(createOrder.rejected, (state, { payload }) => {
         state.isLoading = false;
+        state.isSuccess = false;
         state.isError = true;
         state.message = payload;
         toast.error(payload);
       })
-      // Get Products
-      .addCase(getProducts.pending, (state) => {
+      // Get Orders
+      .addCase(getOrders.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(getProducts.fulfilled, (state, { payload }) => {
+      .addCase(getOrders.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
-        state.products = payload;
+        state.isError = false;
+        state.orders = payload;
       })
-      .addCase(getProducts.rejected, (state, { payload }) => {
+      .addCase(getOrders.rejected, (state, { payload }) => {
         state.isLoading = false;
-        state.isError = true;
-        state.message = payload;
-      })
-      // Get Product
-      .addCase(getProduct.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getProduct.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.product = payload;
-      })
-      .addCase(getProduct.rejected, (state, { payload }) => {
-        state.isLoading = false;
+        state.isSuccess = false;
         state.isError = true;
         state.message = payload;
         toast.error(payload);
       })
-      // Update Product
-      .addCase(updateProduct.pending, (state) => {
+      // Get My Orders
+      .addCase(getMyOrders.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(updateProduct.fulfilled, (state, { payload }) => {
+      .addCase(getMyOrders.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.orders = payload;
+      })
+      .addCase(getMyOrders.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = payload;
+        toast.error(payload);
+      })
+      // Get Order By Id
+      .addCase(getOrderById.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getOrderById.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.isError = false;
+        state.order = payload;
+      })
+      .addCase(getOrderById.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isSuccess = false;
+        state.isError = true;
+        state.message = payload;
+        toast.error(payload);
+      })
+      // Update Order Status
+      .addCase(updateOrderStatus.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(updateOrderStatus.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
         state.message = payload;
         toast.success(payload);
       })
-      .addCase(updateProduct.rejected, (state, { payload }) => {
+      .addCase(updateOrderStatus.rejected, (state, { payload }) => {
         state.isLoading = false;
-        state.isError = true;
-        state.message = payload;
-        toast.error(payload);
-      })
-      // Delete Product
-      .addCase(deleteProduct.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(deleteProduct.fulfilled, (state, { payload }) => {
-        state.isLoading = false;
-        state.isSuccess = true;
-        state.isError = false;
-        state.message = payload;
-        toast.success(payload);
-      })
-      .addCase(deleteProduct.rejected, (state, { payload }) => {
-        state.isLoading = false;
+        state.isSuccess = false;
         state.isError = true;
         state.message = payload;
         toast.error(payload);
@@ -150,4 +157,6 @@ const productSlice = createSlice({
   },
 });
 
-export default productSlice.reducer;
+export const {} = orderSlice.actions;
+
+export default orderSlice.reducer;

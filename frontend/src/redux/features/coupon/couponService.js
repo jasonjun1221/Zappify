@@ -5,7 +5,7 @@ export const API_URL = `http://localhost:5000/api`;
 // Create Coupon
 const createCoupon = async (formData) => {
   const response = await axios.post(`${API_URL}/coupons/`, formData);
-  return response.data;
+  return response.data.message;
 };
 
 // Get Coupons
@@ -23,7 +23,7 @@ const getCoupon = async (couponName) => {
 // Delete Coupon
 const deleteCoupon = async (id) => {
   const response = await axios.delete(`${API_URL}/coupons/${id}`);
-  return response.data;
+  return response.data.message;
 };
 
 const couponService = { createCoupon, getCoupons, getCoupon, deleteCoupon };

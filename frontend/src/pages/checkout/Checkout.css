@@ -51,3 +51,7 @@
 .payment-input {
   margin-right: 0.5rem;
 }
+
+.strike-price {
+  color: grey;
+}

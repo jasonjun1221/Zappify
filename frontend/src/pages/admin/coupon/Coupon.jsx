@@ -1,5 +1,5 @@
-import { useState } from "react";
 import "./Coupon.css";
+import { useState } from "react";
 import CouponList from "./CouponList";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -13,11 +13,12 @@ function Coupon() {
   const [discount, setDiscount] = useState("");
   const [expiry, setExpiry] = useState(new Date());
 
+  // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (name === "") return toast.error("Coupon name is required.");
-    if (discount === "") return toast.error("Discount is required.");
-    if (expiry === "") return toast.error("Expiry date is required.");
+    if (name === "") return toast.error("Please enter a coupon name.");
+    if (discount === "") return toast.error("Please enter a discount.");
+    if (expiry === "") return toast.error("Please select an expiry date.");
     if (discount < 1 || discount > 100) return toast.error("Discount must be between 1 and 100.");
     await dispatch(createCoupon({ name, discount, expiry }));
     await dispatch(getCoupons());
@@ -47,10 +48,10 @@ function Coupon() {
             <input
               type="number"
               id="discount"
-              min="1"
-              max="100"
               placeholder="Discount in %"
               className="form-input"
+              min="1"
+              max="100"
               value={discount}
               onChange={(e) => setDiscount(e.target.value)}
             />
@@ -66,7 +67,6 @@ function Coupon() {
           </div>
         </form>
       </div>
-
       <CouponList />
     </>
   );

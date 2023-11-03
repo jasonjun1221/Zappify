@@ -7,10 +7,6 @@ import { addToCart } from "../../redux/features/cart/cartSlice";
 function ProductCard({ product }) {
   const dispatch = useDispatch();
 
-  const addItem = (product) => {
-    dispatch(addToCart(product));
-  };
-
   return (
     <div className="product-item">
       <div className="product-banner">
@@ -35,7 +31,7 @@ function ProductCard({ product }) {
 
         <div className="product-footer">
           <div className="product-price">${product?.price.toFixed(2)}</div>
-          <button className="add-btn" onClick={() => addItem(product)}>
+          <button className="add-btn" onClick={() => dispatch(addToCart(product))}>
             <i className="fa-solid fa-plus"></i>
           </button>
         </div>

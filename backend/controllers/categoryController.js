@@ -8,18 +8,20 @@ const slugify = require("slugify");
 const createCategory = asyncHandler(async (req, res) => {
   const { name } = req.body;
 
+  // Check if name is filled in
   if (!name) {
     res.status(400);
     throw new Error("Please enter a category name.");
   }
 
+  // Check if category already exists
   if (await Category.findOne({ name })) {
     res.status(400);
     throw new Error("Category already exists.");
   }
 
-  const category = await Category.create({ name, slug: slugify(name) });
-  res.status(201).json({ status: "success", category });
+  await Category.create({ name, slug: slugify(name) });
+  res.status(201).json({ status: "success", message: "Category created successfully." });
 });
 
 // @desc    Get all categories
@@ -42,7 +44,7 @@ const deleteCategory = asyncHandler(async (req, res) => {
   }
 
   await Category.deleteOne({ slug });
-  res.json({ status: "success", message: "Category removed." });
+  res.json({ status: "success", message: "Category removed successfully." });
 });
 
 module.exports = { createCategory, getCategories, deleteCategory };

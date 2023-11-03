@@ -28,7 +28,7 @@ const createAndSendToken = (user, statusCode, res) => {
 const register = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
 
-  // Validate user input
+  // Check if all fields are filled in
   if (!name || !email || !password) {
     res.status(400);
     throw new Error("Please enter all fields.");
@@ -58,10 +58,10 @@ const register = asyncHandler(async (req, res) => {
 const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
-  // Validate user input
+  // Check if all fields are filled in
   if (!email || !password) {
     res.status(400);
-    throw new Error("Please enter all fields.");
+    throw new Error("Please enter email and password.");
   }
 
   // Check if user exists
@@ -97,6 +97,7 @@ const loginStatus = asyncHandler(async (req, res) => {
   if (!token) {
     return res.json(false);
   }
+
   const verified = jwt.verify(token, process.env.JWT_SECRETKEY);
 
   if (verified) {
@@ -111,6 +112,8 @@ const loginStatus = asyncHandler(async (req, res) => {
 // @access  Private
 const getProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
+
+  // Check if user exists
   if (!user) {
     res.status(404);
     throw new Error("User not found.");
@@ -122,12 +125,14 @@ const getProfile = asyncHandler(async (req, res) => {
 // @route   PUT /api/users/profile
 // @access  Private
 const updateProfile = asyncHandler(async (req, res) => {
+  // Check if user exists
   const user = await User.findById(req.user._id);
   if (!user) {
     res.status(404);
     throw new Error("User not found.");
   }
 
+  // Update user profile
   user.name = req.body.name || user.name;
   user.phone = req.body.phone || user.phone;
   user.address = req.body.address || user.address;
@@ -140,18 +145,20 @@ const updateProfile = asyncHandler(async (req, res) => {
 // @route   PUT /api/users/password
 // @access  Private
 const updatePassword = asyncHandler(async (req, res) => {
-  console.log(req.body);
+  // Check if user exists
   const user = await User.findById(req.user._id);
   if (!user) {
     res.status(404);
     throw new Error("User not found.");
   }
 
+  // Check if current password is correct
   if (!(await user.verifyPassword(req.body.currentPassword))) {
     res.status(400);
     throw new Error("Current password is incorrect.");
   }
 
+  // Update password
   user.password = req.body.newPassword;
   const updatedUser = await user.save();
   createAndSendToken(updatedUser, 200, res);
@@ -161,21 +168,27 @@ const updatePassword = asyncHandler(async (req, res) => {
 // @route   POST /api/users/save-cart
 // @access  Private
 const saveCartItems = asyncHandler(async (req, res) => {
+  // Check if user exists
   const user = await User.findById(req.user._id);
   if (!user) {
     res.status(404);
     throw new Error("User not found.");
   }
 
-  user.cartItems = req.body;
-  await user.save();
-  res.status(200).json({ status: "success", message: "Cart items saved." });
+  // Save cart items
+  if (req.body) {
+    user.cartItems = req.body;
+    await user.save();
+  }
+
+  res.status(200).json({ status: "success" });
 });
 
 // @desc    Get cart items
 // @route   GET /api/users/get-cart
 // @access  Private
 const getCartItems = asyncHandler(async (req, res) => {
+  // Check if user exists
   const user = await User.findById(req.user._id);
   if (!user) {
     res.status(404);

@@ -9,7 +9,7 @@ const adminNav = [
   { name: "Category", link: "/admin/category" },
   { name: "Brand", link: "/admin/brand" },
   { name: "Coupon", link: "/admin/coupon" },
-  { name: "Order", link: "/admin/" },
+  { name: "Order", link: "/admin/order" },
   { name: "User", link: "/admin/" },
   { name: "Review", link: "/admin/" },
 ];

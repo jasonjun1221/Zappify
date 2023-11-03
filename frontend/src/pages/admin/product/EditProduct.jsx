@@ -2,12 +2,10 @@ import "./EditProduct.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteProduct, getProduct, updateProduct } from "../../../redux/features/product/productSlice";
+import { getProduct, updateProduct } from "../../../redux/features/product/productSlice";
 import { getCategories } from "../../../redux/features/category/categorySlice";
 import { getBrands } from "../../../redux/features/brand/brandSlice";
 import { toast } from "react-toastify";
-import { confirmAlert } from "react-confirm-alert";
-import "react-confirm-alert/src/react-confirm-alert.css";
 import Loader from "../../../components/loader/Loader";
 
 function EditProduct() {
@@ -43,35 +41,16 @@ function EditProduct() {
     return () => setEditProduct({});
   }, [product]);
 
-  // Delete product
-  const handleDelete = async (id) => {
-    await dispatch(deleteProduct(id));
-    navigate("/admin/product");
-  };
-
-  // Confirm delete
-  const confirmDelete = (id) => {
-    confirmAlert({
-      title: `Delete ${product?.name}`,
-      message: "Are you sure you want to delete this product?",
-      buttons: [
-        { label: "Yes", onClick: () => handleDelete(id) },
-        { label: "Cancel", onClick: () => {} },
-      ],
-    });
-  };
-
   // Handle input change
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setEditProduct({ ...editProduct, [name]: value });
+    setEditProduct({ ...editProduct, [e.target.name]: e.target.value });
   };
 
   // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, category, brand, price, quantity, description } = editProduct;
-    if (!name || !category || !brand || !price || !quantity || !description) return toast.error("All fields are required.");
+    if (!name || !category || !brand || !price || !quantity || !description) return toast.error("Please enter all fields.");
     if (name.length < 3) return toast.error("Product name must be at least 3 characters long.");
     if (description.length < 5) return toast.error("Product description must be at least 5 characters long.");
     if (price < 1) return toast.error("Product price must be greater than 0.");
@@ -86,15 +65,10 @@ function EditProduct() {
     <>
       {isLoading && <Loader />}
       <div className="edit-product-form">
-        <div className="edit-product-header">
-          <button className="btn back-btn" onClick={() => navigate(-1)}>
-            <i className="fa-solid fa-chevron-left"></i>
-          </button>
-          <h1 className="section-title">Edit Product</h1>
-          <button>
-            <i className="fa-solid fa-trash table-trash trash-icon" onClick={() => confirmDelete(id)}></i>
-          </button>
-        </div>
+        <button className="btn back-btn" onClick={() => navigate(-1)}>
+          <i className="fa-solid fa-chevron-left"></i>
+        </button>
+        <h1 className="section-title">Edit Product</h1>
 
         <form onSubmit={handleSubmit}>
           <div>

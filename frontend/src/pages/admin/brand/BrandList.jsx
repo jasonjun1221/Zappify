@@ -26,7 +26,7 @@ function BrandList() {
   const confirmDelete = (slug) => {
     confirmAlert({
       title: "Delete Brand",
-      message: "Are you sure you want to delete this brand?",
+      message: `Are you sure you want to delete this brand(${slug})?`,
       buttons: [
         { label: "Yes", onClick: () => handleDelete(slug) },
         { label: "Cancel", onClick: () => {} },
@@ -41,7 +41,7 @@ function BrandList() {
   const currentItems = brands.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(brands.length / itemsPerPage);
 
-  // Handle page click
+  // Handle page click for pagination
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % brands.length;
     setItemOffset(newOffset);

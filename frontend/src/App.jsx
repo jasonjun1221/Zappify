@@ -33,19 +33,20 @@ import Product from "./pages/admin/product/Product";
 import AddProduct from "./pages/admin/product/AddProduct";
 import EditProduct from "./pages/admin/product/EditProduct";
 import Coupon from "./pages/admin/coupon/Coupon";
+import Order from "./pages/admin/order/Order";
+import EditOrder from "./pages/admin/order/EditOrder";
 
 function App() {
   axios.defaults.withCredentials = true;
   const dispatch = useDispatch();
   const { isLoggedIn, user } = useSelector((state) => state.auth);
 
-
   // Check if user is logged in
   useEffect(() => {
     dispatch(loginStatus());
   }, [dispatch]);
 
-  // Get user profile
+  // Get user profile if logged in
   useEffect(() => {
     if (isLoggedIn && user === null) {
       dispatch(getProfile());
@@ -88,6 +89,8 @@ function App() {
             { path: "add-product", element: <AddProduct /> },
             { path: "edit-product/:id", element: <EditProduct /> },
             { path: "coupon", element: <Coupon /> },
+            { path: "order", element: <Order /> },
+            { path: "edit-order/:id", element: <EditOrder /> },
           ],
         },
       ],

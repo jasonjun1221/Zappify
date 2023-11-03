@@ -50,10 +50,12 @@ const brandSlice = createSlice({
       .addCase(createBrand.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(createBrand.fulfilled, (state) => {
+      .addCase(createBrand.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
-        toast.success("Brand created successfully.");
+        state.isError = false;
+        state.message = payload;
+        toast.success(payload);
       })
       .addCase(createBrand.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -80,10 +82,11 @@ const brandSlice = createSlice({
       .addCase(deleteBrand.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(deleteBrand.fulfilled, (state) => {
+      .addCase(deleteBrand.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
-        toast.success("Brand deleted successfully.");
+        state.message = payload;
+        toast.success(payload);
       })
       .addCase(deleteBrand.rejected, (state, { payload }) => {
         state.isLoading = false;

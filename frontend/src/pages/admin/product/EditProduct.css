@@ -4,15 +4,9 @@
   padding: 3rem;
 }
 
-.edit-product-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.edit-product-header i {
-  font-size: 1.2rem;
+.edit-product-form .back-btn {
+  position: absolute;
+  top: 13rem;
 }
 
 .edit-product-form form {

@@ -1,12 +1,19 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./Checkout.css";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Loader from "../../components/loader/Loader";
 import { CountryDropdown } from "react-country-region-selector";
+import { calculateTotalPrice, resetCart} from "../../redux/features/cart/cartSlice";
+import { createOrder } from "../../redux/features/order/orderSlice";
+import { resetCoupon } from "../../redux/features/coupon/couponSlice";
 
 function Checkout() {
-  const { cartItems, totalPrice } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { cartItems, totalPrice, discountedPrice } = useSelector((state) => state.cart);
   const { user, isLoading } = useSelector((state) => state.auth);
+  const { coupon } = useSelector((state) => state.coupon);
 
   const initialState = {
     name: user?.name || JSON.parse(localStorage.getItem("user"))?.name || "",
@@ -18,12 +25,17 @@ function Checkout() {
     orderNote: "",
   };
   const [checkoutInfo, setUserInfo] = useState(initialState);
-  const [paymentMethod, setPaymentMethod] = useState("bank-transfer");
+  const [paymentMethod, setPaymentMethod] = useState("cash-on-delivery");
 
   // update local storage when userInfo changes
   useEffect(() => {
     localStorage.setItem("user", JSON.stringify({ ...user, checkoutInfo }));
   }, [checkoutInfo, user]);
+
+  // Calculate total price
+  useEffect(() => {
+    dispatch(calculateTotalPrice(JSON.parse(localStorage.getItem("coupon"))));
+  }, [dispatch, coupon]);
 
   // handle input change
   const handleInputChange = (e) => {
@@ -31,8 +43,12 @@ function Checkout() {
   };
 
   // handle form submit
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    await dispatch(createOrder({ cartItems, checkoutInfo, paymentMethod, coupon }));
+    dispatch(resetCart());
+    dispatch(resetCoupon());
+    navigate("/");
   };
 
   return (
@@ -123,17 +139,15 @@ function Checkout() {
 
               <tfoot>
                 <tr>
-                  <td>Subtotal</td>
-                  <td colSpan="2">${totalPrice.toFixed(2)}</td>
-                </tr>
-                <tr>
-                  <td>Shipping</td>
-                  <td colSpan="2">Free Shipping</td>
-                </tr>
-                <tr>
                   <td>Total</td>
                   <td colSpan="2" className="order-grand-total">
-                    ${totalPrice.toFixed(2)}
+                    {discountedPrice > 0 ? (
+                      <>
+                        <del className="strike-price">${totalPrice.toFixed(2)}</del> ${discountedPrice.toFixed(2)}
+                      </>
+                    ) : (
+                      <>${totalPrice.toFixed(2)}</>
+                    )}
                   </td>
                 </tr>
               </tfoot>
@@ -144,26 +158,26 @@ function Checkout() {
               <div className="payment-option">
                 <input
                   type="radio"
-                  id="bank-transfer"
+                  id="cash-on-delivery"
                   name="payment"
                   className="payment-input"
-                  value="bank-transfer"
+                  value="cash-on-delivery"
                   defaultChecked
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
-                <label htmlFor="bank-transfer">Bank Transfer</label>
+                <label htmlFor="cash-on-delivery">Cash On Delivery</label>
               </div>
 
               <div className="payment-option">
                 <input
                   type="radio"
-                  id="credit-card"
+                  id="stripe"
                   name="payment"
                   className="payment-input"
-                  value="credit-card"
+                  value="stripe"
                   onChange={(e) => setPaymentMethod(e.target.value)}
                 />
-                <label htmlFor="credit-card">Credit card</label>
+                <label htmlFor="stripe">Stripe</label>
               </div>
 
               <div className="payment-option">
@@ -178,7 +192,7 @@ function Checkout() {
                 <label htmlFor="paypal">Paypal</label>
               </div>
               <button type="submit" className="btn">
-                Place Order
+                {paymentMethod === "cash-on-delivery" ? "Place Order" : "Make Payment"}
               </button>
             </div>
           </div>

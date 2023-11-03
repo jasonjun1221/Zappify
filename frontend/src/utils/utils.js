@@ -11,3 +11,10 @@ export const shortenText = (text, n) => {
 export const validateEmail = (email) => {
   return email.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i);
 };
+
+// Get product ids and cart quantity from cart items
+export const getProductIdsAndCartQuantity = (products) => {
+  return products.map((product) => {
+    return { _id: product._id, cartQuantity: product.cartQuantity };
+  });
+};

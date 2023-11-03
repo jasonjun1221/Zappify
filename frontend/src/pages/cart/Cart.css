@@ -107,6 +107,9 @@
 .cart-total-price {
   font-weight: 700;
 }
+.cart-total-price del {
+  color: grey;
+}
 
 .cart-total .btn {
   margin-left: 13rem;

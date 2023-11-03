@@ -22,10 +22,10 @@ function CouponList() {
   };
 
   // Confirm delete
-  const confirmDelete = (id) => {
+  const confirmDelete = (id, couponName) => {
     confirmAlert({
       title: "Delete Coupon",
-      message: "Are you sure you want to delete this coupon?",
+      message: `Are you sure you want to delete this coupon(${couponName})?`,
       buttons: [
         { label: "Yes", onClick: () => handleDelete(id) },
         { label: "Cancel", onClick: () => {} },
@@ -60,7 +60,7 @@ function CouponList() {
                   <td>{coupon.expiry.slice(0, 10)}</td>
                   <td>
                     <span>
-                      <i className="fa-solid fa-trash table-trash trash-icon" onClick={() => confirmDelete(coupon._id)}></i>
+                      <i className="fa-solid fa-trash table-trash trash-icon" onClick={() => confirmDelete(coupon._id, coupon.name)}></i>
                     </span>
                   </td>
                 </tr>

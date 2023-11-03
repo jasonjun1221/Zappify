@@ -50,11 +50,12 @@ const categorySlice = createSlice({
       .addCase(createCategory.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(createCategory.fulfilled, (state) => {
+      .addCase(createCategory.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        toast.success("Category created successfully.");
+        state.message = payload;
+        toast.success(payload);
       })
       .addCase(createCategory.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -82,11 +83,12 @@ const categorySlice = createSlice({
       .addCase(deleteCategory.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(deleteCategory.fulfilled, (state) => {
+      .addCase(deleteCategory.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        toast.success("Category deleted successfully.");
+        state.message = payload;
+        toast.success(payload);
       })
       .addCase(deleteCategory.rejected, (state, { payload }) => {
         state.isLoading = false;

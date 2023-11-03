@@ -17,7 +17,7 @@ function Product() {
   const currentItems = products.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(products.length / itemsPerPage);
 
-  // Handle page click
+  // Handle page click for pagination
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % products.length;
     setItemOffset(newOffset);
@@ -45,6 +45,7 @@ function Product() {
         </div>
 
         <ProductList currentItems={currentItems} products={products} />
+        
         <ReactPaginate
           className="pagination"
           pageLinkClassName="pagination-link"

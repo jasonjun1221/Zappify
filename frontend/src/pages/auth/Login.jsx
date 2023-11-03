@@ -31,7 +31,7 @@ function Login() {
   // Get cart items when user is logged in and redirect to home page
   useEffect(() => {
     if (isSuccess && isLoggedIn) {
-      if (redirect === "checkout") return navigate("/checkout");
+      if (redirect === "cart") return navigate("/cart");
       dispatch(getCartItems());
       navigate("/");
     }
@@ -77,7 +77,7 @@ function Login() {
         </div>
       )}
       <Newsletter />
-      <Footer/>
+      <Footer />
     </>
   );
 }

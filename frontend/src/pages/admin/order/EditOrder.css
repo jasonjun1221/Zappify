@@ -1,0 +1,83 @@
+.edit-order-form {
+  padding: 3rem 0 3rem 5rem;
+}
+
+.edit-order-form .back-btn {
+  position: absolute;
+  top: 13rem;
+}
+
+.edit-order-form .section-title {
+  text-align: center;
+}
+
+.order-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.order-table-container {
+  max-height: 230px;
+  overflow-y: auto;
+  width: 91.5%;
+  margin-bottom: 1.5rem;
+  padding: 1px 0;
+}
+
+.order-details-table tr th,
+.order-details-table tr td {
+  border: 1px solid lightgrey;
+  padding: 0.2rem;
+  text-align: center;
+}
+
+.order-details-grand-total {
+  color: var(--main-color);
+  font-weight: bold;
+}
+
+.order-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 4.3rem;
+  margin-bottom: 1.5rem;
+}
+
+.order-actions .form-group label {
+  margin-right: 1rem;
+}
+
+.order-status-title {
+  font-weight: bold;
+  color: var(--main-color);
+}
+
+.order-shipping label {
+  margin-right: 1rem;
+}
+
+.order-shipping input {
+  width: 75%;
+}
+
+.order-note {
+  display: flex;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.order-note label {
+  margin-right: 2.5rem;
+}
+
+.order-note textarea {
+  width: 75%;
+  height: 5rem;
+  padding-block: 1rem;
+  resize: none;
+}
+
+.edit-order-form .update-btn {
+  width: 13rem;
+  margin-left: 20rem;
+}

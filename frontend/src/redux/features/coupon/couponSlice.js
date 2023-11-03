@@ -62,6 +62,7 @@ const couponSlice = createSlice({
       state.isLoading = false;
       state.isSuccess = false;
       state.message = "";
+      localStorage.removeItem("coupon");
     },
   },
   extraReducers: (builder) =>
@@ -70,10 +71,12 @@ const couponSlice = createSlice({
       .addCase(createCoupon.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(createCoupon.fulfilled, (state) => {
+      .addCase(createCoupon.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
-        toast.success("Coupon created successfully");
+        state.isError = false;
+        state.message = payload;
+        toast.success(payload);
       })
       .addCase(createCoupon.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -103,6 +106,7 @@ const couponSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.coupon = payload;
+        console.log(payload);
         toast.success("Coupon applied successfully.");
       })
       .addCase(getCoupon.rejected, (state, { payload }) => {
@@ -115,10 +119,11 @@ const couponSlice = createSlice({
       .addCase(deleteCoupon.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(deleteCoupon.fulfilled, (state) => {
+      .addCase(deleteCoupon.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.isSuccess = true;
-        toast.success("Coupon deleted successfully.");
+        state.message = payload;
+        toast.success(payload);
       })
       .addCase(deleteCoupon.rejected, (state, { payload }) => {
         state.isLoading = false;

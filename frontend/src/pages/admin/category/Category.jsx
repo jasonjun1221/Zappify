@@ -12,7 +12,7 @@ function Category() {
   // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (name === "") return toast.error("Category name is required.");
+    if (name === "") return toast.error("Please enter a category name.");
     if (name.length < 3) return toast.error("Category name must be at least 3 characters long.");
     await dispatch(createCategory({ name }));
     await dispatch(getCategories());
@@ -40,7 +40,6 @@ function Category() {
           </div>
         </form>
       </div>
-
       <CategoryList />
     </>
   );

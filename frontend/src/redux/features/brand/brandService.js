@@ -5,7 +5,7 @@ export const API_URL = `http://localhost:5000/api`;
 // Create Brand
 const createBrand = async (formData) => {
   const response = await axios.post(`${API_URL}/brands/`, formData);
-  return response.data;
+  return response.data.message;
 };
 
 // Get Brands
@@ -17,7 +17,7 @@ const getBrands = async () => {
 // Delete Brand
 const deleteBrand = async (slug) => {
   const response = await axios.delete(`${API_URL}/brands/${slug}`);
-  return response.data;
+  return response.data.message;
 };
 
 const brandService = { createBrand, getBrands, deleteBrand };

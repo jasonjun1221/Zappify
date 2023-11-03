@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import './MyAccount.css'
+import "./MyAccount.css";
 
 const orderDetails = [
   {
@@ -25,7 +25,7 @@ const orderDetails = [
 function OrdersTab() {
   return (
     <div className="tab-content">
-      <h3 className="tab-header">Your Orders</h3>
+      <h3 className="tab-header">My Orders</h3>
 
       <div className="tab-body">
         <table className="order-table">

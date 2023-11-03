@@ -5,7 +5,7 @@ export const API_URL = `http://localhost:5000/api`;
 // Create Product
 const createProduct = async (formData) => {
   const response = await axios.post(`${API_URL}/products/`, formData);
-  return response.data;
+  return response.data.message;
 };
 
 // Get Products
@@ -23,13 +23,13 @@ const getProduct = async (id) => {
 // Update Product
 const updateProduct = async (id, formData) => {
   const response = await axios.put(`${API_URL}/products/${id}`, formData);
-  return response.data;
+  return response.data.message;
 };
 
 // Delete Product
 const deleteProduct = async (id) => {
   const response = await axios.delete(`${API_URL}/products/${id}`);
-  return response.data;
+  return response.data.message;
 };
 
 const productService = { createProduct, getProducts, getProduct, updateProduct, deleteProduct };

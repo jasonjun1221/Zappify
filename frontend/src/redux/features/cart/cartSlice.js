@@ -7,6 +7,7 @@ const initialState = {
   cartItems: localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : [],
   totalQuantity: 0,
   totalPrice: 0,
+  discountedPrice: 0,
   isError: false,
   isLoading: false,
   isSuccess: false,
@@ -68,27 +69,13 @@ const cartSlice = createSlice({
       if (existItem.cartQuantity === 1) {
         state.cartItems = state.cartItems.filter((item) => item._id !== action.payload._id);
         toast.success(`${shortenText(action.payload.name, 8)} removed from cart.`, { position: "bottom-right" });
+        localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
         return;
       }
 
       // If item quantity is greater than 1, decrease quantity by 1
       existItem.cartQuantity--;
       toast.success(`${shortenText(action.payload.name, 8)} decreased by 1.`, { position: "bottom-right" });
-      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
-    },
-    increaseQuantity: (state, action) => {
-      // Find item in cart
-      const existItem = state.cartItems.find((item) => item._id === action.payload._id);
-
-      // If item quantity is equal to cart quantity, show error
-      if (existItem.cartQuantity === existItem.quantity) {
-        toast.error("Maximum quantity reached.", { position: "bottom-right" });
-        return;
-      }
-
-      // If item quantity is less than cart quantity, increase quantity by 1
-      existItem.cartQuantity++;
-      toast.success(`${shortenText(action.payload.name, 8)} increased by 1.`, { position: "bottom-right" });
       localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
     },
     removeFromCart: (state, action) => {
@@ -103,8 +90,8 @@ const cartSlice = createSlice({
       if (!action.payload) {
         state.totalPrice = state.cartItems.reduce((acc, item) => acc + item.price * item.cartQuantity, 0);
       } else {
-        const originalPrice = state.cartItems.reduce((acc, item) => acc + item.price * item.cartQuantity, 0);
-        state.totalPrice = originalPrice - (originalPrice * action.payload?.discount) / 100;
+        state.totalPrice = state.cartItems.reduce((acc, item) => acc + item.price * item.cartQuantity, 0);
+        state.discountedPrice = state.totalPrice - (state.totalPrice * action.payload?.discount) / 100;
       }
     },
     resetCart: (state) => {
@@ -112,6 +99,9 @@ const cartSlice = createSlice({
       state.totalQuantity = 0;
       state.totalPrice = 0;
       localStorage.removeItem("cartItems");
+    },
+    resetDiscountedPrice: (state) => {
+      state.discountedPrice = 0;
     },
   },
   extraReducers: (builder) => {
@@ -124,7 +114,6 @@ const cartSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        console.log("Cart items saved successfully.");
       })
       .addCase(saveCartItems.rejected, (state, { payload }) => {
         state.isLoading = false;
@@ -140,7 +129,7 @@ const cartSlice = createSlice({
         state.isLoading = false;
         state.isSuccess = true;
         state.isError = false;
-        state.cartItems = payload;
+        state.cartItems = payload || null;
         localStorage.setItem("cartItems", JSON.stringify(payload));
       })
       .addCase(getCartItems.rejected, (state, { payload }) => {
@@ -152,7 +141,7 @@ const cartSlice = createSlice({
   },
 });
 
-export const { addToCart, decreaseQuantity, increaseQuantity, removeFromCart, calculateTotalQuantity, calculateTotalPrice, resetCart } =
+export const { addToCart, decreaseQuantity, removeFromCart, calculateTotalQuantity, calculateTotalPrice, resetCart, resetDiscountedPrice } =
   cartSlice.actions;
 
 export default cartSlice.reducer;

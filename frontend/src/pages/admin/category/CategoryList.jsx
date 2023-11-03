@@ -25,7 +25,7 @@ function CategoryList() {
   const confirmDelete = (slug) => {
     confirmAlert({
       title: "Delete Category",
-      message: "Are you sure you want to delete this category?",
+      message: `Are you sure you want to delete this category(${slug})?`,
       buttons: [
         { label: "Yes", onClick: () => handleDelete(slug) },
         { label: "Cancel", onClick: () => {} },
