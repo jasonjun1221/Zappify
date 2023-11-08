@@ -1,7 +1,7 @@
 /*=============== Category Form ===============*/
 
 .category-form {
-  padding: 3rem 3rem 4rem 3rem;
+  padding: 1.1rem;
   border-bottom: 1px solid lightgrey;
 }
 
@@ -20,7 +20,7 @@
 .category-form .form-group label {
   display: block;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
 .category-form .form-group input {
@@ -39,7 +39,7 @@
 }
 
 .category-list .section-title {
-  margin-top: 3rem;
+  margin: 1rem 0;
   font-size: 1.5rem;
   text-align: center;
 }

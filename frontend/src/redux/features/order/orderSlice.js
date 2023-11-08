@@ -64,7 +64,16 @@ export const updateOrderStatus = createAsyncThunk("order/updateOrderStatus", asy
 const orderSlice = createSlice({
   name: "order",
   initialState,
-  reducers: {},
+  reducers: {
+    resetOrder: (state) => {
+      state.order = null;
+      state.orders = [];
+      state.isLoading = false;
+      state.isSuccess = false;
+      state.isError = false;
+      state.message = "";
+    },
+  },
   extraReducers: (builder) => {
     builder
       // Create Order
@@ -157,6 +166,6 @@ const orderSlice = createSlice({
   },
 });
 
-export const {} = orderSlice.actions;
+export const { resetOrder } = orderSlice.actions;
 
 export default orderSlice.reducer;

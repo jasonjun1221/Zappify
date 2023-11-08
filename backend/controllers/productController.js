@@ -80,7 +80,8 @@ const updateProduct = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const deleteProduct = asyncHandler(async (req, res) => {
   // Check if product exists
-  if (!(await Product.findById(req.params.id))) {
+  const product = await Product.findById(req.params.id);
+  if (!product) {
     res.status(404);
     throw new Error("Product not found.");
   }
@@ -89,7 +90,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
   res.status(200).json({ status: "success", message: "Product removed successfully." });
 });
 
-// @desc    Create a review
+// @desc    Create a review of a product
 // @route   POST /api/products/reviews/:id
 // @access  Private
 const createProductReview = asyncHandler(async (req, res) => {
@@ -108,16 +109,16 @@ const createProductReview = asyncHandler(async (req, res) => {
     throw new Error("Product not found.");
   }
 
-  product.reviews.push({ userID: req.user._id, name: req.user.name, rating, comment });
-  product.save();
+  product.reviews.push({ userID: req.user._id, name: req.user.name, rating, comment, date: new Date(Date.now()) });
+  await product.save();
 
   res.status(201).json({ status: "success", message: "Review added successfully." });
 });
 
-// @desc    Delete a review
-// @route   DELETE /api/products/reviews/:id
-// @access  Private
-const deleteProductReview = asyncHandler(async (req, res) => {
+// @desc    Get all reviews of a product
+// @route   GET /api/products/reviews/:id
+// @access  Public
+const getProductReviews = asyncHandler(async (req, res) => {
   // Check if product exists
   const product = await Product.findById(req.params.id);
   if (!product) {
@@ -125,10 +126,33 @@ const deleteProductReview = asyncHandler(async (req, res) => {
     throw new Error("Product not found.");
   }
 
-  product.reviews = product.reviews.filter((review) => review.userID.toString() !== req.user._id.toString());
+  res.json({ status: "success", reviews: product.reviews });
+});
+
+// @desc    Delete a review of a product
+// @route   DELETE /api/products/reviews/:productId/:reviewId
+// @access  Private
+const deleteProductReview = asyncHandler(async (req, res) => {
+  // Check if product exists
+  const product = await Product.findById(req.params.productId);
+  if (!product) {
+    res.status(404);
+    throw new Error("Product not found.");
+  }
+
+  product.reviews = product.reviews.filter((review) => review._id.toString() !== req.params.reviewId.toString());
   await product.save();
 
   res.status(200).json({ status: "success", message: "Review removed successfully." });
 });
 
-module.exports = { createProduct, getProducts, getProductById, updateProduct, deleteProduct, createProductReview, deleteProductReview };
+module.exports = {
+  createProduct,
+  getProducts,
+  getProductById,
+  updateProduct,
+  deleteProduct,
+  createProductReview,
+  getProductReviews,
+  deleteProductReview,
+};

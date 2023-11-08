@@ -64,68 +64,81 @@ function EditProduct() {
   return (
     <>
       {isLoading && <Loader />}
-      <div className="edit-product-form">
-        <button className="btn back-btn" onClick={() => navigate(-1)}>
-          <i className="fa-solid fa-chevron-left"></i>
-        </button>
-        <h1 className="section-title">Edit Product</h1>
-
-        <form onSubmit={handleSubmit}>
-          <div>
-            <div className="form-group">
-              <label htmlFor="name">Name:</label>
-              <input type="text" id="name" className="form-input" name="name" value={editProduct?.name} onChange={handleInputChange} />
+      <form onSubmit={handleSubmit}>
+        <div className="edit-product-form">
+          <div className="edit-product-header">
+            <div className="btn back-btn" onClick={() => navigate(-1)}>
+              <i className="fa-solid fa-chevron-left"></i>
             </div>
+            <h1 className="section-title">Edit Product</h1>
+            <button type="submit" className="btn update-product-btn">
+              Update
+            </button>
+          </div>
 
-            <div className="form-group">
-              <label htmlFor="category">Category:</label>
-              <select className="form-input" id="category" name="category" value={editProduct?.category} onChange={handleInputChange}>
-                <option value="">-- Select Category --</option>
-                {categories.length > 0 &&
-                  categories.map((cat) => (
-                    <option key={cat._id} value={cat.name}>
-                      {cat.name}
-                    </option>
-                  ))}
-              </select>
+          <div className="edit-product-container">
+            <div className="form-group edit-product-image">
+              <img src={product?.image} alt={product?.name} id="image" />
             </div>
+            <div className="edit-form-elements">
+              <div className="form-group">
+                <label htmlFor="name">Name:</label>
+                <input type="text" id="name" className="form-input" name="name" value={editProduct?.name} onChange={handleInputChange} />
+              </div>
 
-            <div className="form-group">
-              <label htmlFor="brand">Brand:</label>
-              <select className="form-input" id="brand" name="brand" value={editProduct?.brand} onChange={handleInputChange}>
-                <option value="">-- Select Brand --</option>
-                {filteredBrands.length > 0 &&
-                  filteredBrands.map((brand) => (
-                    <option key={brand._id} value={brand.name}>
-                      {brand.name}
-                    </option>
-                  ))}
-              </select>
+              <div className="form-group">
+                <label htmlFor="category">Category:</label>
+                <select className="form-input" id="category" name="category" value={editProduct?.category} onChange={handleInputChange}>
+                  <option value="">-- Select Category --</option>
+                  {categories.length > 0 &&
+                    categories.map((cat) => (
+                      <option key={cat._id} value={cat.name}>
+                        {cat.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+              <div className="form-group">
+                <label htmlFor="brand">Brand:</label>
+                <select className="form-input" id="brand" name="brand" value={editProduct?.brand} onChange={handleInputChange}>
+                  <option value="">-- Select Brand --</option>
+                  {filteredBrands.length > 0 &&
+                    filteredBrands.map((brand) => (
+                      <option key={brand._id} value={brand.name}>
+                        {brand.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
             </div>
+            <div className="edit-form-elements">
+              <div className="form-group">
+                <label htmlFor="price">Price (SGD):</label>
+                <input
+                  type="number"
+                  id="price"
+                  className="form-input"
+                  name="price"
+                  value={editProduct?.price}
+                  onChange={handleInputChange}
+                />
+              </div>
 
-            <div className="form-group">
-              <label htmlFor="price">Price (SGD):</label>
-              <input type="number" id="price" className="form-input" name="price" value={editProduct?.price} onChange={handleInputChange} />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="quantity">Quantity:</label>
-              <input
-                type="number"
-                id="quantity"
-                className="form-input"
-                name="quantity"
-                value={editProduct?.quantity}
-                onChange={handleInputChange}
-              />
+              <div className="form-group">
+                <label htmlFor="quantity">Quantity:</label>
+                <input
+                  type="number"
+                  id="quantity"
+                  className="form-input"
+                  name="quantity"
+                  value={editProduct?.quantity}
+                  onChange={handleInputChange}
+                />
+              </div>
             </div>
           </div>
 
-          <div className="form-group edit-product-image">
-            <img src={product?.image} alt={product?.name} id="image" />
-          </div>
-
-          <div className="form-group">
+          <div className="form-group edit-description-container">
             <label htmlFor="description">Description:</label>
             <textarea
               className="form-input textarea edit-description"
@@ -135,12 +148,8 @@ function EditProduct() {
               onChange={handleInputChange}
             ></textarea>
           </div>
-
-          <button type="submit" className="btn update-btn">
-            Update
-          </button>
-        </form>
-      </div>
+        </div>
+      </form>
     </>
   );
 }

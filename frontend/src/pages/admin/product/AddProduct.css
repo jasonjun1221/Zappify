@@ -1,57 +1,51 @@
 /*=============== Add Product Form ===============*/
-
-.add-product-form {
-  padding: 3rem;
-}
-
 .add-product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 1rem;
 }
 
-.add-product-header button {
-  position: absolute;
-  max-width: 50px;
-  top: 0;
-  left: 43rem;
+.add-product-header .back-btn i{
+  font-size: 1rem;
+  padding-top: 15px;
+  padding-left: 5px;
 }
 
-.add-product-header i {
-  font-size: 1.2rem;
+.add-product-header .back-btn {
+  margin-left: 2.5rem;
+  margin-top: 1.5rem;
 }
 
-.add-product-form form {
+.add-product-header .add-product-btn {
+  margin-top: 1.5rem;
+  margin-right: 3rem;
+}
+
+.product-form-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
 .add-product-form .form-group {
-  margin: 1rem 0 2.5rem 2.5rem;
-}
-
-.add-product-form .section-title {
-  text-align: center;
+  margin: 0 3rem 1.5rem 3rem;
 }
 
 .add-product-form .form-group label {
   display: block;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.2rem;
 }
+
 .add-product-form .form-group input {
-  width: 90%;
+  width: 100%;
   border: 1px solid lightgrey;
 }
 
 .add-product-form .form-group select {
-  width: 90%;
+  width: 100%;
 }
 
 .product-description {
-  width: 200%;
-}
-
-.add-product-form button {
-  margin-top: 13rem;
-  margin-left: -10rem;
-  width: 75%;
+  width: 100%;
 }

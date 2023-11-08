@@ -1,6 +1,7 @@
 .accounts-container {
   grid-template-columns: 1fr 3fr;
   padding: 1rem;
+  margin-bottom: 4rem;
 }
 
 .account-tabs {
@@ -27,7 +28,7 @@
   border-bottom: 1px solid lightgrey;
 }
 
-/********** For account tabs ***********/
+/*=============== Account Tab ===============*/
 .tab-content {
   border: 1px solid lightgrey;
   border-radius: 0.25rem;
@@ -53,11 +54,50 @@
   width: 33.5%;
 }
 
-.order-table tr th,
-.order-table tr td {
-  border: 1px solid lightgrey;
+/*=============== Order Table ===============*/
+.my-order-table {
+  margin-bottom: 1.25rem;
+}
+
+.my-order-table tr:hover {
+  background-color: #f2f2f2;
+}
+
+.my-order-table tr th,
+.my-order-table tr td {
   padding: 0.5rem;
-  font-size: 0.9rem;
+  text-align: center;
+}
+
+.my-order-table tr th:nth-child(1),
+.my-order-table tr td:nth-child(1) {
+  width: 40px;
+}
+
+.my-order-table tr th:nth-child(2),
+.my-order-table tr td:nth-child(2) {
+  border-left: none;
+  width: 250px;
+}
+
+.my-order-table tr th:nth-child(3),
+.my-order-table tr td:nth-child(3) {
+  width: 100px;
+}
+
+.my-order-table tr th:nth-child(4),
+.my-order-table tr td:nth-child(4) {
+  width: 120px;
+}
+
+.my-order-table tr th:nth-child(5),
+.my-order-table tr td:nth-child(5) {
+  width: 120px;
+}
+
+.my-order-table tr th:nth-child(6),
+.my-order-table tr td:nth-child(6) {
+  width: 80px;
 }
 
 .view-order {
@@ -88,4 +128,62 @@
 .country-dropdown {
   width: 20rem;
   margin-bottom: 1rem;
+}
+
+/*=============== MyOrder Table ===============*/
+.my-order-details {
+  margin-left: 2rem;
+  padding-bottom: 0.3rem;
+}
+
+.myorder-group {
+  display: flex;
+  margin: 1rem 2.5rem;
+  gap: 6rem;
+}
+
+.myorder-table-container {
+  max-height: 109px;
+  overflow-y: auto;
+  margin: 0 4.5rem 1.5rem 2.5rem;
+  padding: 1px 0;
+}
+
+.myorder-details-table tr th,
+.myorder-details-table tr td {
+  border: 1px solid lightgrey;
+  padding: 0.2rem;
+  text-align: center;
+}
+
+.myorder-details-grand-total {
+  color: var(--main-color);
+  font-weight: bold;
+}
+
+.myorder-actions {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 4.5rem 0 2.5rem;
+}
+
+.myorder-actions .form-group label {
+  margin-right: 1rem;
+}
+
+.myorder-status-title {
+  font-weight: bold;
+  color: var(--main-color);
+}
+
+.myorder-shipping {
+  margin: 1rem 2.5rem;
+}
+
+.myorder-shipping label {
+  margin-right: 1.1rem;
+}
+
+.myorder-shipping input {
+  width: 81%;
 }

@@ -1,6 +1,7 @@
 .checkout-container {
   display: flex;
   gap: 2rem;
+  margin-bottom: 2rem;
 }
 
 .checkout-title {
@@ -12,26 +13,40 @@
 }
 
 .checkout-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2em;
   width: 50%;
   padding: 2rem;
   border: 1px solid lightgrey;
-  border-radius: 0.5rem;
+  border-radius: 0.25rem;
 }
 
-.order-table tr th,
-.order-table tr td {
+.checkout-details-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.checkout-table-container {
+  max-height: 255px;
+  overflow-y: auto;
+  border-bottom: 1px solid lightgrey;
+}
+
+.checkout-order-table tr th,
+.checkout-order-table tr td {
   border: 1px solid lightgrey;
   padding: 0.5rem;
   text-align: center;
 }
 
-.order-table tr th {
+.checkout-order-table tr th {
   font-size: 0.9rem;
 }
 
 .order-grand-total {
   color: var(--main-color);
-  font-size: 1.2rem;
   font-weight: 700;
 }
 
@@ -45,7 +60,7 @@
 }
 
 .payment-methods button {
-  margin: 1rem 0;
+  margin: 0.5rem 0;
 }
 
 .payment-input {

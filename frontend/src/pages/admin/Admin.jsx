@@ -11,7 +11,6 @@ const adminNav = [
   { name: "Coupon", link: "/admin/coupon" },
   { name: "Order", link: "/admin/order" },
   { name: "User", link: "/admin/" },
-  { name: "Review", link: "/admin/" },
 ];
 
 function Admin() {

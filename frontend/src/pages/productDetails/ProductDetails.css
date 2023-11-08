@@ -1,15 +1,6 @@
-.shop-back-btn {
-  margin-left: 4rem;
-  margin-top: -2rem;
-}
-
-.shop-back-btn i {
-  font-size: 1.2rem;
-}
-
 .details-container {
   grid-template-columns: 1fr 2fr;
-  margin: 2rem auto;
+  margin-top: 1rem;
 }
 
 .details-img {
@@ -102,4 +93,9 @@
   font-family: "Spartan", sans-serif;
   font-size: 0.85rem;
   font-weight: 700;
+}
+
+hr {
+  margin: 4rem;
+  border: 1px solid lightgrey;
 }

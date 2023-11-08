@@ -6,7 +6,7 @@ import Loader from "../../components/loader/Loader";
 import { getProducts } from "../../redux/features/product/productSlice";
 import { getCategories } from "../../redux/features/category/categorySlice";
 import { filterByCategory, filterBySearch, filterBySort } from "../../redux/features/product/filterSlice";
-import ProductCard from "../../components/productCard/ProductCard";
+import ProductCard from "./ProductCard";
 
 function Shop() {
   const dispatch = useDispatch();
@@ -41,7 +41,7 @@ function Shop() {
   };
 
   // Pagination
-  const itemsPerPage = 8;
+  const itemsPerPage = 10;
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = filteredProducts.slice(itemOffset, endOffset);
@@ -56,13 +56,7 @@ function Shop() {
   return (
     <>
       {isLoading && <Loader />}
-      <section className="container section shop">
-        <div className={`items-container ${filteredProducts.length === 0 ? `none-items` : ``}`}>
-          <p className="total-items">
-            We found <span>{filteredProducts?.length}</span> items for you!
-          </p>
-        </div>
-
+      <section className="container shop">
         <div className="filters-container">
           <div className="search">
             <input
@@ -91,7 +85,7 @@ function Shop() {
 
           <div className="sort-container">
             <div className="sorting">
-              <span>Sort By: </span>
+              <span>Sort by: </span>
               <select className="form-input" value={sort} onChange={(e) => setSort(e.target.value)}>
                 <option value="">Default</option>
                 <option value="newest">Newest</option>
@@ -99,6 +93,12 @@ function Shop() {
                 <option value="highest-price">Highest Price</option>
               </select>
             </div>
+          </div>
+
+          <div className={`items-container ${filteredProducts.length === 0 ? `none-items` : ``}`}>
+            <p className="total-items">
+              We found <span>{filteredProducts?.length}</span> items for you!
+            </p>
           </div>
         </div>
 

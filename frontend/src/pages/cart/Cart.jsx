@@ -1,10 +1,10 @@
 import "./Cart.css";
+import CartCoupon from "./CartCoupon";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart, calculateTotalPrice, decreaseQuantity, removeFromCart } from "../../redux/features/cart/cartSlice";
 import { useEffect } from "react";
 import { shortenText } from "../../utils/utils";
-import CartCoupon from "../../components/cartCoupon/CartCoupon";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -63,7 +63,7 @@ function Cart() {
 
                     <td>
                       <h3 className="table-title">{product?.name}</h3>
-                      <p className="table-description">{shortenText(product?.description, 145)}</p>
+                      <p className="table-description">{shortenText(product?.description, 140)}</p>
                     </td>
 
                     <td>

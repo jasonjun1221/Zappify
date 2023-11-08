@@ -1,9 +1,10 @@
 .newsletter {
   background-color: lightblue;
+  padding: 2rem;
 }
 
 .newsletter-container {
-  grid-template-columns: 0.4fr 3.5fr 3.5fr 5fr;
+  grid-template-columns: 0.4fr 3fr 4fr 4.5fr;
   align-items: center;
 }
 

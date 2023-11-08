@@ -1,9 +1,10 @@
 import "./Category.css";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCategory, getCategories } from "../../../redux/features/category/categorySlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import ReactPaginate from "react-paginate";
 import Loader from "../../../components/loader/Loader";
 
 function CategoryList() {
@@ -33,6 +34,19 @@ function CategoryList() {
     });
   };
 
+  // Pagination
+  const itemsPerPage = 5;
+  const [itemOffset, setItemOffset] = useState(0);
+  const endOffset = itemOffset + itemsPerPage;
+  const currentItems = categories.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(categories.length / itemsPerPage);
+
+  // Handle page click for pagination
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % categories.length;
+    setItemOffset(newOffset);
+  };
+
   return (
     <>
       {isLoading && <Loader />}
@@ -50,9 +64,9 @@ function CategoryList() {
               </tr>
             </thead>
             <tbody>
-              {categories.map((cat, index) => (
+              {currentItems.map((cat, index) => (
                 <tr key={cat._id}>
-                  <td>{index + 1}</td>
+                  <td>{index + 1 + itemOffset}</td>
                   <td>{cat.name}</td>
                   <td>
                     <span>
@@ -65,6 +79,20 @@ function CategoryList() {
           </table>
         )}
       </div>
+      <ReactPaginate
+        className="pagination"
+        pageLinkClassName="pagination-link"
+        activeLinkClassName="pagination-link active"
+        previousLinkClassName="pagination-link"
+        nextLinkClassName="pagination-link"
+        previousLabel="<<"
+        nextLabel=">>"
+        breakLabel="..."
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        renderOnZeroPageCount={null}
+      />
     </>
   );
 }

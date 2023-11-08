@@ -5,6 +5,7 @@ import { logout } from "../../redux/features/auth/authSlice";
 import { resetCart, saveCartItems } from "../../redux/features/cart/cartSlice";
 import Newsletter from "../../components/newsletter/Newsletter";
 import Footer from "../../components/footer/Footer";
+import { resetOrder } from "../../redux/features/order/orderSlice";
 
 const myAccountNav = [
   { name: "Dashboard", icon: "fa-solid fa-house", link: "/myaccount/" },
@@ -23,6 +24,7 @@ function MyAccount() {
       dispatch(saveCartItems(JSON.parse(localStorage.getItem("cartItems"))));
     }
     dispatch(resetCart());
+    dispatch(resetOrder());
     dispatch(logout());
   };
 

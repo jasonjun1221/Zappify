@@ -1,6 +1,6 @@
 /*=============== Order ===============*/
 .order-list .section-title {
-  margin: 2rem 0;
+  margin: 2.5rem 0;
   font-size: 1.5rem;
   text-align: center;
 }
@@ -36,17 +36,17 @@
 .order-table tr th:nth-child(1),
 .order-table tr td:nth-child(1) {
   border-left: none;
-  width: 40px;
+  width: 30px;
 }
 
 .order-table tr th:nth-child(2),
 .order-table tr td:nth-child(2) {
-  width: 100px;
+  width: 110px;
 }
 
 .order-table tr th:nth-child(3),
 .order-table tr td:nth-child(3) {
-  width: 150px;
+  width: 140px;
 }
 
 .order-table tr th:nth-child(4),
@@ -66,7 +66,7 @@
 
 .order-table tr th:nth-child(7),
 .order-table tr td:nth-child(7) {
-  width: 70px;
+  width: 80px;
 }
 
 .order-table tr th:nth-child(8),

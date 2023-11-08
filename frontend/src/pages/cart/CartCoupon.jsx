@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import "./CartCoupon.css";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getCoupon, resetCoupon } from "../../redux/features/coupon/couponSlice";
 import { toast } from "react-toastify";
@@ -28,6 +28,7 @@ function CartCoupon() {
     await dispatch(resetDiscountedPrice());
     setCouponName("");
     localStorage.removeItem("coupon");
+    toast.success("Coupon removed successfully.");
   };
 
   return (

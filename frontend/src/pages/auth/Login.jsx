@@ -15,7 +15,7 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [urlParams] = useSearchParams();
-  const redirect = urlParams.get("redirect");
+  const redirectPath = urlParams.get("redirect");
   const { isLoading, isLoggedIn, isSuccess } = useSelector((state) => state.auth);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -31,11 +31,11 @@ function Login() {
   // Get cart items when user is logged in and redirect to home page
   useEffect(() => {
     if (isSuccess && isLoggedIn) {
-      if (redirect === "cart") return navigate("/cart");
+      if (redirectPath === "cart") return navigate("/cart");
       dispatch(getCartItems());
       navigate("/");
     }
-  }, [isSuccess, isLoggedIn, navigate, dispatch, redirect]);
+  }, [isSuccess, isLoggedIn, navigate, dispatch, redirectPath]);
 
   return (
     <>

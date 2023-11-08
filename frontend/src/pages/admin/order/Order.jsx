@@ -9,7 +9,7 @@ function Order() {
   const { isLoading, orders } = useSelector((state) => state.order);
 
   // Pagination
-  const itemsPerPage = 12;
+  const itemsPerPage = 9;
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = orders.slice(itemOffset, endOffset);
@@ -26,16 +26,7 @@ function Order() {
       {isLoading && <Loader />}
       <div className="order-list">
         <h1 className="section-title">Order List</h1>
-
-        <div className="search">
-          <input type="text" placeholder="Search for orders..." className="form-input" />
-          <button className="search-btn">
-            <i className="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </div>
-
-        <OrderList currentItems={currentItems} orders={orders} />
-
+        <OrderList currentItems={currentItems} itemOffset={itemOffset} orders={orders} />
         <ReactPaginate
           className="pagination"
           pageLinkClassName="pagination-link"

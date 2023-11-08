@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
 import "./Footer.css";
 import logoSVG from "../../assets/logo.svg";
 import paymentPNG from "../../assets/payment.png";
+import { Link } from "react-router-dom";
 
 const contacts = [
   { title: "Address", description: "#01-91, 5026 Ang Mo Kio Industrial Park 2" },
@@ -22,9 +22,9 @@ function Footer() {
   return (
     <footer className="container">
       <div className="footer-container grid">
-        <div className="footer__content">
+        <div>
           <Link to="/">
-            <img src={logoSVG} alt="" className="footer-logo" />
+            <img src={logoSVG} alt="logo" className="footer-logo" />
           </Link>
           <h2 className="footer-title">Contact</h2>
 

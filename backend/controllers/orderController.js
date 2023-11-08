@@ -1,5 +1,6 @@
 const asyncHandler = require("../utils/asyncHandler.js");
 const Order = require("../models/orderModel.js");
+const Product = require("../models/productModel.js");
 
 // @desc    Create new order
 // @route   POST /api/orders
@@ -14,6 +15,13 @@ const createOrder = asyncHandler(async (req, res) => {
 
   // Create order items
   const orderItems = cartItems.map((item) => ({ name: item.name, quantity: item.cartQuantity, price: item.price, product: item._id }));
+
+  // Update product stock
+  orderItems.forEach(async (item) => {
+    const product = await Product.findById(item.product);
+    product.quantity = product.quantity - item.quantity;
+    await product.save();
+  });
 
   // Calculate order amount
   let orderAmount = cartItems.reduce((acc, item) => acc + item.cartQuantity * item.price, 0);
@@ -34,7 +42,6 @@ const createOrder = asyncHandler(async (req, res) => {
     orderAmount: orderAmount.toFixed(2),
     shippingAddress: `${checkoutInfo.street}, ${checkoutInfo.postalCode}, ${checkoutInfo.country}`,
     paymentMethod,
-    orderNote: checkoutInfo.orderNote,
   });
   res.status(201).json({ status: "success", message: "Order created successfully." });
 });
@@ -57,7 +64,12 @@ const getAllOrders = asyncHandler(async (req, res) => {
 // @route   GET /api/orders/myorders
 // @access  Private
 const getMyOrders = asyncHandler(async (req, res) => {
-  const orders = await Order.find({ user: req.user._id }).sort({ createdAt: -1 });
+  // Check if user is logged in
+  if (!req.user) {
+    res.status(401);
+    throw new Error("Not authorized, Please login.");
+  }
+  const orders = await Order.find({ "user._id": req.user._id }).sort({ createdAt: -1 });
   res.status(200).json({ status: "success", orders });
 });
 

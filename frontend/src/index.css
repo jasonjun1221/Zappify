@@ -19,6 +19,10 @@
   box-sizing: border-box;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 input,
 textarea,
 body,
@@ -68,7 +72,7 @@ th {
 
 /*=============== Global CSS Classes ===============*/
 .container {
-  max-width: 1400px;
+  max-width: 1410px;
   margin-inline: auto;
 }
 
@@ -77,13 +81,8 @@ th {
   gap: 1.5rem;
 }
 
-.section {
-  padding-block: 2rem;
-}
-
 .section-title {
   font-size: 1.5rem;
-  margin-bottom: 1.5rem;
   color: var(--main-color);
 }
 

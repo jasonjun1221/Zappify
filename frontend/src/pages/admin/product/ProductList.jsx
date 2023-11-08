@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { shortenText } from "../../../utils/utils";
 
-function ProductList({ products, currentItems }) {
+function ProductList({ products, currentItems, itemOffSet }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -55,7 +55,7 @@ function ProductList({ products, currentItems }) {
           <tbody>
             {currentItems.map((prod, index) => (
               <tr key={prod._id}>
-                <td>{index + 1}</td>
+                <td>{index + 1 + itemOffSet}</td>
                 <td>{shortenText(prod?.name, 20)}</td>
                 <td>{prod?.category}</td>
                 <td>{prod?.brand}</td>

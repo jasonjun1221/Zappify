@@ -11,7 +11,7 @@ function Product() {
   const { isLoading, products } = useSelector((state) => state.product);
 
   // Pagination
-  const itemsPerPage = 12;
+  const itemsPerPage = 7;
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = products.slice(itemOffset, endOffset);
@@ -30,22 +30,13 @@ function Product() {
         <h1 className="section-title">Product List</h1>
 
         <div className="product-actions">
-          <div>
-            <button className="btn" onClick={() => navigate("/admin/add-product")}>
-              Add New Product
-            </button>
-          </div>
-
-          <div className="search">
-            <input type="text" placeholder="Search for products..." className="form-input" />
-            <button className="search-btn">
-              <i className="fa-solid fa-magnifying-glass"></i>
-            </button>
-          </div>
+          <button className="btn" onClick={() => navigate("/admin/add-product")}>
+            Add New Product
+          </button>
         </div>
 
-        <ProductList currentItems={currentItems} products={products} />
-        
+        <ProductList currentItems={currentItems} itemOffSet={itemOffset} products={products} />
+
         <ReactPaginate
           className="pagination"
           pageLinkClassName="pagination-link"

@@ -20,6 +20,7 @@ import ProductDetails from "./pages/productDetails/ProductDetails";
 import MyAccount from "./pages/myaccount/MyAccount";
 import DashboardTab from "./pages/myaccount/DashboardTab";
 import OrdersTab from "./pages/myaccount/OrdersTab";
+import OrdersTabDetails from "./pages/myaccount/OrdersTabDetails";
 import UpdateProfileTab from "./pages/myaccount/UpdateProfileTab";
 import AddressTab from "./pages/myaccount/AddressTab";
 import UpdatePasswordTab from "./pages/myaccount/UpdatePasswordTab";
@@ -73,6 +74,7 @@ function App() {
           children: [
             { index: true, element: <DashboardTab /> },
             { path: "orders", element: <OrdersTab /> },
+            { path: "orders/:id", element: <OrdersTabDetails /> },
             { path: "address", element: <AddressTab /> },
             { path: "update-profile", element: <UpdateProfileTab /> },
             { path: "update-password", element: <UpdatePasswordTab /> },

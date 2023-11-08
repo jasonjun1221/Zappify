@@ -1,8 +1,8 @@
-import { NavLink, Link } from "react-router-dom";
 import "./Header.css";
 import logoSVG from "../../assets/logo.svg";
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { NavLink, Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { calculateTotalQuantity } from "../../redux/features/cart/cartSlice";
 
 const navigations = [

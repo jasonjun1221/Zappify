@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { shortenText } from "../../../utils/utils";
 import { getOrders } from "../../../redux/features/order/orderSlice";
 
-function OrderList({ orders, currentItems }) {
+function OrderList({ orders, currentItems, itemOffset }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -36,12 +36,12 @@ function OrderList({ orders, currentItems }) {
           <tbody>
             {currentItems.map((order, index) => (
               <tr key={order._id}>
-                <td>{index + 1}</td>
+                <td>{index + 1 + itemOffset}</td>
                 <td>{shortenText(order?.user?.name, 12)}</td>
                 <td>{shortenText(order?.user?.email, 20)}</td>
                 <td>{order?.user?.phone}</td>
                 <td>{order?.orderStatus}</td>
-                <td>{order?.orderAmount}</td>
+                <td>{order?.orderAmount.toFixed(2)}</td>
                 <td>{order?.createdAt.substring(0, 10)}</td>
                 <td>
                   <span>

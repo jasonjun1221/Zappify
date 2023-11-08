@@ -1,9 +1,10 @@
 import "./Coupon.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deleteCoupon, getCoupons } from "../../../redux/features/coupon/couponSlice";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import ReactPaginate from "react-paginate";
 import Loader from "../../../components/loader/Loader";
 
 function CouponList() {
@@ -33,6 +34,19 @@ function CouponList() {
     });
   };
 
+  // Pagination
+  const itemsPerPage = 5;
+  const [itemOffset, setItemOffset] = useState(0);
+  const endOffset = itemOffset + itemsPerPage;
+  const currentItems = coupons.slice(itemOffset, endOffset);
+  const pageCount = Math.ceil(coupons.length / itemsPerPage);
+
+  // Handle page click for pagination
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % coupons.length;
+    setItemOffset(newOffset);
+  };
+
   return (
     <>
       {isLoading && <Loader />}
@@ -52,9 +66,9 @@ function CouponList() {
               </tr>
             </thead>
             <tbody>
-              {coupons.map((coupon, index) => (
+              {currentItems.map((coupon, index) => (
                 <tr key={coupon._id}>
-                  <td>{index + 1}</td>
+                  <td>{index + 1 + itemOffset}</td>
                   <td>{coupon.name}</td>
                   <td>{coupon.discount}</td>
                   <td>{coupon.expiry.slice(0, 10)}</td>
@@ -69,6 +83,20 @@ function CouponList() {
           </table>
         )}
       </div>
+      <ReactPaginate
+        className="pagination"
+        pageLinkClassName="pagination-link"
+        activeLinkClassName="pagination-link active"
+        previousLinkClassName="pagination-link"
+        nextLinkClassName="pagination-link"
+        previousLabel="<<"
+        nextLabel=">>"
+        breakLabel="..."
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={5}
+        pageCount={pageCount}
+        renderOnZeroPageCount={null}
+      />
     </>
   );
 }

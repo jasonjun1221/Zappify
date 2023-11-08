@@ -62,16 +62,19 @@ function AddProduct() {
   return (
     <>
       {(categoryLoading || brandLoading) && <Loader />}
-      <div className="add-product-form">
-        <div className="add-product-header">
-          <button className="btn back-btn" onClick={() => navigate(-1)}>
-            <i className="fa-solid fa-chevron-left"></i>
-          </button>
-          <h1 className="section-title">Add New Product</h1>
-        </div>
+      <form onSubmit={handleSubmit}>
+        <div className="add-product-form">
+          <div className="add-product-header">
+            <div className="btn back-btn" onClick={() => navigate(-1)}>
+              <i className="fa-solid fa-chevron-left"></i>
+            </div>
+            <h1 className="section-title">Add New Product</h1>
+            <button type="submit" className="btn add-product-btn">
+              Add
+            </button>
+          </div>
 
-        <form onSubmit={handleSubmit}>
-          <div>
+          <div className="product-form-container">
             <div className="form-group">
               <label htmlFor="name">Name:</label>
               <input
@@ -97,7 +100,9 @@ function AddProduct() {
                   ))}
               </select>
             </div>
+          </div>
 
+          <div className="product-form-container">
             <div className="form-group">
               <label htmlFor="brand">Brand:</label>
               <select className="form-input" id="brand" name="brand" value={product?.brand} onChange={handleInputChange}>
@@ -110,9 +115,6 @@ function AddProduct() {
                   ))}
               </select>
             </div>
-          </div>
-
-          <div>
             <div className="form-group">
               <label htmlFor="price">Price (SGD):</label>
               <input
@@ -125,7 +127,9 @@ function AddProduct() {
                 onChange={handleInputChange}
               />
             </div>
+          </div>
 
+          <div className="product-form-container">
             <div className="form-group">
               <label htmlFor="quantity">Quantity:</label>
               <input
@@ -156,12 +160,8 @@ function AddProduct() {
               onChange={handleInputChange}
             ></textarea>
           </div>
-
-          <button type="submit" className="btn">
-            Add
-          </button>
-        </form>
-      </div>
+        </div>
+      </form>
     </>
   );
 }

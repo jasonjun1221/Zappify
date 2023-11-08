@@ -1,27 +1,36 @@
-.edit-order-form {
-  padding: 3rem 0 3rem 5rem;
+.edit-order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
-.edit-order-form .back-btn {
-  position: absolute;
-  top: 13rem;
+.edit-order-header .back-btn i {
+  font-size: 1rem;
+  padding-top: 15px;
+  padding-left: 5px;
 }
 
-.edit-order-form .section-title {
-  text-align: center;
+.edit-order-header .back-btn {
+  margin-left: 2.5rem;
+  margin-top: 1.5rem;
+}
+
+.edit-order-header .update-order-btn {
+  margin-top: 1.5rem;
+  margin-right: 3rem;
 }
 
 .order-group {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
+  margin: 0 2.5rem;
+  gap: 7rem;
 }
 
 .order-table-container {
-  max-height: 230px;
+  max-height: 200px;
   overflow-y: auto;
-  width: 91.5%;
-  margin-bottom: 1.5rem;
+  margin: 1.5rem 2.5rem;
   padding: 1px 0;
 }
 
@@ -40,8 +49,7 @@
 .order-actions {
   display: flex;
   justify-content: space-between;
-  margin-right: 4.3rem;
-  margin-bottom: 1.5rem;
+  margin: 0 2.5rem;
 }
 
 .order-actions .form-group label {
@@ -53,31 +61,14 @@
   color: var(--main-color);
 }
 
+.order-shipping {
+  margin: 1rem 2.5rem;
+}
+
 .order-shipping label {
-  margin-right: 1rem;
+  margin-right: 1.1rem;
 }
 
 .order-shipping input {
-  width: 75%;
-}
-
-.order-note {
-  display: flex;
-  margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-.order-note label {
-  margin-right: 2.5rem;
-}
-
-.order-note textarea {
-  width: 75%;
-  height: 5rem;
-  padding-block: 1rem;
-  resize: none;
-}
-
-.edit-order-form .update-btn {
-  width: 13rem;
-  margin-left: 20rem;
+  width: 83%;
 }

@@ -35,7 +35,7 @@ function BrandList() {
   };
 
   // Pagination
-  const itemsPerPage = 7;
+  const itemsPerPage = 5;
   const [itemOffset, setItemOffset] = useState(0);
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = brands.slice(itemOffset, endOffset);
@@ -67,7 +67,7 @@ function BrandList() {
             <tbody>
               {currentItems.map((brand, index) => (
                 <tr key={brand._id}>
-                  <td>{index + 1}</td>
+                  <td>{index + 1 + itemOffset}</td>
                   <td>{brand.name}</td>
                   <td>{brand.category}</td>
                   <td>

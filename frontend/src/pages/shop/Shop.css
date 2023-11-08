@@ -1,20 +1,14 @@
 /*=============== Shop ===============*/
-
 .shop {
   display: grid;
   gap: 1rem;
-  max-width: fit-content;
 }
 
 .items-container {
   display: flex;
-  font-size: 1.2rem;
-  grid-column: 2;
-  justify-content: center;
-}
-
-.items-container.none-items {
-  justify-content: flex-start;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+  margin-left: 1rem;
 }
 
 .items-container span {
@@ -22,12 +16,9 @@
   font-weight: 600;
 }
 
-/*=============== Filters ===============*/
-
 .filters-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   justify-content: flex-start;
 }
 
@@ -76,9 +67,10 @@
 
 .products-container {
   grid-column: 2;
+  margin-bottom: 2rem;
 }
 
 .products-details {
-  margin: 1rem 0 2rem 0;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  margin: 1rem 0;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 }

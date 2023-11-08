@@ -6,7 +6,6 @@ function Layout() {
     <>
       <Header />
       <Outlet />
-      
     </>
   );
 }

@@ -1,54 +1,27 @@
-import "./EditOrder.css";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
-import Loader from "../../../components/loader/Loader";
-import { getOrderById, updateOrderStatus } from "../../../redux/features/order/orderSlice";
-import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
+import { getOrderById } from "../../redux/features/order/orderSlice";
+import Loader from "../../components/loader/Loader";
 
-function EditProduct() {
+function OrdersTabDetails() {
   const { id } = useParams();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { order, isLoading } = useSelector((state) => state.order);
-  console.log(order);
 
-  const [editOrderStatus, setEditOrderStatus] = useState(order?.orderStatus || "");
-
-  // Get Order details
+  // Get Order By Id
   useEffect(() => {
     dispatch(getOrderById(id));
   }, [dispatch, id]);
 
-  // Set editOrderStatus
-  useEffect(() => {
-    setEditOrderStatus(order?.orderStatus);
-  }, [order?.orderStatus]);
-
-  // Handle form submit
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!editOrderStatus) return toast.error("Please select order status.");
-    await dispatch(updateOrderStatus({ id, orderStatus: editOrderStatus }));
-    navigate("/admin/order");
-  };
-
   return (
     <>
       {isLoading && <Loader />}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <div className="edit-order-header">
-            <div className="btn back-btn" onClick={() => navigate(-1)}>
-              <i className="fa-solid fa-chevron-left"></i>
-            </div>
-            <h1 className="section-title">Order Details</h1>
-            <button type="submit" className="btn update-order-btn">
-              Update
-            </button>
-          </div>
+      <div className="tab-content">
+        <h3 className="tab-header">Order Details</h3>
 
-          <div className="order-group">
+        <div className="my-order-details">
+          <div className="myorder-group">
             <div className="form-group">
               <label htmlFor="name">Recipient name:</label>
               <input type="text" id="name" className="form-input" name="name" value={order?.user?.name} disabled />
@@ -65,8 +38,8 @@ function EditProduct() {
             </div>
           </div>
 
-          <div className="order-table-container">
-            <table className="order-details-table">
+          <div className="myorder-table-container">
+            <table className="myorder-details-table">
               <thead>
                 <tr>
                   <th>Products</th>
@@ -95,7 +68,7 @@ function EditProduct() {
             </table>
           </div>
 
-          <div className="order-actions">
+          <div className="myorder-actions">
             <div className="form-group">
               <label htmlFor="payment">Payment method:</label>
               <input type="text" id="payment" className="form-input" name="payment" value={order?.paymentMethod} disabled />
@@ -105,30 +78,17 @@ function EditProduct() {
               <label htmlFor="orderStatus">
                 <span className="order-status-title">Order Status:</span>
               </label>
-              <select
-                className="form-input"
-                id="orderStatus"
-                name="orderStatus"
-                value={editOrderStatus}
-                onChange={(e) => setEditOrderStatus(e.target.value)}
-              >
-                <option value="">-- Select Status --</option>
-                <option value="Processing">Processing</option>
-                <option value="Shipped">Shipped</option>
-                <option value="Delivered">Delivered</option>
-                <option value="Cancelled">Cancelled</option>
-              </select>
+              <input type="text" id="orderStatus" className="form-input" name="orderStatus" value={order?.orderStatus} disabled />
             </div>
           </div>
 
-          <div className="form-group order-shipping">
+          <div className="form-group myorder-shipping">
             <label htmlFor="shippingAddress">Shipping address:</label>
             <input type="text" id="payment" className="form-input" name="payment" value={order?.shippingAddress} disabled />
           </div>
         </div>
-      </form>
+      </div>
     </>
   );
 }
-
-export default EditProduct;
+export default OrdersTabDetails;
