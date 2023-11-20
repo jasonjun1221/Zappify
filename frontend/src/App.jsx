@@ -36,6 +36,7 @@ import EditProduct from "./pages/admin/product/EditProduct";
 import Coupon from "./pages/admin/coupon/Coupon";
 import Order from "./pages/admin/order/Order";
 import EditOrder from "./pages/admin/order/EditOrder";
+import User from "./pages/admin/user/User";
 
 function App() {
   axios.defaults.withCredentials = true;
@@ -93,6 +94,7 @@ function App() {
             { path: "coupon", element: <Coupon /> },
             { path: "order", element: <Order /> },
             { path: "edit-order/:id", element: <EditOrder /> },
+            { path: "user", element: <User /> },
           ],
         },
       ],

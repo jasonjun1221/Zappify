@@ -1,0 +1,18 @@
+.main {
+  margin-bottom: 6rem;
+}
+
+.home-product-container {
+  margin: 0rem 4rem;
+  margin-bottom: 4rem;
+}
+
+.home-product-list {
+  padding: 1rem 0;
+  margin: 2rem 0;
+}
+
+.home-product-card {
+  max-width: 200px;
+  height: 375px;
+}

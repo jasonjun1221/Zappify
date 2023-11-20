@@ -95,7 +95,7 @@
   font-weight: 700;
 }
 
-hr {
+.borderline {
   margin: 4rem;
-  border: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
 }

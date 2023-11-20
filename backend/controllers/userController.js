@@ -198,4 +198,46 @@ const getCartItems = asyncHandler(async (req, res) => {
   res.status(200).json({ status: "success", cartItems: user.cartItems });
 });
 
-module.exports = { register, login, logout, loginStatus, getProfile, updateProfile, updatePassword, saveCartItems, getCartItems };
+// @desc    Get all users
+// @route   GET /api/users
+// @access  Private/Admin
+const getUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({ isAdmin: false }).sort({ createdAt: -1 });
+  res.status(200).json({ status: "success", users });
+});
+
+// @desc    Block user
+// @route   PUT /api/users/block/:id
+// @access  Private/Admin
+const blockUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (!user) {
+    res.status(404);
+    throw new Error("User not found.");
+  }
+
+  if (user.isBlocked === true) {
+    user.isBlocked = false;
+    await user.save();
+    res.status(200).json({ status: "success", message: "User unblocked successfully." });
+    return;
+  }
+
+  user.isBlocked = true;
+  await user.save();
+  res.status(200).json({ status: "success", message: "User blocked successfully." });
+});
+
+module.exports = {
+  register,
+  login,
+  logout,
+  loginStatus,
+  getProfile,
+  updateProfile,
+  updatePassword,
+  saveCartItems,
+  getCartItems,
+  getUsers,
+  blockUser,
+};

@@ -1,6 +1,8 @@
 .banner-container {
   grid-template-columns: 5fr 7fr;
   align-items: center;
+  margin-top: 3.5rem;
+  margin-bottom: 7.5rem;
 }
 
 .banner-subtitle,

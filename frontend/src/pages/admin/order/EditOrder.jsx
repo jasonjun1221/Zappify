@@ -11,7 +11,6 @@ function EditProduct() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { order, isLoading } = useSelector((state) => state.order);
-  console.log(order);
 
   const [editOrderStatus, setEditOrderStatus] = useState(order?.orderStatus || "");
 

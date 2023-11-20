@@ -67,7 +67,7 @@ function ProductDetails() {
         </div>
       </div>
 
-      <hr />
+      <div className="borderline" />
 
       <ProductReview />
     </>

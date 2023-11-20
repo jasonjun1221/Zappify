@@ -56,9 +56,9 @@ function ProductList({ products, currentItems, itemOffSet }) {
             {currentItems.map((prod, index) => (
               <tr key={prod._id}>
                 <td>{index + 1 + itemOffSet}</td>
-                <td>{shortenText(prod?.name, 20)}</td>
+                <td>{shortenText(prod?.name, 25)}</td>
                 <td>{prod?.category}</td>
-                <td>{prod?.brand}</td>
+                <td>{shortenText(prod?.brand, 10)}</td>
                 <td>{prod?.price.toFixed(2)}</td>
                 <td>{prod?.quantity}</td>
                 <td>

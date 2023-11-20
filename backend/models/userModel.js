@@ -25,6 +25,11 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
+    isBlocked: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
     phone: {
       type: String,
       required: [true, "Please enter your phone number"],

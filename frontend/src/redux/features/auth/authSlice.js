@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 
 const initialState = {
   user: null,
+  users: [],
   isError: false,
   isLoggedIn: false,
   isSuccess: false,
@@ -75,6 +76,26 @@ export const updateProfile = createAsyncThunk("auth/updateProfile", async (userD
 export const updatePassword = createAsyncThunk("auth/updatePassword", async (userData, thunkAPI) => {
   try {
     return await authService.updatePassword(userData);
+  } catch (error) {
+    const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+// Get Users
+export const getUsers = createAsyncThunk("auth/getUsers", async (_, thunkAPI) => {
+  try {
+    return await authService.getUsers();
+  } catch (error) {
+    const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
+// Block User
+export const blockUser = createAsyncThunk("auth/blockUser", async (id, thunkAPI) => {
+  try {
+    return await authService.blockUser(id);
   } catch (error) {
     const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
     return thunkAPI.rejectWithValue(message);
@@ -202,6 +223,37 @@ const authSlice = createSlice({
         toast.success("Password updated successfully.");
       })
       .addCase(updatePassword.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = payload;
+        toast.error(payload);
+      })
+      // Get Users
+      .addCase(getUsers.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUsers.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.users = payload;
+      })
+      .addCase(getUsers.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = payload;
+        toast.error(payload);
+      })
+      // Block User
+      .addCase(blockUser.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(blockUser.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message = payload;
+        toast.success(payload);
+      })
+      .addCase(blockUser.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.isError = true;
         state.message = payload;

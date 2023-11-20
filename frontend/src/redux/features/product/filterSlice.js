@@ -26,6 +26,8 @@ const filterSlice = createSlice({
         sortedProducts.sort((a, b) => a.price - b.price);
       } else if (sort === "highest-price") {
         sortedProducts.sort((a, b) => b.price - a.price);
+      } else if (sort === "default") {
+        sortedProducts.sort(() => Math.random() - 0.5);
       }
       state.filteredProducts = sortedProducts;
     },

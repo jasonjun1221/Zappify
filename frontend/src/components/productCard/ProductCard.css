@@ -21,7 +21,7 @@
 
 .product-img {
   height: 200px;
-  width: 100%;
+  width: 180px;
   vertical-align: middle;
   transition: var(--transition);
 }

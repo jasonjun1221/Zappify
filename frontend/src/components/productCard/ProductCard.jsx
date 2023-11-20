@@ -7,11 +7,9 @@ import StarRatings from "react-star-ratings";
 
 function ProductCard({ product }) {
   const dispatch = useDispatch();
-  console.log(product);
 
   // Average rating in product card
   const averageRating = product?.reviews.reduce((acc, item) => item.rating + acc, 0) / product?.reviews.length;
-  console.log(averageRating);
 
   return (
     <div className="product-item">

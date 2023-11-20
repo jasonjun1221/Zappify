@@ -1,5 +1,6 @@
 const asyncHandler = require("../utils/asyncHandler.js");
 const Coupon = require("../models/couponModel.js");
+const nodemailer = require("nodemailer");
 
 // @desc    Create a new coupon
 // @route   POST /api/coupons
@@ -60,4 +61,33 @@ const deleteCoupon = asyncHandler(async (req, res, next) => {
   res.status(200).json({ status: "success", message: "Coupon removed successfully." });
 });
 
-module.exports = { createCoupon, getCoupons, getCoupon, deleteCoupon };
+// @desc    Send coupon to client by email
+// @route   POST /api/coupons/send-email
+// @access  Private
+const sendEmail = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+
+  const transporter = nodemailer.createTransport({
+    service: "hotmail",
+    auth: {
+      user: "jasonchong1221@hotmail.com",
+      pass: process.env.EMAIL_PASSWORD,
+    },
+  });
+
+  const mailOptions = {
+    from: "jasonchong1221@hotmail.com",
+    to: email,
+    subject: "Member Coupon 50%!",
+    text: "Coupon: SPECIAL",
+  };
+
+  transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      throw new Error("Email not sent successfully");
+    }
+    res.status(200).json({ status: "success", message: "Email sent successfully." });
+  });
+});
+
+module.exports = { createCoupon, getCoupons, getCoupon, deleteCoupon, sendEmail };

@@ -7,6 +7,7 @@ import "react-confirm-alert/src/react-confirm-alert.css";
 import ReactPaginate from "react-paginate";
 import Loader from "../../../components/loader/Loader";
 
+
 function BrandList() {
   const dispatch = useDispatch();
   const { isLoading, brands } = useSelector((state) => state.brand);

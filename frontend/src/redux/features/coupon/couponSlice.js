@@ -51,6 +51,16 @@ export const deleteCoupon = createAsyncThunk("coupon/deleteCoupon", async (id, t
   }
 });
 
+// Send Email
+export const sendEmail = createAsyncThunk("coupon/sendEmail", async (formData, thunkAPI) => {
+  try {
+    return await couponService.sendEmail(formData);
+  } catch (error) {
+    const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+    return thunkAPI.rejectWithValue(message);
+  }
+});
+
 const couponSlice = createSlice({
   name: "coupon",
   initialState,
@@ -126,6 +136,22 @@ const couponSlice = createSlice({
         toast.success(payload);
       })
       .addCase(deleteCoupon.rejected, (state, { payload }) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.message = payload;
+        toast.error(payload);
+      })
+      // Send Email
+      .addCase(sendEmail.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(sendEmail.fulfilled, (state, { payload }) => {
+        state.isLoading = false;
+        state.isSuccess = true;
+        state.message = payload;
+        toast.success(payload);
+      })
+      .addCase(sendEmail.rejected, (state, { payload }) => {
         state.isLoading = false;
         state.isError = true;
         state.message = payload;

@@ -7,6 +7,7 @@ import { CountryDropdown } from "react-country-region-selector";
 import { calculateTotalPrice, resetCart } from "../../redux/features/cart/cartSlice";
 import { createOrder } from "../../redux/features/order/orderSlice";
 import { resetCoupon } from "../../redux/features/coupon/couponSlice";
+import { toast } from "react-toastify";
 
 function Checkout() {
   const dispatch = useDispatch();
@@ -44,6 +45,18 @@ function Checkout() {
   // handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!user) navigate("/login");
+
+    if (
+      checkoutInfo?.name === "" ||
+      checkoutInfo?.email === "" ||
+      checkoutInfo?.phone === "" ||
+      checkoutInfo?.street === "" ||
+      checkoutInfo?.postalCode === "" ||
+      checkoutInfo?.country === ""
+    )
+      toast.error("Please fill all the fields");
+
     await dispatch(createOrder({ cartItems, checkoutInfo, paymentMethod, coupon }));
     dispatch(resetCart());
     dispatch(resetCoupon());
@@ -179,31 +192,8 @@ function Checkout() {
                 <label htmlFor="cash-on-delivery">Cash On Delivery</label>
               </div>
 
-              <div className="payment-option">
-                <input
-                  type="radio"
-                  id="stripe"
-                  name="payment"
-                  className="payment-input"
-                  value="stripe"
-                  onChange={(e) => setPaymentMethod(e.target.value)}
-                />
-                <label htmlFor="stripe">Stripe</label>
-              </div>
-
-              <div className="payment-option">
-                <input
-                  type="radio"
-                  id="paypal"
-                  name="payment"
-                  className="payment-input"
-                  value="paypal"
-                  onChange={(e) => setPaymentMethod(e.target.value)}
-                />
-                <label htmlFor="paypal">Paypal</label>
-              </div>
               <button type="submit" className="btn">
-                {paymentMethod === "cash-on-delivery" ? "Place Order" : "Make Payment"}
+                Place Order
               </button>
             </div>
           </div>

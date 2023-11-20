@@ -6,17 +6,17 @@ import Loader from "../../components/loader/Loader";
 import { getProducts } from "../../redux/features/product/productSlice";
 import { getCategories } from "../../redux/features/category/categorySlice";
 import { filterByCategory, filterBySearch, filterBySort } from "../../redux/features/product/filterSlice";
-import ProductCard from "./ProductCard";
+import ProductCard from "../../components/productCard/ProductCard";
 
 function Shop() {
   const dispatch = useDispatch();
   const { isLoading, products } = useSelector((state) => state.product);
+  const { categories } = useSelector((state) => state.category);
   const { filteredProducts } = useSelector((state) => state.filter);
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [search, setSearch] = useState("");
-  const [sort, setSort] = useState("");
-
-  const uniqueCategories = ["All", ...new Set(products.map((product) => product.category))];
+  const [sort, setSort] = useState("default");
+  const categoryNav = ["All", ...categories.map((cat) => cat.name)];
 
   // Get categories & products
   useEffect(() => {
@@ -72,7 +72,7 @@ function Shop() {
           </div>
 
           <div className="categories-container">
-            {uniqueCategories.map((cat, index) => (
+            {categoryNav.map((cat, index) => (
               <button
                 className={`categories-item ${selectedCategory === cat ? "active" : ""}`}
                 key={index}
@@ -87,7 +87,7 @@ function Shop() {
             <div className="sorting">
               <span>Sort by: </span>
               <select className="form-input" value={sort} onChange={(e) => setSort(e.target.value)}>
-                <option value="">Default</option>
+                <option value="default">Default</option>
                 <option value="newest">Newest</option>
                 <option value="lowest-price">Lowest Price</option>
                 <option value="highest-price">Highest Price</option>
