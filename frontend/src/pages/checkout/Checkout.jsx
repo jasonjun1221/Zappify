@@ -54,8 +54,10 @@ function Checkout() {
       checkoutInfo?.street === "" ||
       checkoutInfo?.postalCode === "" ||
       checkoutInfo?.country === ""
-    )
+    ) {
       toast.error("Please fill all the fields");
+      return;
+    }
 
     await dispatch(createOrder({ cartItems, checkoutInfo, paymentMethod, coupon }));
     dispatch(resetCart());

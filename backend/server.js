@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({ origin: process.env.FRONTEND_API_URL, credentials: true }));
 
-// Serve static files
+// Serve static files in uploads folder
 app.use("/uploads", express.static("uploads"));
 
 // Routes

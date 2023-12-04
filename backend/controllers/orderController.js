@@ -85,7 +85,7 @@ const getOrderById = asyncHandler(async (req, res) => {
   }
 
   // Check if user is admin or order belongs to user
-  if (!req.user.isAdmin && order.user.toString() !== req.user._id.toString()) {
+  if (!req.user.isAdmin && order.user._id.toString() !== req.user._id.toString()) {
     res.status(401);
     throw new Error("Not authorized to view this order.");
   }

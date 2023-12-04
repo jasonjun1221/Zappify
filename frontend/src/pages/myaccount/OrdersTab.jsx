@@ -34,52 +34,56 @@ function OrdersTab() {
       <div className="tab-content">
         <h3 className="tab-header">My Orders</h3>
 
-        <div className="tab-body">
-          <table className="my-order-table">
-            <thead>
-              <tr>
-                <th>No.</th>
-                <th>Orders Id</th>
-                <th>Date</th>
-                <th>Status</th>
-                <th>Total (SGD)</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {currentItems.map((order, index) => (
-                <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{order?._id}</td>
-                  <td>{order?.createdAt.slice(0, 10)}</td>
-                  <td>{order?.orderStatus}</td>
-                  <td>${order?.orderAmount.toFixed(2)}</td>
-                  <td>
-                    <Link to={`/myaccount/orders/${order?._id}`} className="view-order">
-                      View
-                    </Link>
-                  </td>
+        {orders.length === 0 ? (
+          <div className="tab-body">You have no orders.</div>
+        ) : (
+          <div className="tab-body">
+            <table className="my-order-table">
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Orders Id</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Total (SGD)</th>
+                  <th>Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
 
-          <ReactPaginate
-            className="pagination"
-            pageLinkClassName="pagination-link"
-            activeLinkClassName="pagination-link active"
-            previousLinkClassName="pagination-link"
-            nextLinkClassName="pagination-link"
-            previousLabel="<<"
-            nextLabel=">>"
-            breakLabel="..."
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={5}
-            pageCount={pageCount}
-            renderOnZeroPageCount={null}
-          />
-        </div>
+              <tbody>
+                {currentItems.map((order, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>{order?._id}</td>
+                    <td>{order?.createdAt.slice(0, 10)}</td>
+                    <td>{order?.orderStatus}</td>
+                    <td>${order?.orderAmount.toFixed(2)}</td>
+                    <td>
+                      <Link to={`/myaccount/orders/${order?._id}`} className="view-order">
+                        View
+                      </Link>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+
+            <ReactPaginate
+              className="pagination"
+              pageLinkClassName="pagination-link"
+              activeLinkClassName="pagination-link active"
+              previousLinkClassName="pagination-link"
+              nextLinkClassName="pagination-link"
+              previousLabel="<<"
+              nextLabel=">>"
+              breakLabel="..."
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={5}
+              pageCount={pageCount}
+              renderOnZeroPageCount={null}
+            />
+          </div>
+        )}
       </div>
     </>
   );

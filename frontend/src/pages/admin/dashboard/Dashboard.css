@@ -19,8 +19,65 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20%;
-  height: 10rem;
+  width: 40%;
+  height: 8rem;
   border: 1px solid lightgrey;
   border-radius: 0.25rem;
+  margin-bottom: 3rem;
+}
+
+.sales-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-list {
+  max-height: 440px;
+}
+
+.dashboard-list .section-title {
+  margin: 1rem 0;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.dashboard-table {
+  table-layout: fixed;
+  border-left: none;
+  border-right: none;
+  margin-bottom: 1rem;
+}
+
+.dashboard-table tr:hover {
+  background-color: #f2f2f2;
+}
+
+.dashboard-table tr th,
+.dashboard-table tr td {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.dashboard-table tr th:nth-child(1),
+.dashboard-table tr td:nth-child(1) {
+  border-left: none;
+  width: 50px;
+}
+
+.dashboard-table tr th:nth-child(2),
+.dashboard-table tr td:nth-child(2) {
+  width: 350px;
+}
+
+.dashboard-table tr th:nth-child(3),
+.dashboard-table tr td:nth-child(3) {
+  width: 150px;
+}
+
+.dashboard-table tr th:nth-child(4),
+.dashboard-table tr td:nth-child(4) {
+  border-right: none;
+  width: 150px;
 }

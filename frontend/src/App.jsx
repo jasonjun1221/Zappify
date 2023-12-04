@@ -55,7 +55,7 @@ function App() {
     }
   }, [dispatch, isLoggedIn, user]);
 
-  // Create routes
+  // Create routes for the app using react-router-dom v6
   const router = createBrowserRouter([
     {
       element: <Layout />,
