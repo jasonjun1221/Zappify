@@ -12,11 +12,9 @@ const {
   saveCartItems,
   getCartItems,
   getUsers,
-  blockUser,
 } = require("../controllers/userController");
 
 router.get("/", protect, admin, getUsers);
-router.put("/block/:id", protect, admin, blockUser);
 
 router.post("/register", register);
 router.post("/login", login);

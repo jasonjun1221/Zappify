@@ -7,7 +7,7 @@ const categorySchema = mongoose.Schema(
       unqiue: true,
       required: [true, "Please enter category name."],
       trim: true,
-      minlenght: [3, "Category name too short."],
+      minLength: [3, "Category name too short."],
       maxLength: [20, "Category name too long."],
     },
     slug: {
@@ -17,9 +17,7 @@ const categorySchema = mongoose.Schema(
       index: true,
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 const Category = mongoose.model("Category", categorySchema);

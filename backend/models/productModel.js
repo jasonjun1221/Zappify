@@ -13,8 +13,8 @@ const reviewSchema = mongoose.Schema({
   rating: {
     type: Number,
     required: [true, "Please enter your rating."],
-    minlength: [1, "Rating must be at least 1."],
-    maxlength: [5, "Rating must not exceed 5."],
+    minLength: [1, "Rating must be at least 1."],
+    maxLength: [5, "Rating must not exceed 5."],
   },
   comment: {
     type: String,
@@ -59,11 +59,16 @@ const productSchema = mongoose.Schema(
       type: [reviewSchema],
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 const Product = mongoose.model("Product", productSchema);
 
 module.exports = Product;
+
+
+
+
+
+
+

@@ -7,37 +7,24 @@ const Product = require("../models/productModel.js");
 // @access  Private
 const createOrder = asyncHandler(async (req, res) => {
   const { cartItems, checkoutInfo, paymentMethod, coupon } = req.body;
-
   if (!cartItems || !checkoutInfo || !paymentMethod) {
     res.status(400);
     throw new Error("All fields are required.");
   }
-
-  // Create order items
-  const orderItems = cartItems.map((item) => ({ name: item.name, quantity: item.cartQuantity, price: item.price, product: item._id }));
-
-  // Update product stock
+  const orderItems = cartItems.map((item) => {
+    return { _id: item._id, name: item.name, quantity: item.cartQuantity, price: item.price };
+  });
   orderItems.forEach(async (item) => {
-    const product = await Product.findById(item.product);
+    const product = await Product.findById(item._id);
     product.quantity = product.quantity - item.quantity;
     await product.save();
   });
-
-  // Calculate order amount
   let orderAmount = cartItems.reduce((acc, item) => acc + item.cartQuantity * item.price, 0);
-
-  // Apply coupon discount
   if (coupon) {
     orderAmount = orderAmount - (orderAmount * coupon.discount) / 100;
   }
-
   await Order.create({
-    user: {
-      _id: req.user._id,
-      name: checkoutInfo.name,
-      email: checkoutInfo.email,
-      phone: checkoutInfo.phone,
-    },
+    user: { _id: req.user._id, name: checkoutInfo.name, email: checkoutInfo.email, phone: checkoutInfo.phone },
     orderItems,
     orderAmount: orderAmount.toFixed(2),
     shippingAddress: `${checkoutInfo.street}, ${checkoutInfo.postalCode}, ${checkoutInfo.country}`,
@@ -50,12 +37,10 @@ const createOrder = asyncHandler(async (req, res) => {
 // @route   GET /api/orders
 // @access  Private/Admin
 const getAllOrders = asyncHandler(async (req, res) => {
-  // Check if user is admin
   if (!req.user.isAdmin) {
     res.status(401);
     throw new Error("Not authorized as an admin.");
   }
-
   const orders = await Order.find({}).sort({ createdAt: -1 });
   res.status(200).json({ status: "success", orders });
 });
@@ -64,7 +49,6 @@ const getAllOrders = asyncHandler(async (req, res) => {
 // @route   GET /api/orders/myorders
 // @access  Private
 const getMyOrders = asyncHandler(async (req, res) => {
-  // Check if user is logged in
   if (!req.user) {
     res.status(401);
     throw new Error("Not authorized, Please login.");
@@ -77,14 +61,11 @@ const getMyOrders = asyncHandler(async (req, res) => {
 // @route   GET /api/orders/:id
 // @access  Private
 const getOrderById = asyncHandler(async (req, res) => {
-  // Check if order exists
   const order = await Order.findById(req.params.id);
   if (!order) {
     res.status(404);
     throw new Error("Order not found.");
   }
-
-  // Check if user is admin or order belongs to user
   if (!req.user.isAdmin && order.user._id.toString() !== req.user._id.toString()) {
     res.status(401);
     throw new Error("Not authorized to view this order.");
@@ -96,19 +77,15 @@ const getOrderById = asyncHandler(async (req, res) => {
 // @route   PUT /api/orders/:id
 // @access  Private/Admin
 const updateOrder = asyncHandler(async (req, res) => {
-  // Check if order exists
   const order = await Order.findById(req.params.id);
   if (!order) {
     res.status(404);
     throw new Error("Order not found.");
   }
-
-  // Check if order status is provided
   if (!req.body.orderStatus) {
     res.status(400);
     throw new Error("Order status is required.");
   }
-
   await Order.findByIdAndUpdate(req.params.id, { orderStatus: req.body.orderStatus }, { new: true, runValidators: true });
   res.status(200).json({ status: "success", message: "Order updated successfully." });
 });

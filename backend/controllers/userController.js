@@ -27,22 +27,18 @@ const createAndSendToken = (user, statusCode, res) => {
 // @access  Public
 const register = asyncHandler(async (req, res) => {
   const { name, email, password } = req.body;
-
   // Check if all fields are filled in
   if (!name || !email || !password) {
     res.status(400);
     throw new Error("Please enter all fields.");
   }
-
   // Check if user exists
   if (await User.findOne({ email })) {
     res.status(400);
     throw new Error("User already exists.");
   }
-
   // Create new user
   const newUser = await User.create({ name, email, password });
-
   // Send token in response
   if (newUser) {
     createAndSendToken(newUser, 201, res);
@@ -151,13 +147,11 @@ const updatePassword = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("User not found.");
   }
-
   // Check if current password is correct
   if (!(await user.verifyPassword(req.body.currentPassword))) {
     res.status(400);
     throw new Error("Current password is incorrect.");
   }
-
   // Update password
   user.password = req.body.newPassword;
   const updatedUser = await user.save();
@@ -206,28 +200,6 @@ const getUsers = asyncHandler(async (req, res) => {
   res.status(200).json({ status: "success", users });
 });
 
-// @desc    Block user
-// @route   PUT /api/users/block/:id
-// @access  Private/Admin
-const blockUser = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id);
-  if (!user) {
-    res.status(404);
-    throw new Error("User not found.");
-  }
-
-  if (user.isBlocked === true) {
-    user.isBlocked = false;
-    await user.save();
-    res.status(200).json({ status: "success", message: "User unblocked successfully." });
-    return;
-  }
-
-  user.isBlocked = true;
-  await user.save();
-  res.status(200).json({ status: "success", message: "User blocked successfully." });
-});
-
 module.exports = {
   register,
   login,
@@ -239,5 +211,4 @@ module.exports = {
   saveCartItems,
   getCartItems,
   getUsers,
-  blockUser,
 };

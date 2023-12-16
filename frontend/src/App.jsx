@@ -83,7 +83,7 @@ function App() {
         },
         {
           path: "admin",
-          element: user?.isAdmin && <Admin />,
+          element: user?.isAdmin ? <Admin /> : <PageNotFound />,
           children: [
             { index: true, element: <Dashboard /> },
             { path: "category", element: <Category /> },

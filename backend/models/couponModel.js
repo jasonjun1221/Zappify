@@ -8,8 +8,8 @@ const couponSchema = mongoose.Schema(
       unique: true,
       uppercase: true,
       required: [true, "Coupon name is required."],
-      minlength: [6, "Coupon name must be at least 6 characters long."],
-      maxlength: [12, "Coupon name must be at most 12 characters long."],
+      minLength: [6, "Coupon name must be at least 6 characters long."],
+      maxLength: [12, "Coupon name must be at most 12 characters long."],
     },
     expiry: {
       type: Date,

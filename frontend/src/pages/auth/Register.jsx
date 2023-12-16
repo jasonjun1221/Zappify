@@ -50,11 +50,20 @@ function Register() {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className="register-container">
+        <div className="register-container" data-testid="register-component">
           <h1 className="section-title">Register</h1>
-          <form onSubmit={handleRegister}>
+          <form onSubmit={handleRegister} data-testid="register-form">
             <label htmlFor="name">Name:</label>
-            <input type="text" className="form-input" placeholder="Name" id="name" name="name" value={name} onChange={handleInputChange} />
+            <input
+              type="text"
+              className="form-input"
+              placeholder="Name"
+              id="name"
+              name="name"
+              value={name}
+              onChange={handleInputChange}
+              data-testid="name-input"
+            />
             <label htmlFor="email">Email Address:</label>
             <input
               type="email"
@@ -64,6 +73,7 @@ function Register() {
               name="email"
               value={email}
               onChange={handleInputChange}
+              data-testid="email-input"
             />
             <label htmlFor="password">Password:</label>
             <input
@@ -74,6 +84,7 @@ function Register() {
               name="password"
               value={password}
               onChange={handleInputChange}
+              data-testid="password-input"
             />
             <label htmlFor="confirmPassword">Confirm password:</label>
             <input
@@ -84,8 +95,9 @@ function Register() {
               name="confirmPassword"
               value={confirmPassword}
               onChange={handleInputChange}
+              data-testid="confirm-password-input"
             />
-            <button type="submit" className="btn register-btn">
+            <button type="submit" className="btn register-btn" data-testid="submit-button">
               Register
             </button>
           </form>

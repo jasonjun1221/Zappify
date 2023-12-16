@@ -10,10 +10,10 @@ const orderSchema = mongoose.Schema(
     },
     orderItems: [
       {
+        _id: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "Product" },
         name: { type: String, required: true },
         quantity: { type: Number, required: true },
         price: { type: Number, required: true },
-        product: { type: mongoose.Schema.Types.ObjectId, required: true, ref: "Product" },
       },
     ],
     orderStatus: {
@@ -33,14 +33,10 @@ const orderSchema = mongoose.Schema(
     paymentMethod: {
       type: String,
       required: true,
-    },
-    orderNote: {
-      type: String,
+      default: "cash-on-delivery",
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 const Order = mongoose.model("Order", orderSchema);

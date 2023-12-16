@@ -8,25 +8,18 @@ const slugify = require("slugify");
 // @access  Private/Admin
 const createBrand = asyncHandler(async (req, res) => {
   const { name, category } = req.body;
-
-  // Check if brand and category are filled in
   if (!name || !category) {
     res.status(400);
     throw new Error("Please enter brand and category.");
   }
-
-  // Check if brand already exists
   if (await Brand.findOne({ name, category })) {
     res.status(400);
     throw new Error("Brand already exists.");
   }
-
-  // Check if category exists
   if (!(await Category.findOne({ name: category }))) {
     res.status(400);
     throw new Error("Category does not exist.");
   }
-
   await Brand.create({ name, slug: slugify(`${name}-${category}`), category });
   res.status(201).json({ status: "success", message: "Brand created successfully." });
 });
@@ -44,13 +37,10 @@ const getBrands = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const deleteBrand = asyncHandler(async (req, res) => {
   const slug = req.params.slug.toLowerCase();
-
-  // Check if brand exists
   if (!(await Brand.findOne({ slug }))) {
     res.status(404);
     throw new Error("Brand not found.");
   }
-
   await Brand.deleteOne({ slug });
   res.status(200).json({ status: "success", message: "Brand removed successfully." });
 });

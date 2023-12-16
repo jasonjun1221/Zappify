@@ -25,11 +25,6 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
-    isBlocked: {
-      type: Boolean,
-      required: true,
-      default: false,
-    },
     phone: {
       type: String,
       required: [true, "Please enter your phone number"],
@@ -37,26 +32,15 @@ const userSchema = mongoose.Schema(
       default: "+65",
     },
     address: {
-      street: {
-        type: String,
-        default: "",
-      },
-      postalCode: {
-        type: String,
-        default: "",
-      },
-      country: {
-        type: String,
-        default: "",
-      },
+      street: { type: String, default: "" },
+      postalCode: { type: String, default: "" },
+      country: { type: String, default: "" },
     },
     cartItems: {
       type: [Object],
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 // Hash password before saving to database

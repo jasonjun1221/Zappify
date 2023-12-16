@@ -7,8 +7,8 @@ const brandSchema = mongoose.Schema(
       unqiue: true,
       required: [true, "Please enter brand name."],
       trim: true,
-      minlenght: [2, "Category name too short."],
-      maxLength: [20, "Category name too long."],
+      minLength: [2, "Brand name too short."],
+      maxLength: [20, "Brand name too long."],
     },
     slug: {
       type: String,

@@ -7,19 +7,14 @@ const slugify = require("slugify");
 // @access  Private/Admin
 const createCategory = asyncHandler(async (req, res) => {
   const { name } = req.body;
-
-  // Check if name is filled in
   if (!name) {
     res.status(400);
     throw new Error("Please enter a category name.");
   }
-
-  // Check if category already exists
   if (await Category.findOne({ name })) {
     res.status(400);
     throw new Error("Category already exists.");
   }
-
   await Category.create({ name, slug: slugify(name) });
   res.status(201).json({ status: "success", message: "Category created successfully." });
 });
@@ -37,12 +32,10 @@ const getCategories = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const deleteCategory = asyncHandler(async (req, res) => {
   const slug = req.params.slug.toLowerCase();
-
   if (!(await Category.findOne({ slug }))) {
     res.status(404);
     throw new Error("Category not found.");
   }
-
   await Category.deleteOne({ slug });
   res.json({ status: "success", message: "Category removed successfully." });
 });
